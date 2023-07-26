@@ -96,23 +96,27 @@ Automated findings output for the audit can be found [here](add link to report) 
 
 ## Scoping Details 
 ```
-- If you have a public code repo, please share it here:  
-- How many contracts are in scope?:   
-- Total SLoC for these contracts?:  
-- How many external imports are there?:  
-- How many separate interfaces and struct definitions are there for the contracts within scope?:  
-- Does most of your code generally use composition or inheritance?:   
-- How many external calls?:   
-- What is the overall line coverage percentage provided by your tests?:
-- Is this an upgrade of an existing system?:
-- Check all that apply (e.g. timelock, NFT, AMM, ERC20, rollups, etc.): 
-- Is there a need to understand a separate part of the codebase / get context in order to audit this part of the protocol?:   
-- Please describe required context:   
-- Does it use an oracle?:  
-- Describe any novel or unique curve logic or mathematical models your code uses: 
-- Is this either a fork of or an alternate implementation of another project?:   
-- Does it use a side-chain?:
+- If you have a public code repo, please share it here:  https://github.com/smartcontractkit/staking
+- How many contracts are in scope?:   20
+- Total SLoC for these contracts?:  2297
+- How many external imports are there?: 15 
+- How many separate interfaces and struct definitions are there for the contracts within scope?:  10 interfaces 20 structs
+- Does most of your code generally use composition or inheritance?:  Inheritance 
+- How many external calls?:   15
+- What is the overall line coverage percentage provided by your tests?: 100%
+- Is this an upgrade of an existing system?: False
+- Check all that apply (e.g. timelock, NFT, AMM, ERC20, rollups, etc.): Timelock function, ERC-20 Token
+- Is there a need to understand a separate part of the codebase / get context in order to audit this part of the protocol?:  False 
+- Please describe required context: n/a  
+- Does it use an oracle?:  Chainlink
+- Describe any novel or unique curve logic or mathematical models your code uses: None that are unique. The code does use some math for calculating staking rewards and withdrawal penalties.
+- Is this either a fork of or an alternate implementation of another project?:   False
+- Does it use a side-chain?: False
 - Describe any specific areas you would like addressed:
+### Staking access controls
+1.  Is all access control sound?
+2. Can addresses other than the contract admin access admin-only functions? This includes setting pool configuration, adding and removing operators, pausing, and others.
+3. Can an adversary or the contract admin unlock stake that does not belong to them?
 ```
 
 # Tests
