@@ -47,14 +47,14 @@ Under "SPONSORS ADD INFO HERE" heading below, include the following:
 ---
 
 # Chainlink Staking audit details
-- Total Prize Pool: $257,500 USDC 
+- Total Prize Pool: $250,000 USDC 
   - HM awards: $189,337.50 USDC 
   - Analysis awards: $11,475 USDC 
-  - QA awards: $5737.50 USDC 
+  - QA awards: $5,737.50 USDC 
   - Bot Race awards: $17,212.50 USDC 
   - Gas awards: $5,737.50 USDC 
   - Judge awards: $12,000 USDC 
-  - Lookout awards: $7,000 USDC 
+  - Lookout awards: $8,000 USDC 
   - Scout awards: $500 USDC 
 - Join [C4 Discord](https://discord.gg/code4rena) to register
 - Submit findings [using the C4 form](https://code4rena.com/contests/2023-08-chainlink-staking/submit)
