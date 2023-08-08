@@ -78,17 +78,30 @@ Automated findings output for the audit can be found [here](bot-report.md) withi
 
 # Scope
 
-*List all files in scope in the table below (along with hyperlinks) -- and feel free to add notes here to emphasize areas of focus.*
+Specific focus should be paid to the contracts listed below:
 
-*For line of code counts, we recommend using [cloc](https://github.com/AlDanial/cloc).* 
-
-| Contract | SLOC | Purpose | Libraries used |  
-| ----------- | ----------- | ----------- | ----------- |
-| [contracts/folder/sample.sol](contracts/folder/sample.sol) | 123 | This contract does XYZ | [`@openzeppelin/*`](https://openzeppelin.com/contracts/) |
+| Contract           | Description                                                                                                                                                                                                                            | Lines of Code (and comments) | Libraries used                                                    | External contracts called                      |
+| ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------- | ----------------------------------------------------------------- | ---------------------------------------------- |
+| src/Migratable.sol       | Helper library for casting integers.                                                                                                                                                                                                   | 28(7)                       |                                                                   |                                                | 
+| src/MigrationProxy.sol       | Helper library for casting integers.                                                                                                                                                                                                   | 87 (63)                       |        
+| src/PausableWithAccessControl.sol       | Helper library for casting integers.                                                                                                                                                                                                   | 18 (6)                       |                                                                   |                                                |                                                           |                                                |
+| src/alerts/PriceFeedAlertsController.sol        | The Staking v0.1 pool contract responsible for storing staked LINK and distributing rewards to stakers. Also handles pool config management, node operator management, Merkle allowlist, alerting, and migrations. Locks staker stake. | 304 (212)                    | RewardLib, StakingPoolLib, @openzeppelin/_ @chainlink/contracts/_ | LINK Token, Chainlink ETH-USD Aggregator Proxy |
+| src/pools/CommunityStakingPool.sol      | Helper library that implements reward calculation logic and functions.                                                                                                                                                                 | 75 (49)                    |                                                                   |                                                |
+| src/pools/OperatorStakingPool.sol | Helper library that implements staking pool management logic and functions.                                                                                                                                                            | 308 (214)                     |                                                                   |                                                |
+| src/pools/StakingPoolBase.sol       | Helper library for casting integers.                                                                                                                                                                                                   | 438 (241)                       |                                                                   |                                                |
+| src/rewards/RewardVault.sol       | Helper library for casting integers.                                                                                                                                                                                                   | 1002 (525)                       |                                                                   |                                                |
+| src/timelock/StakingTimelock.sol       | Helper library for casting integers.                                                                                                                                                                                                   | 87 (28)                       |                                                                   |                                                |
+| src/timelock/Timelock.sol       | Helper library for casting integers.                                                                                                                                                                                                   | 191 (256)                       |                                                                   |                                                |
 
 ## Out of scope
 
-*List any files/contracts that are out of scope for this audit.*
+| Contract               | Description                                            |
+| ---------------------- | ------------------------------------------------------ |
+| src/interfaces/\*.sol      | Interfaces, contains no logic. Provided for reference. |
+| src/tests/\*.sol | Mock and helper contracts for testing purposes only.   |
+| test/\*.sol            | Foundry unit, fuzz and invariant tests.                      |
+| scripts/\*.sol            | Foundry deployment scripts                      |
+| External libraries            |                       |
 
 # Additional Context
 
