@@ -130,6 +130,7 @@ Specific focus should be paid to the contracts listed below:
 | Unbonding Period | A period of time stakers are required to wait before unstaking. |
 | Claim Period | The period of time following the unbonding period in which a staker may unstake their tokens.  |
 | Reward Duration | The period of time an amount of rewards is distributed for. |
+| Timelock Period | The period of time after a transaction is proposed in the Timelock before the transaction can be executed. |
 
 
 ### Areas of Concern, Attack Surfaces, Invariants
@@ -154,9 +155,17 @@ The team's largest concerns with the Staking V0.2 protocol are around
 
 ### Staking pool management
 
-- Can the Staking v0.1 pool always be concluded by the contract manager? (When rewards have not yet depleted)
-- Can the contract manager always add and remove operators before Staking v0.1 has concluded?
-- Can removed operators only unlock after Staking v0.1 has concluded?
+- Can the admin immediately pause a staking pool in case of an emergency?
+- Can the admin always add and remove operators before Staking v0.2 has concluded?
+- Must the admin go through a timelock period to add a new slashing condition on the `OperatorStakingPool`?
+- Can the admin perform operational actions such as updating the unbonding period?
+
+### Reward vault management
+
+- Can the admin extend the reward duration by adding more rewards to the `RewardVault`?
+- Can the admin immediately pause the reward vault in case of an emergency?
+- Can the admin migrate the reward vault?
+- Can the admin perform operational actions such as updating the multiplier ramp up period and delegation rates?
 
 ### Staking and Unstaking
 
