@@ -35,10 +35,10 @@ Under "SPONSORS ADD INFO HERE" heading below, include the following:
   - [X] source lines of code (excluding blank lines and comments) in each
   - [X] external contracts called in each
   - [X] libraries used in each
-- [ ] Describe any novel or unique curve logic or mathematical models implemented in the contracts
-- [ ] Does the token conform to the ERC-20 standard? In what specific ways does it differ?
-- [ ] Describe anything else that adds any special logic that makes your approach unique
-- [ ] Identify any areas of specific concern in reviewing the code
+- [X] Describe any novel or unique curve logic or mathematical models implemented in the contracts
+- [X] Does the token conform to the ERC-20 standard? In what specific ways does it differ?
+- [X] Describe anything else that adds any special logic that makes your approach unique
+- [X] Identify any areas of specific concern in reviewing the code
 - [ ] Review the Gas award pool amount. This can be adjusted up or down, based on your preference - just flag it for Code4rena staff so we can update the pool totals across all comms channels. 
 - [ ] Optional / nice to have: pre-record a high-level overview of your protocol (not just specific smart contract functions). This saves wardens a lot of time wading through documentation.
 - [ ] See also: [this checklist in Notion](https://code4rena.notion.site/Key-info-for-Code4rena-sponsors-f60764c4c4574bbf8e7a6dbd72cc49b4#0cafa01e6201462e9f78677a39e09746)
@@ -134,6 +134,18 @@ Specific focus should be paid to the contracts listed below:
 
 ### Areas of Concern, Attack Surfaces, Invariants
 
+### Areas of Concern
+
+The team's largest concerns with the Staking V0.2 protocol are around
+
+ - Reward calculation/distribution logic
+  - Does a staker earn the correct amount of rewards at all times?
+  - Is the ramp up multiplier correctly applied and reset at all times?
+ - Contract upgradability patterns
+  - Can a staker's principal be locked in an older contract?
+  - Can a staker lose any of their rewards once a reward vault is upgraded?
+  - Does any state in any contract get corrupted whenever there is an upgrade?
+
 ### Staking access controls
 
 - Is all access control sound?
@@ -209,24 +221,28 @@ Specific focus should be paid to the contracts listed below:
 - Can the contract be bricked?
 
 ## Scoping Details 
+
 ```
-- If you have a public code repo, please share it here:  https://github.com/smartcontractkit/staking
-- How many contracts are in scope?:   20
-- Total SLoC for these contracts?:  2297
-- How many external imports are there?: 15 
+- If you have a public code repo, please share it here:  NA
+- How many contracts are in scope?:   10
+- Total SLoC for these contracts?:  2538
+- How many external imports are there?: 8.  This is the number of external libraries used and the number of external contracts that Staking V0.2 contracts interact with
 - How many separate interfaces and struct definitions are there for the contracts within scope?:  10 interfaces 20 structs
 - Does most of your code generally use composition or inheritance?:  Inheritance 
-- How many external calls?:   15
+- How many external calls?:   2.  Staking V0.2 makes external calls to the LINKToken and the Chainlink price feed oracles
 - What is the overall line coverage percentage provided by your tests?: 100%
-- Is this an upgrade of an existing system?: False
-- Check all that apply (e.g. timelock, NFT, AMM, ERC20, rollups, etc.): Timelock function, ERC-20 Token
-- Is there a need to understand a separate part of the codebase / get context in order to audit this part of the protocol?:  False 
-- Please describe required context: n/a  
-- Does it use an oracle?:  Chainlink
-- Describe any novel or unique curve logic or mathematical models your code uses: None that are unique. The code does use some math for calculating staking rewards and withdrawal penalties.
-- Is this either a fork of or an alternate implementation of another project?:   False
-- Does it use a side-chain?: False
+- Is this an upgrade of an existing system?: Yes.  This is the second iteration of Chainlink's staking protocol
+- Check all that apply (e.g. timelock, NFT, AMM, ERC20, rollups, etc.): Timelock, ERC-20 Token, Chainlink Price Feeds
+- Is there a need to understand a separate part of the codebase / get context in order to audit this part of the protocol?:  Yes 
+- Please describe required context: You may need to understand how Chainlink price feeds work in order to understand how the `PriceFeedAlertsController` detects feed downtime.  Today Chainlink DONs write an updated price on-chain every 30s along with a timestamp of when this price was updated.  These values can then be read by calling the feed's `getLatestRoundData` function.  The `PriceFeedAlertsController` calls this function to retrieve the time the feed was last updated and compares it against the current `block.timestamp` to determine if the feed has been down for longer than the configured alertable threshold.
+- Does it use an oracle?:  No
+- Describe any novel or unique curve logic or mathematical models your code uses: The `RewardVault` calculates staker rewards by implementing the widely used reward-per-token model implemented by other staker protocols. A more detailed explanation of this can be found in the Staking Reward Calculations document.
+- Is this either a fork of or an alternate implementation of another project?:   No
+- Does it use a side-chain?: No
 - Describe any specific areas you would like addressed:
+  - Reward calculation and distribution logic in the `RewardVault`
+  - Upgradability patterns
+
 ### Staking access controls
 1.  Is all access control sound?
 2. Can addresses other than the contract admin access admin-only functions? This includes setting pool configuration, adding and removing operators, pausing, and others.
