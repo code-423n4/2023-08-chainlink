@@ -226,7 +226,7 @@ The team's largest concerns with the Staking V0.2 protocol are around
 - If you have a public code repo, please share it here:  NA
 - How many contracts are in scope?:   10
 - Total SLoC for these contracts?:  2538
-- How many external imports are there?: 8.  This is the number of external libraries used and the number of external contracts that Staking V0.2 contracts interact with
+- How many external imports are there?: 8.  This is the number of unique external libraries used and the unique number of external contracts that Staking V0.2 contracts interact with
 - How many separate interfaces and struct definitions are there for the contracts within scope?:  10 interfaces 20 structs
 - Does most of your code generally use composition or inheritance?:  Inheritance 
 - How many external calls?:   2.  Staking V0.2 makes external calls to the LINKToken and the Chainlink price feed oracles
@@ -242,11 +242,6 @@ The team's largest concerns with the Staking V0.2 protocol are around
 - Describe any specific areas you would like addressed:
   - Reward calculation and distribution logic in the `RewardVault`
   - Upgradability patterns
-
-### Staking access controls
-1.  Is all access control sound?
-2. Can addresses other than the contract admin access admin-only functions? This includes setting pool configuration, adding and removing operators, pausing, and others.
-3. Can an adversary or the contract admin unlock stake that does not belong to them?
 ```
 
 # Developer Guide
