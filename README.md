@@ -59,10 +59,10 @@ Under "SPONSORS ADD INFO HERE" heading below, include the following:
 - Join [C4 Discord](https://discord.gg/code4rena) to register
 - Submit findings [using the C4 form](https://code4rena.com/contests/2023-08-chainlink-staking/submit)
 - [Read our guidelines for more details](https://docs.code4rena.com/roles/wardens)
-- Starts August 11, 2023 20:00 UTC
-- Ends August 28, 2023 20:00 UTC
+- Starts August 25, 2023 20:00 UTC
+- Ends September 12, 2023 20:00 UTC
 
-**IMPORTANT NOTE**: Prior to receiving payment from this audit you MUST become a Certified Warden (successfully complete KYC). You do not have to complete this process before competing or submitting bugs. You must have started this process within 48 hours after the audit ends, i.e. **by August 30, 2023 at 20:00 UTC in order to receive payment.**
+**IMPORTANT NOTE:** Prior to receiving payment from this audit you MUST become a [Certified Contributor](https://docs.code4rena.com/roles/certified-contributors)  (successfully complete KYC). You do not have to become certified before submitting bugs. But you must successfully complete the certification process within 30 days of the audit end date in order to receive awards. This applies to all audit participants including wardens, teams, bot crews, judges, lookouts, and scouts.
 
 ## Automated Findings / Publicly Known Issues
 
