@@ -177,6 +177,12 @@ The team's largest concerns with the Staking V0.2 protocol are around
 
 - Stakers SHOULD always be able to migrate when the pool has been concluded by the contract manager and migration target is set.
 
+### Timelock invariants
+
+- The min delay for a selector cannot be lower than the global min delay.
+- Stakers should be able to unbond and unstake before major protocol changes.
+- The timelock delay for upgrade operations should be greater than the unbonding period. 
+
 ### General
 
 - Can any getter function in the Staking v0.2 contracts revert?
@@ -224,13 +230,13 @@ Additionally you may also need to understand how rewards are migrated from Staki
 Compile the smart contracts with Forge:
 
 ```sh
-$ forge build
+forge build
 ```
 
 ### Format files
 
 ```sh
-$ forge fmt
+forge fmt
 ```
 
 ### Test
@@ -238,32 +244,31 @@ $ forge fmt
 Run unit tests:
 
 ```sh
-$ forge test
+forge test
 ```
 
 Run integration tests:
 ```sh
-$ FOUNRY_PROFILE=integration forge test
+FOUNDRY_PROFILE=integration forge test
 ```
 
 Run invariant tests:
 ```sh
-$ FOUNRY_PROFILE=invariant forge test
+FOUNDRY_PROFILE=invariant forge test
 ```
 
 Run a single test:
 
 ```sh
-$ forge test test/MyContract.test.ts
+forge test test/MyContract.test.ts
 ```
-
 
 ### Coverage
 
 Generate a test coverage report:
 
 ```sh
-$ forge coverage
+pnpm coverage
 ```
 
 Unit test coverage is at 100%.
@@ -273,7 +278,7 @@ Unit test coverage is at 100%.
 Delete the output smart contract artifacts directory and clears the Forge cache:
 
 ```sh
-$ forge clean
+forge clean
 ```
 
 ### Slither static analysis
@@ -297,5 +302,5 @@ asdf reshim python
 You can find a `.gas-snapshot` file for several key flows. You may find it helpful during gas golfing.
 
 ```
-FOUNDRY_PROFILE=gas forge snapshot
+pnpm gas
 ```
