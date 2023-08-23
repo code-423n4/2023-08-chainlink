@@ -1,0 +1,302 @@
+INFO:Detectors:
+Migratable.setMigrationTarget(address).newMigrationTarget (src/Migratable.sol#11) lacks a zero-check on :
+		- s_migrationTarget = newMigrationTarget (src/Migratable.sol#15)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#missing-zero-address-validation
+INFO:Detectors:
+Migratable (src/Migratable.sol#6-43) does not implement functions:
+	- IMigratable.migrate(bytes) (src/interfaces/IMigratable.sol#25)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#unimplemented-functions
+INFO:Detectors:
+MigrationProxy.onTokenTransfer(address,uint256,bytes) (src/MigrationProxy.sol#91-118) ignores return value by i_LINK.transfer(staker,amountToWithdraw) (src/MigrationProxy.sol#117)
+OperatorStakingPool.depositAlerterReward(uint256) (src/pools/OperatorStakingPool.sol#154-165) ignores return value by i_LINK.transferFrom(msg.sender,address(this),amount) (src/pools/OperatorStakingPool.sol#163)
+OperatorStakingPool.withdrawAlerterReward(uint256) (src/pools/OperatorStakingPool.sol#173-183) ignores return value by i_LINK.transfer(msg.sender,amount) (src/pools/OperatorStakingPool.sol#181)
+OperatorStakingPool._payAlerter(address,uint256,uint256) (src/pools/OperatorStakingPool.sol#350-369) ignores return value by i_LINK.transfer(alerter,alerterRewardActual) (src/pools/OperatorStakingPool.sol#368)
+OperatorStakingPool.unstakeRemovedPrincipal() (src/pools/OperatorStakingPool.sol#538-553) ignores return value by i_LINK.transfer(msg.sender,withdrawableAmount) (src/pools/OperatorStakingPool.sol#551)
+StakingPoolBase.unstake(uint256,bool) (src/pools/StakingPoolBase.sol#459-505) ignores return value by i_LINK.transfer(msg.sender,amount) (src/pools/StakingPoolBase.sol#502)
+RewardVault.addReward(address,uint256,uint256) (src/rewards/RewardVault.sol#346-373) ignores return value by i_LINK.transferFrom(msg.sender,address(this),amount) (src/rewards/RewardVault.sol#370)
+RewardVault._transferRewards(address,IRewardVault.StakerReward) (src/rewards/RewardVault.sol#664-683) ignores return value by i_LINK.transfer(staker,claimableReward) (src/rewards/RewardVault.sol#679)
+RewardVault.close() (src/rewards/RewardVault.sol#793-800) ignores return value by i_LINK.transfer(msg.sender,totalUnvestedRewards) (src/rewards/RewardVault.sol#798)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#unchecked-transfer
+INFO:Detectors:
+RewardVault._calculateForfeitedRewardDistribution(uint256,uint256) (src/rewards/RewardVault.sol#1579-1597) uses a dangerous strict equality:
+	- forfeitedReward == 0 (src/rewards/RewardVault.sol#1583)
+RewardVault._transferRewards(address,IRewardVault.StakerReward) (src/rewards/RewardVault.sol#664-683) uses a dangerous strict equality:
+	- claimableReward == 0 (src/rewards/RewardVault.sol#670)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#dangerous-strict-equalities
+INFO:Detectors:
+Reentrancy in OperatorStakingPool._slashOperators(address[],uint256) (src/pools/OperatorStakingPool.sol#312-344):
+	External calls:
+	- s_rewardVault.updateReward(operators[i],operatorPrincipal) (src/pools/OperatorStakingPool.sol#329)
+	State variables written after the call(s):
+	- _updateStakerHistory(staker,updatedPrincipal,stakerStakedAtTime) (src/pools/OperatorStakingPool.sol#330-334)
+		- staker.history.push(s_checkpointId ++,(uint224(uint112(latestPrincipal)) << 112) | uint224(uint112(latestStakedAtTime))) (src/pools/StakingPoolBase.sol#742-745)
+	StakingPoolBase.s_checkpointId (src/pools/StakingPoolBase.sol#193) can be used in cross function reentrancies:
+	- StakingPoolBase._updateStakerHistory(IStakingPool.Staker,uint256,uint256) (src/pools/StakingPoolBase.sol#737-746)
+	- StakingPoolBase.getCurrentCheckpointId() (src/pools/StakingPoolBase.sol#610-612)
+Reentrancy in RewardVault.claimReward() (src/rewards/RewardVault.sol#623-658):
+	External calls:
+	- claimableRewards = _transferRewards(msg.sender,stakerReward) (src/rewards/RewardVault.sol#645)
+		- i_LINK.transfer(staker,claimableReward) (src/rewards/RewardVault.sol#679)
+	State variables written after the call(s):
+	- s_rewards[msg.sender] = stakerReward (src/rewards/RewardVault.sol#646)
+	RewardVault.s_rewards (src/rewards/RewardVault.sol#307) can be used in cross function reentrancies:
+	- RewardVault._calculateStakerReward(address,bool,uint256) (src/rewards/RewardVault.sol#1500-1537)
+	- RewardVault._getReward(address) (src/rewards/RewardVault.sol#1621-1667)
+	- RewardVault.claimReward() (src/rewards/RewardVault.sol#623-658)
+	- RewardVault.finalizeReward(address,uint256,uint256,uint256,bool) (src/rewards/RewardVault.sol#721-787)
+	- RewardVault.getStoredReward(address) (src/rewards/RewardVault.sol#837-839)
+	- RewardVault.updateReward(address,uint256) (src/rewards/RewardVault.sol#687-712)
+Reentrancy in RewardVault.finalizeReward(address,uint256,uint256,uint256,bool) (src/rewards/RewardVault.sol#721-787):
+	External calls:
+	- claimedAmount = _transferRewards(staker,stakerReward) (src/rewards/RewardVault.sol#771)
+		- i_LINK.transfer(staker,claimableReward) (src/rewards/RewardVault.sol#679)
+	State variables written after the call(s):
+	- s_rewards[staker] = stakerReward (src/rewards/RewardVault.sol#774)
+	RewardVault.s_rewards (src/rewards/RewardVault.sol#307) can be used in cross function reentrancies:
+	- RewardVault._calculateStakerReward(address,bool,uint256) (src/rewards/RewardVault.sol#1500-1537)
+	- RewardVault._getReward(address) (src/rewards/RewardVault.sol#1621-1667)
+	- RewardVault.claimReward() (src/rewards/RewardVault.sol#623-658)
+	- RewardVault.finalizeReward(address,uint256,uint256,uint256,bool) (src/rewards/RewardVault.sol#721-787)
+	- RewardVault.getStoredReward(address) (src/rewards/RewardVault.sol#837-839)
+	- RewardVault.updateReward(address,uint256) (src/rewards/RewardVault.sol#687-712)
+Reentrancy in OperatorStakingPool.removeOperators(address[]) (src/pools/OperatorStakingPool.sol#473-511):
+	External calls:
+	- s_rewardVault.finalizeReward(operatorAddress,principal,principal,false,stakedAtTime) (src/pools/OperatorStakingPool.sol#491-497)
+	State variables written after the call(s):
+	- _updateStakerHistory(staker,0,0) (src/pools/OperatorStakingPool.sol#503)
+		- staker.history.push(s_checkpointId ++,(uint224(uint112(latestPrincipal)) << 112) | uint224(uint112(latestStakedAtTime))) (src/pools/StakingPoolBase.sol#742-745)
+	StakingPoolBase.s_checkpointId (src/pools/StakingPoolBase.sol#193) can be used in cross function reentrancies:
+	- StakingPoolBase._updateStakerHistory(IStakingPool.Staker,uint256,uint256) (src/pools/StakingPoolBase.sol#737-746)
+	- StakingPoolBase.getCurrentCheckpointId() (src/pools/StakingPoolBase.sol#610-612)
+	- operator.isOperator = false (src/pools/OperatorStakingPool.sol#500)
+	OperatorStakingPool.s_operators (src/pools/OperatorStakingPool.sol#126) can be used in cross function reentrancies:
+	- OperatorStakingPool._validateOnTokenTransfer(address,address,bytes) (src/pools/OperatorStakingPool.sol#393-396)
+	- OperatorStakingPool.addOperators(address[]) (src/pools/OperatorStakingPool.sol#426-458)
+	- OperatorStakingPool.getRemovedPrincipal(address) (src/pools/OperatorStakingPool.sol#530-532)
+	- OperatorStakingPool.isOperator(address) (src/pools/OperatorStakingPool.sol#516-518)
+	- OperatorStakingPool.isRemoved(address) (src/pools/OperatorStakingPool.sol#523-525)
+	- OperatorStakingPool.removeOperators(address[]) (src/pools/OperatorStakingPool.sol#473-511)
+	- OperatorStakingPool.unstakeRemovedPrincipal() (src/pools/OperatorStakingPool.sol#538-553)
+	- operator.isRemoved = true (src/pools/OperatorStakingPool.sol#501)
+	OperatorStakingPool.s_operators (src/pools/OperatorStakingPool.sol#126) can be used in cross function reentrancies:
+	- OperatorStakingPool._validateOnTokenTransfer(address,address,bytes) (src/pools/OperatorStakingPool.sol#393-396)
+	- OperatorStakingPool.addOperators(address[]) (src/pools/OperatorStakingPool.sol#426-458)
+	- OperatorStakingPool.getRemovedPrincipal(address) (src/pools/OperatorStakingPool.sol#530-532)
+	- OperatorStakingPool.isOperator(address) (src/pools/OperatorStakingPool.sol#516-518)
+	- OperatorStakingPool.isRemoved(address) (src/pools/OperatorStakingPool.sol#523-525)
+	- OperatorStakingPool.removeOperators(address[]) (src/pools/OperatorStakingPool.sol#473-511)
+	- OperatorStakingPool.unstakeRemovedPrincipal() (src/pools/OperatorStakingPool.sol#538-553)
+	- operator.removedPrincipal = principal (src/pools/OperatorStakingPool.sol#505)
+	OperatorStakingPool.s_operators (src/pools/OperatorStakingPool.sol#126) can be used in cross function reentrancies:
+	- OperatorStakingPool._validateOnTokenTransfer(address,address,bytes) (src/pools/OperatorStakingPool.sol#393-396)
+	- OperatorStakingPool.addOperators(address[]) (src/pools/OperatorStakingPool.sol#426-458)
+	- OperatorStakingPool.getRemovedPrincipal(address) (src/pools/OperatorStakingPool.sol#530-532)
+	- OperatorStakingPool.isOperator(address) (src/pools/OperatorStakingPool.sol#516-518)
+	- OperatorStakingPool.isRemoved(address) (src/pools/OperatorStakingPool.sol#523-525)
+	- OperatorStakingPool.removeOperators(address[]) (src/pools/OperatorStakingPool.sol#473-511)
+	- OperatorStakingPool.unstakeRemovedPrincipal() (src/pools/OperatorStakingPool.sol#538-553)
+	- s_pool.state.totalPrincipal -= principal (src/pools/OperatorStakingPool.sol#499)
+	StakingPoolBase.s_pool (src/pools/StakingPoolBase.sol#177) can be used in cross function reentrancies:
+	- StakingPoolBase._canUnstake(IStakingPool.Staker) (src/pools/StakingPoolBase.sol#717-719)
+	- StakingPoolBase._increaseStake(address,uint256,uint256) (src/pools/StakingPoolBase.sol#672-698)
+	- StakingPoolBase._setClaimPeriod(uint256) (src/pools/StakingPoolBase.sol#658-666)
+	- StakingPoolBase._setClaimPeriod(uint256) (src/pools/StakingPoolBase.sol#658-666)
+	- StakingPoolBase._setPoolConfig(uint256,uint256) (src/pools/StakingPoolBase.sol#622-642)
+	- StakingPoolBase._setPoolConfig(uint256,uint256) (src/pools/StakingPoolBase.sol#622-642)
+	- StakingPoolBase._setUnbondingPeriod(uint256) (src/pools/StakingPoolBase.sol#646-654)
+	- StakingPoolBase._setUnbondingPeriod(uint256) (src/pools/StakingPoolBase.sol#646-654)
+	- OperatorStakingPool._slashOperators(address[],uint256) (src/pools/OperatorStakingPool.sol#312-344)
+	- OperatorStakingPool.addOperators(address[]) (src/pools/OperatorStakingPool.sol#426-458)
+	- StakingPoolBase.close() (src/pools/StakingPoolBase.sol#425-429)
+	- StakingPoolBase.getMaxPoolSize() (src/pools/StakingPoolBase.sol#581-583)
+	- StakingPoolBase.getStakerLimits() (src/pools/StakingPoolBase.sol#576-578)
+	- StakingPoolBase.getTotalPrincipal() (src/pools/StakingPoolBase.sol#508-510)
+	- StakingPoolBase.getUnbondingParams() (src/pools/StakingPoolBase.sol#596-598)
+	- OperatorStakingPool.removeOperators(address[]) (src/pools/OperatorStakingPool.sol#473-511)
+	- StakingPoolBase.unbond() (src/pools/StakingPoolBase.sol#277-289)
+	- StakingPoolBase.unstake(uint256,bool) (src/pools/StakingPoolBase.sol#459-505)
+	- StakingPoolBase.whenBeforeClosing() (src/pools/StakingPoolBase.sol#778-781)
+	- StakingPoolBase.whenBeforeOpening() (src/pools/StakingPoolBase.sol#771-775)
+	- StakingPoolBase.whenClosed() (src/pools/StakingPoolBase.sol#796-799)
+Reentrancy in OperatorStakingPool.slashAndReward(address[],address,uint256,uint256) (src/pools/OperatorStakingPool.sol#277-305):
+	External calls:
+	- totalSlashedAmount = _slashOperators(stakers,principalAmount) (src/pools/OperatorStakingPool.sol#294)
+		- s_rewardVault.updateReward(operators[i],operatorPrincipal) (src/pools/OperatorStakingPool.sol#329)
+	State variables written after the call(s):
+	- s_slasherState[msg.sender].remainingSlashCapacityAmount = remainingSlashCapacity - totalSlashedAmount (src/pools/OperatorStakingPool.sol#296-297)
+	OperatorStakingPool.s_slasherState (src/pools/OperatorStakingPool.sol#130) can be used in cross function reentrancies:
+	- OperatorStakingPool._getRemainingSlashCapacity(ISlashable.SlasherConfig,address) (src/pools/OperatorStakingPool.sol#375-386)
+	- OperatorStakingPool._setSlasherConfig(address,ISlashable.SlasherConfig) (src/pools/OperatorStakingPool.sol#241-254)
+	- OperatorStakingPool.slashAndReward(address[],address,uint256,uint256) (src/pools/OperatorStakingPool.sol#277-305)
+	- s_slasherState[msg.sender].lastSlashTimestamp = block.timestamp (src/pools/OperatorStakingPool.sol#298)
+	OperatorStakingPool.s_slasherState (src/pools/OperatorStakingPool.sol#130) can be used in cross function reentrancies:
+	- OperatorStakingPool._getRemainingSlashCapacity(ISlashable.SlasherConfig,address) (src/pools/OperatorStakingPool.sol#375-386)
+	- OperatorStakingPool._setSlasherConfig(address,ISlashable.SlasherConfig) (src/pools/OperatorStakingPool.sol#241-254)
+	- OperatorStakingPool.slashAndReward(address[],address,uint256,uint256) (src/pools/OperatorStakingPool.sol#277-305)
+Reentrancy in StakingPoolBase.unstake(uint256,bool) (src/pools/StakingPoolBase.sol#459-505):
+	External calls:
+	- claimedReward = s_rewardVault.finalizeReward(msg.sender,stakerPrincipal,amount,shouldClaimReward,stakedAt) (src/pools/StakingPoolBase.sol#483-489)
+	State variables written after the call(s):
+	- s_pool.state.totalPrincipal -= amount (src/pools/StakingPoolBase.sol#491)
+	StakingPoolBase.s_pool (src/pools/StakingPoolBase.sol#177) can be used in cross function reentrancies:
+	- StakingPoolBase._canUnstake(IStakingPool.Staker) (src/pools/StakingPoolBase.sol#717-719)
+	- StakingPoolBase._increaseStake(address,uint256,uint256) (src/pools/StakingPoolBase.sol#672-698)
+	- StakingPoolBase._setClaimPeriod(uint256) (src/pools/StakingPoolBase.sol#658-666)
+	- StakingPoolBase._setPoolConfig(uint256,uint256) (src/pools/StakingPoolBase.sol#622-642)
+	- StakingPoolBase._setUnbondingPeriod(uint256) (src/pools/StakingPoolBase.sol#646-654)
+	- StakingPoolBase.close() (src/pools/StakingPoolBase.sol#425-429)
+	- StakingPoolBase.getMaxPoolSize() (src/pools/StakingPoolBase.sol#581-583)
+	- StakingPoolBase.getStakerLimits() (src/pools/StakingPoolBase.sol#576-578)
+	- StakingPoolBase.getTotalPrincipal() (src/pools/StakingPoolBase.sol#508-510)
+	- StakingPoolBase.getUnbondingParams() (src/pools/StakingPoolBase.sol#596-598)
+	- StakingPoolBase.unbond() (src/pools/StakingPoolBase.sol#277-289)
+	- StakingPoolBase.unstake(uint256,bool) (src/pools/StakingPoolBase.sol#459-505)
+	- StakingPoolBase.whenBeforeOpening() (src/pools/StakingPoolBase.sol#771-775)
+	- StakingPoolBase.whenClosed() (src/pools/StakingPoolBase.sol#796-799)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#reentrancy-vulnerabilities-1
+INFO:Detectors:
+OperatorStakingPool.removeOperators(address[]).i (src/pools/OperatorStakingPool.sol#480) is a local variable never initialized
+RewardVault._calculateForfeitedRewardDistribution(uint256,uint256).reclaimableReward (src/rewards/RewardVault.sol#1587) is a local variable never initialized
+RewardVault._getBucketRewardAndEmissionRateSplit(address,uint256,uint256,bool).delegatedRate (src/rewards/RewardVault.sol#1231) is a local variable never initialized
+OperatorStakingPool.addOperators(address[]).i (src/pools/OperatorStakingPool.sol#436) is a local variable never initialized
+RewardVault.finalizeReward(address,uint256,uint256,uint256,bool).claimedAmount (src/rewards/RewardVault.sol#768) is a local variable never initialized
+RewardVault._calculateForfeitedRewardDistribution(uint256,uint256).vestedRewardPerToken (src/rewards/RewardVault.sol#1586) is a local variable never initialized
+RewardVault._getBucketRewardAndEmissionRateSplit(address,uint256,uint256,bool).operatorDelegatedReward (src/rewards/RewardVault.sol#1230) is a local variable never initialized
+OperatorStakingPool._slashOperators(address[],uint256).i (src/pools/OperatorStakingPool.sol#319) is a local variable never initialized
+RewardVault._calculateForfeitedRewardDistribution(uint256,uint256).vestedReward (src/rewards/RewardVault.sol#1585) is a local variable never initialized
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#uninitialized-local-variables
+INFO:Detectors:
+MigrationProxy._migrateToPool(address,uint256,bytes) (src/MigrationProxy.sol#126-133) ignores return value by i_LINK.transferAndCall(pool,amount,data) (src/MigrationProxy.sol#132)
+OperatorStakingPool.removeOperators(address[]) (src/pools/OperatorStakingPool.sol#473-511) ignores return value by s_rewardVault.finalizeReward(operatorAddress,principal,principal,false,stakedAtTime) (src/pools/OperatorStakingPool.sol#491-497)
+StakingPoolBase.migrate(bytes) (src/pools/StakingPoolBase.sol#230-253) ignores return value by i_LINK.transferAndCall(s_migrationTarget,stakerPrincipal,migrationData) (src/pools/StakingPoolBase.sol#251)
+StakingPoolBase.onTokenTransfer(address,uint256,bytes) (src/pools/StakingPoolBase.sol#332-374) ignores return value by s_rewardVault.finalizeReward(staker,stakerPrincipal,0,false,stakedAt) (src/pools/StakingPoolBase.sol#365-371)
+StakingPoolBase._updateStakerHistory(IStakingPool.Staker,uint256,uint256) (src/pools/StakingPoolBase.sol#737-746) ignores return value by staker.history.push(s_checkpointId ++,(uint224(uint112(latestPrincipal)) << 112) | uint224(uint112(latestStakedAtTime))) (src/pools/StakingPoolBase.sol#742-745)
+RewardVault.migrate(bytes) (src/rewards/RewardVault.sol#509-540) ignores return value by i_LINK.transferAndCall(s_migrationTarget,totalUnvestedRewards,migrationData) (src/rewards/RewardVault.sol#538)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#unused-return
+INFO:Detectors:
+Migratable.setMigrationTarget(address).newMigrationTarget (src/Migratable.sol#11) lacks a zero-check on :
+		- s_migrationTarget = newMigrationTarget (src/Migratable.sol#15)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#missing-zero-address-validation
+INFO:Detectors:
+OperatorStakingPool.addOperators(address[]) (src/pools/OperatorStakingPool.sol#426-458) has external calls inside a loop: stakerReward = s_rewardVault.getStoredReward(operatorAddress) (src/pools/OperatorStakingPool.sol#438)
+OperatorStakingPool.removeOperators(address[]) (src/pools/OperatorStakingPool.sol#473-511) has external calls inside a loop: s_rewardVault.finalizeReward(operatorAddress,principal,principal,false,stakedAtTime) (src/pools/OperatorStakingPool.sol#491-497)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation/#calls-inside-a-loop
+INFO:Detectors:
+Reentrancy in OperatorStakingPool._slashOperators(address[],uint256) (src/pools/OperatorStakingPool.sol#312-344):
+	External calls:
+	- s_rewardVault.updateReward(operators[i],operatorPrincipal) (src/pools/OperatorStakingPool.sol#329)
+	State variables written after the call(s):
+	- s_pool.state.totalPrincipal -= totalSlashedAmount (src/pools/OperatorStakingPool.sol#341)
+Reentrancy in StakingPoolBase.onTokenTransfer(address,uint256,bytes) (src/pools/StakingPoolBase.sol#332-374):
+	External calls:
+	- s_rewardVault.finalizeReward(staker,stakerPrincipal,0,false,stakedAt) (src/pools/StakingPoolBase.sol#365-371)
+	State variables written after the call(s):
+	- _increaseStake(staker,stakerPrincipal + amount,amount) (src/pools/StakingPoolBase.sol#373)
+		- staker.history.push(s_checkpointId ++,(uint224(uint112(latestPrincipal)) << 112) | uint224(uint112(latestStakedAtTime))) (src/pools/StakingPoolBase.sol#742-745)
+	- _increaseStake(staker,stakerPrincipal + amount,amount) (src/pools/StakingPoolBase.sol#373)
+		- s_pool.state.totalPrincipal = newTotalPrincipal (src/pools/StakingPoolBase.sol#688)
+Reentrancy in OperatorStakingPool.removeOperators(address[]) (src/pools/OperatorStakingPool.sol#473-511):
+	External calls:
+	- s_rewardVault.finalizeReward(operatorAddress,principal,principal,false,stakedAtTime) (src/pools/OperatorStakingPool.sol#491-497)
+	State variables written after the call(s):
+	- s_numOperators -= operators.length (src/pools/OperatorStakingPool.sol#510)
+Reentrancy in StakingPoolBase.unstake(uint256,bool) (src/pools/StakingPoolBase.sol#459-505):
+	External calls:
+	- claimedReward = s_rewardVault.finalizeReward(msg.sender,stakerPrincipal,amount,shouldClaimReward,stakedAt) (src/pools/StakingPoolBase.sol#483-489)
+	State variables written after the call(s):
+	- _updateStakerHistory(staker,updatedPrincipal,0) (src/pools/StakingPoolBase.sol#495-499)
+		- staker.history.push(s_checkpointId ++,(uint224(uint112(latestPrincipal)) << 112) | uint224(uint112(latestStakedAtTime))) (src/pools/StakingPoolBase.sol#742-745)
+	- _updateStakerHistory(staker,updatedPrincipal,block.timestamp) (src/pools/StakingPoolBase.sol#495-499)
+		- staker.history.push(s_checkpointId ++,(uint224(uint112(latestPrincipal)) << 112) | uint224(uint112(latestStakedAtTime))) (src/pools/StakingPoolBase.sol#742-745)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#reentrancy-vulnerabilities-2
+INFO:Detectors:
+Reentrancy in OperatorStakingPool._slashOperators(address[],uint256) (src/pools/OperatorStakingPool.sol#312-344):
+	External calls:
+	- s_rewardVault.updateReward(operators[i],operatorPrincipal) (src/pools/OperatorStakingPool.sol#329)
+	Event emitted after the call(s):
+	- Slashed(operators[i],slashedAmount,updatedPrincipal) (src/pools/OperatorStakingPool.sol#338)
+Reentrancy in RewardVault._transferRewards(address,IRewardVault.StakerReward) (src/rewards/RewardVault.sol#664-683):
+	External calls:
+	- i_LINK.transfer(staker,claimableReward) (src/rewards/RewardVault.sol#679)
+	Event emitted after the call(s):
+	- RewardClaimed(staker,claimableReward) (src/rewards/RewardVault.sol#680)
+Reentrancy in RewardVault.addReward(address,uint256,uint256) (src/rewards/RewardVault.sol#346-373):
+	External calls:
+	- i_LINK.transferFrom(msg.sender,address(this),amount) (src/rewards/RewardVault.sol#370)
+	Event emitted after the call(s):
+	- RewardAdded(pool,amount,emissionRate) (src/rewards/RewardVault.sol#372)
+Reentrancy in RewardVault.claimReward() (src/rewards/RewardVault.sol#623-658):
+	External calls:
+	- claimableRewards = _transferRewards(msg.sender,stakerReward) (src/rewards/RewardVault.sol#645)
+		- i_LINK.transfer(staker,claimableReward) (src/rewards/RewardVault.sol#679)
+	Event emitted after the call(s):
+	- StakerRewardUpdated(msg.sender,stakerReward.finalizedBaseReward,stakerReward.finalizedDelegatedReward,stakerReward.baseRewardPerToken,stakerReward.operatorDelegatedRewardPerToken,stakerReward.claimedBaseRewardsInPeriod) (src/rewards/RewardVault.sol#648-655)
+Reentrancy in RewardVault.close() (src/rewards/RewardVault.sol#793-800):
+	External calls:
+	- i_LINK.transfer(msg.sender,totalUnvestedRewards) (src/rewards/RewardVault.sol#798)
+	Event emitted after the call(s):
+	- VaultClosed(totalUnvestedRewards) (src/rewards/RewardVault.sol#799)
+Reentrancy in OperatorStakingPool.depositAlerterReward(uint256) (src/pools/OperatorStakingPool.sol#154-165):
+	External calls:
+	- i_LINK.transferFrom(msg.sender,address(this),amount) (src/pools/OperatorStakingPool.sol#163)
+	Event emitted after the call(s):
+	- AlerterRewardDeposited(amount,s_alerterRewardFunds) (src/pools/OperatorStakingPool.sol#164)
+Reentrancy in RewardVault.finalizeReward(address,uint256,uint256,uint256,bool) (src/rewards/RewardVault.sol#721-787):
+	External calls:
+	- claimedAmount = _transferRewards(staker,stakerReward) (src/rewards/RewardVault.sol#771)
+		- i_LINK.transfer(staker,claimableReward) (src/rewards/RewardVault.sol#679)
+	Event emitted after the call(s):
+	- RewardFinalized(staker,shouldForfeit) (src/rewards/RewardVault.sol#776)
+	- StakerRewardUpdated(staker,stakerReward.finalizedBaseReward,stakerReward.finalizedDelegatedReward,stakerReward.baseRewardPerToken,stakerReward.operatorDelegatedRewardPerToken,stakerReward.claimedBaseRewardsInPeriod) (src/rewards/RewardVault.sol#777-784)
+Reentrancy in StakingPoolBase.migrate(bytes) (src/pools/StakingPoolBase.sol#230-253):
+	External calls:
+	- i_LINK.transferAndCall(s_migrationTarget,stakerPrincipal,migrationData) (src/pools/StakingPoolBase.sol#251)
+	Event emitted after the call(s):
+	- StakerMigrated(s_migrationTarget,stakerPrincipal,migrationData) (src/pools/StakingPoolBase.sol#252)
+Reentrancy in RewardVault.migrate(bytes) (src/rewards/RewardVault.sol#509-540):
+	External calls:
+	- i_LINK.transferAndCall(s_migrationTarget,totalUnvestedRewards,migrationData) (src/rewards/RewardVault.sol#538)
+	Event emitted after the call(s):
+	- VaultMigrated(s_migrationTarget,totalUnvestedRewards,totalEmissionRate) (src/rewards/RewardVault.sol#539)
+Reentrancy in StakingPoolBase.onTokenTransfer(address,uint256,bytes) (src/pools/StakingPoolBase.sol#332-374):
+	External calls:
+	- s_rewardVault.finalizeReward(staker,stakerPrincipal,0,false,stakedAt) (src/pools/StakingPoolBase.sol#365-371)
+	Event emitted after the call(s):
+	- Staked(sender,newPrincipal,newTotalPrincipal) (src/pools/StakingPoolBase.sol#697)
+		- _increaseStake(staker,stakerPrincipal + amount,amount) (src/pools/StakingPoolBase.sol#373)
+Reentrancy in OperatorStakingPool.removeOperators(address[]) (src/pools/OperatorStakingPool.sol#473-511):
+	External calls:
+	- s_rewardVault.finalizeReward(operatorAddress,principal,principal,false,stakedAtTime) (src/pools/OperatorStakingPool.sol#491-497)
+	Event emitted after the call(s):
+	- OperatorRemoved(operatorAddress,principal) (src/pools/OperatorStakingPool.sol#507)
+Reentrancy in OperatorStakingPool.slashAndReward(address[],address,uint256,uint256) (src/pools/OperatorStakingPool.sol#277-305):
+	External calls:
+	- totalSlashedAmount = _slashOperators(stakers,principalAmount) (src/pools/OperatorStakingPool.sol#294)
+		- s_rewardVault.updateReward(operators[i],operatorPrincipal) (src/pools/OperatorStakingPool.sol#329)
+	- _payAlerter(alerter,totalSlashedAmount,alerterRewardAmount) (src/pools/OperatorStakingPool.sol#300-304)
+		- i_LINK.transfer(alerter,alerterRewardActual) (src/pools/OperatorStakingPool.sol#368)
+	Event emitted after the call(s):
+	- AlertingRewardPaid(alerter,alerterRewardActual,alerterRewardAmount) (src/pools/OperatorStakingPool.sol#364)
+		- _payAlerter(alerter,totalSlashedAmount,alerterRewardAmount) (src/pools/OperatorStakingPool.sol#300-304)
+Reentrancy in StakingPoolBase.unstake(uint256,bool) (src/pools/StakingPoolBase.sol#459-505):
+	External calls:
+	- claimedReward = s_rewardVault.finalizeReward(msg.sender,stakerPrincipal,amount,shouldClaimReward,stakedAt) (src/pools/StakingPoolBase.sol#483-489)
+	- i_LINK.transfer(msg.sender,amount) (src/pools/StakingPoolBase.sol#502)
+	Event emitted after the call(s):
+	- Unstaked(msg.sender,amount,claimedReward) (src/pools/StakingPoolBase.sol#504)
+Reentrancy in OperatorStakingPool.unstakeRemovedPrincipal() (src/pools/OperatorStakingPool.sol#538-553):
+	External calls:
+	- i_LINK.transfer(msg.sender,withdrawableAmount) (src/pools/OperatorStakingPool.sol#551)
+	Event emitted after the call(s):
+	- Unstaked(msg.sender,withdrawableAmount,0) (src/pools/OperatorStakingPool.sol#552)
+Reentrancy in OperatorStakingPool.withdrawAlerterReward(uint256) (src/pools/OperatorStakingPool.sol#173-183):
+	External calls:
+	- i_LINK.transfer(msg.sender,amount) (src/pools/OperatorStakingPool.sol#181)
+	Event emitted after the call(s):
+	- AlerterRewardWithdrawn(amount,s_alerterRewardFunds) (src/pools/OperatorStakingPool.sol#182)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#reentrancy-vulnerabilities-3
+INFO:Detectors:
+StakingPoolBase._updateStakerHistory(IStakingPool.Staker,uint256,uint256) (src/pools/StakingPoolBase.sol#737-746) has costly operations inside a loop:
+	- staker.history.push(s_checkpointId ++,(uint224(uint112(latestPrincipal)) << 112) | uint224(uint112(latestStakedAtTime))) (src/pools/StakingPoolBase.sol#742-745)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#costly-operations-inside-a-loop
+INFO:Slither:src analyzed (50 contracts with 82 detectors), 57 result(s) found

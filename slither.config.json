@@ -1,5 +1,5 @@
 {
   "detectors_to_exclude": "conformance-to-solidity-naming-conventions,solc-version,block-timestamp",
-  "filter_paths": "openzeppelin",
+  "filter_paths": "openzeppelin|/lib/|/scripts/|/test/|/tests/|/staking-v0.1/",
   "solc_remaps": "@chainlink=lib/chainlink @openzeppelin=lib/openzeppelin-contracts @solmate=lib/solmate/src"
 }
