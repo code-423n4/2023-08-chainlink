@@ -22,8 +22,6 @@ Automated findings output for the audit can be found [here](bot-report.md) withi
 
 *Note for C4 wardens: Anything included in the automated findings output is considered a publicly known issue and is ineligible for awards.*
 
-[ ⭐️ SPONSORS ADD INFO HERE ]
-
 # Overview
 
 We are releasing several new contracts to support Staking v0.2, which is the second iteration of Chainlink Staking. An overview blog of Staking v0.2 can be found here.
