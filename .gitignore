@@ -103,3 +103,31 @@ dist
 
 # TernJS port file
 .tern-port
+
+# Compiler files
+cache/
+out/
+dist/
+
+# Ignores development broadcast logs
+!/broadcast
+/broadcast/*/31337/
+/broadcast/**/dry-run/
+
+# Dotenv file
+.env
+
+node_modules
+.DS_Store
+
+# Foundry
+coverage
+lcov.info
+coverage.json
+
+# Foundry deployments
+broadcast/*
+
+.pnpm-debug.log
+
+nohup.out

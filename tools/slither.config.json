@@ -1,0 +1,4 @@
+{
+  "detectors_to_exclude": "conformance-to-solidity-naming-conventions,assembly-usage,low-level-calls",
+  "filter_paths": "node_modules/|contracts/tests/|contracts/fuzzing"
+}

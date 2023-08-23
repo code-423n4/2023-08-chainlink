@@ -1,0 +1,5 @@
+{
+  "detectors_to_exclude": "conformance-to-solidity-naming-conventions,solc-version,block-timestamp",
+  "filter_paths": "openzeppelin",
+  "solc_remaps": "@chainlink=lib/chainlink @openzeppelin=lib/openzeppelin-contracts @solmate=lib/solmate/src"
+}
