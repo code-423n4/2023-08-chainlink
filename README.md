@@ -215,7 +215,7 @@ Additionally you may also need to understand how rewards are migrated from Staki
 **NOTE:  Run the commands below from the root of the project directory**
 
 
-### Prerequidites
+### Prerequisites
 
 - The code in this repository is built using the Foundry framework.  Please install it by following
 [these](https://book.getfoundry.sh/getting-started/installation) setup instructions if you have not set it up yet.
