@@ -281,22 +281,6 @@ Delete the output smart contract artifacts directory and clears the Forge cache:
 forge clean
 ```
 
-### Slither static analysis
-
-Make sure you are on the [latest](https://github.com/crytic/slither/releases) `>=0.9.0` version of Slither.
-
-```sh
-slither .
-```
-
-Make sure you have python and slither installed. You can install it by running
-
-```sh
-asdf install
-pip3 install -r tools/requirements.txt
-asdf reshim python
-```
-
 ### Gas snapshot
 
 You can find a `.gas-snapshot` file for several key flows. You may find it helpful during gas golfing.
