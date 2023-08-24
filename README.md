@@ -24,7 +24,7 @@ Automated findings output for the audit can be found [here](https://github.com/c
 
 # Overview
 
-We are releasing several new contracts to support Staking v0.2, which is the second iteration of Chainlink Staking. An overview blog of Staking v0.2 can be found here.
+We are releasing several new contracts to support Staking v0.2, which is the second iteration of Chainlink Staking. An overview blog of Staking v0.2 can be found [here](https://blog.chain.link/chainlink-staking-v0-2-overview).
 
 To learn more about Chainlink Staking and the technical design, please check out the following resources:
 
