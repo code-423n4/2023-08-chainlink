@@ -1,8 +1,8 @@
 # StakingPoolBase
-[Git Source](https://github.com/smartcontractkit/destiny-next/blob/93e1115f8d7fb0029b73a936d125afb837306065/src/pools/StakingPoolBase.sol)
+[Git Source](https://github.com/code-423n4/2023-08-chainlink/blob/38d594fd52a417af576ce44eee67744196ba1094/src/pools/StakingPoolBase.sol)
 
 **Inherits:**
-ERC677ReceiverInterface, [IStakingPool](/src/interfaces/IStakingPool.sol/interface.IStakingPool.md), [IStakingOwner](/src/interfaces/IStakingOwner.sol/interface.IStakingOwner.md), [Migratable](/src/Migratable.sol/abstract.Migratable.md), [PausableWithAccessControl](/src/PausableWithAccessControl.sol/abstract.PausableWithAccessControl.md)
+ERC677ReceiverInterface, [IStakingPool](/src/interfaces/IStakingPool.sol/interface.IStakingPool.md), [IStakingOwner](/src/staking-v0.1/interfaces/IStakingOwner.sol/interface.IStakingOwner.md), [Migratable](/src/Migratable.sol/abstract.Migratable.md), [PausableWithAccessControl](/src/PausableWithAccessControl.sol/abstract.PausableWithAccessControl.md)
 
 This contract is the base contract for staking pools. Each staking pool extends this
 contract.
@@ -16,10 +16,12 @@ contract.
 *invariant contract's LINK token balance should be greater than or equal to the
 totalPrincipal.*
 
-*invariant The migrated principal must be less than or equal to the staker's principal +
+*invariant The migrated staked LINK amount must be less than or equal to the staker's staked
+LINK amount +
 rewards from the v0.1 staking pool.*
 
-*invariant The migrated principal must be less than or equal to the maxPrincipalPerStaker.*
+*invariant The migrated staked LINK amount must be less than or equal to the
+maxPrincipalPerStaker.*
 
 *We only support LINK token in v0.2 staking. Rebasing tokens, ERC777 tokens, fee-on-transfer
 tokens or tokens that do not have 18 decimal places are not supported.*
@@ -85,7 +87,7 @@ The min amount of LINK that a staker can stake
 
 
 ```solidity
-uint256 internal immutable i_minPrincipalPerStaker;
+uint96 internal immutable i_minPrincipalPerStaker;
 ```
 
 
@@ -145,9 +147,9 @@ constructor(ConstructorParamsBase memory params)
 
 ### migrate
 
-Migrates the contract
+This function allows stakers to migrate funds to a new staking pool.
 
-*This will migrate the staker's principal*
+*This will migrate the staker's staked LINK*
 
 *precondition This contract must be closed and upgraded to a new pool.*
 
@@ -168,7 +170,7 @@ function migrate(bytes calldata data)
 
 |Name|Type|Description|
 |----|----|-----------|
-|`data`|`bytes`|Optional calldata to call on new contract|
+|`data`|`bytes`|Migration path details|
 
 
 ### _validateMigrationTarget
@@ -196,7 +198,7 @@ function _validateMigrationTarget(address newMigrationTarget)
 ### unbond
 
 Starts the unbonding period for the staker.  A staker may unstake
-their principal during the claim period that follows the unbonding period.
+their staked LINK during the claim period that follows the unbonding period.
 
 *precondition The caller must be staked in the pool.*
 
@@ -363,7 +365,7 @@ function setPoolConfig(
 |Name|Type|Description|
 |----|----|-----------|
 |`maxPoolSize`|`uint256`|The max amount of staked LINK allowed in the pool|
-|`maxPrincipalPerStaker`|`uint256`|The max amount of LINK a staker can stake in the pool.|
+|`maxPrincipalPerStaker`|`uint256`||
 
 
 ### open
@@ -379,6 +381,7 @@ function open()
   override(IStakingOwner)
   onlyRole(DEFAULT_ADMIN_ROLE)
   whenBeforeOpening
+  validateRewardVaultSet
   whenRewardVaultOpen;
 ```
 
@@ -421,12 +424,21 @@ function setMigrationProxy(address migrationProxy) external override onlyRole(DE
 
 ### unstake
 
-Unstakes amount LINK tokens from the staker’s principal
+Unstakes amount LINK tokens from the staker’s staked LINK amount
 Also claims all of the earned rewards if claimRewards is true
 
 *precondition The caller must be staked in the pool.*
 
 *precondition The caller must be in the claim period or the pool must be closed or paused.*
+
+*There is a possible reentrancy attack here where a malicious admin
+can point this pool to a malicious reward vault that calls unstake on the
+pool again.  This reentrancy attack is possible as the pool updates the
+staker's staked LINK amount after it calls finalizeReward on the configured reward
+vault.  This scenario is mitigated by forcing the admin to go through
+a timelock period that is longer than the unbonding period, which will
+provide stakers sufficient time to withdraw their staked LINK from the
+pool before a malicious reward vault is set.*
 
 
 ```solidity
@@ -457,7 +469,7 @@ function getTotalPrincipal() external view override returns (uint256);
 
 ### getStakerPrincipal
 
-Returns the staker's principal
+Returns the staker's staked LINK amount
 
 
 ```solidity
@@ -473,15 +485,15 @@ function getStakerPrincipal(address staker) external view override returns (uint
 
 |Name|Type|Description|
 |----|----|-----------|
-|`<none>`|`uint256`|uint256 The staker's principal|
+|`<none>`|`uint256`|uint256 The staker's staked LINK amount|
 
 
 ### getStakerPrincipalAt
 
-Returns the staker's principal
+Returns the staker's staked LINK amount
 
 *Passing in a checkpointId of 0 will return the staker's initial
-principal balance*
+staked LINK amount balance*
 
 
 ```solidity
@@ -495,13 +507,13 @@ function getStakerPrincipalAt(
 |Name|Type|Description|
 |----|----|-----------|
 |`staker`|`address`|The address of the staker to query for|
-|`checkpointId`|`uint256`|The checkpoint ID to fetch the staker's balance for.  Pass 0 to return the staker's latest principal|
+|`checkpointId`|`uint256`|The checkpoint ID to fetch the staker's balance for.  Pass 0 to return the staker's latest staked LINK amount|
 
 **Returns**
 
 |Name|Type|Description|
 |----|----|-----------|
-|`<none>`|`uint256`|uint256 The staker's principal|
+|`<none>`|`uint256`|uint256 The staker's staked LINK amount|
 
 
 ### getStakerStakedAtTime
@@ -710,7 +722,7 @@ function getClaimPeriodEndsAt(address staker) external view returns (uint256);
 
 |Name|Type|Description|
 |----|----|-----------|
-|`staker`|`address`|The staker trying to unstake their principal|
+|`staker`|`address`|The staker trying to unstake their staked LINK|
 
 **Returns**
 
@@ -793,7 +805,7 @@ function _increaseStake(address sender, uint256 newPrincipal, uint256 amount) in
 |Name|Type|Description|
 |----|----|-----------|
 |`sender`|`address`|The staker address|
-|`newPrincipal`|`uint256`|The staker's principal after staking|
+|`newPrincipal`|`uint256`|The staker's staked LINK amount after staking|
 |`amount`|`uint256`|The amount to stake|
 
 
@@ -821,7 +833,7 @@ function _getStakerAddress(bytes calldata data) internal pure returns (address);
 ### _canUnstake
 
 Checks to see whether or not a staker is eligible to
-unstake their principal (when the pool is closed or, when the pool is open and they
+unstake their staked LINK amount (when the pool is closed or, when the pool is open and they
 are in the claim period or, when pool is paused)
 
 
@@ -832,7 +844,7 @@ function _canUnstake(Staker storage staker) internal view returns (bool);
 
 |Name|Type|Description|
 |----|----|-----------|
-|`staker`|`Staker`|The staker trying to unstake their principal|
+|`staker`|`Staker`|The staker trying to unstake their staked LINK|
 
 **Returns**
 
@@ -844,7 +856,7 @@ function _canUnstake(Staker storage staker) internal view returns (bool);
 ### _inClaimPeriod
 
 Checks to see whether or not a staker is within the claim period
-to unstake their principal
+to unstake their staked LINK
 
 
 ```solidity
@@ -854,7 +866,7 @@ function _inClaimPeriod(Staker storage staker) private view returns (bool);
 
 |Name|Type|Description|
 |----|----|-----------|
-|`staker`|`Staker`|The staker trying to unstake their principal|
+|`staker`|`Staker`|The staker trying to unstake their staked LINK|
 
 **Returns**
 
@@ -865,7 +877,7 @@ function _inClaimPeriod(Staker storage staker) private view returns (bool);
 
 ### _updateStakerHistory
 
-Updates the staker's principal history
+Updates the staker's staked LINK amount history
 
 
 ```solidity
@@ -880,7 +892,7 @@ function _updateStakerHistory(
 |Name|Type|Description|
 |----|----|-----------|
 |`staker`|`Staker`|The staker to update|
-|`latestPrincipal`|`uint256`|The staker's latest principal|
+|`latestPrincipal`|`uint256`|The staker's latest staked LINK amount|
 |`latestStakedAtTime`|`uint256`|The staker's latest average staked at time|
 
 
@@ -940,7 +952,7 @@ modifier whenOpen();
 
 ### whenActive
 
-*Reverts if pool is not active (is open and rewards are emitting for this pool)*
+*Reverts if pool is not active (is open and rewards are available for this pool)*
 
 
 ```solidity
@@ -1101,9 +1113,9 @@ constructor.
 ```solidity
 struct ConstructorParamsBase {
   LinkTokenInterface LINKAddress;
-  uint256 initialMaxPoolSize;
-  uint256 initialMaxPrincipalPerStaker;
-  uint256 minPrincipalPerStaker;
+  uint96 initialMaxPoolSize;
+  uint96 initialMaxPrincipalPerStaker;
+  uint96 minPrincipalPerStaker;
   uint32 initialUnbondingPeriod;
   uint32 maxUnbondingPeriod;
   uint32 initialClaimPeriod;

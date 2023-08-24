@@ -1,8 +1,8 @@
 # Migratable
-[Git Source](https://github.com/smartcontractkit/destiny-next/blob/93e1115f8d7fb0029b73a936d125afb837306065/src/Migratable.sol)
+[Git Source](https://github.com/code-423n4/2023-08-chainlink/blob/38d594fd52a417af576ce44eee67744196ba1094/src/Migratable.sol)
 
 **Inherits:**
-[IMigratable](/src/interfaces/IMigratable.sol/interface.IMigratable.md)
+[IMigratable](/src/staking-v0.1/interfaces/IMigratable.sol/interface.IMigratable.md)
 
 
 ## State Variables
@@ -48,18 +48,12 @@ function _validateMigrationTarget(address newMigrationTarget) internal virtual;
 
 ### getMigrationTarget
 
-Returns the current migration target of the contract
+This function returns the migration target contract address
 
 
 ```solidity
 function getMigrationTarget() external view virtual override returns (address);
 ```
-**Returns**
-
-|Name|Type|Description|
-|----|----|-----------|
-|`<none>`|`address`|address The current migration target|
-
 
 ### validateMigrationTargetSet
 

@@ -1,5 +1,5 @@
 # ISlashable
-[Git Source](https://github.com/smartcontractkit/destiny-next/blob/93e1115f8d7fb0029b73a936d125afb837306065/src/interfaces/ISlashable.sol)
+[Git Source](https://github.com/code-423n4/2023-08-chainlink/blob/38d594fd52a417af576ce44eee67744196ba1094/src/interfaces/ISlashable.sol)
 
 
 ## Functions
@@ -98,7 +98,7 @@ function slashAndReward(
 |----|----|-----------|
 |`stakers`|`address[]`|The list of stakers to slash|
 |`alerter`|`address`|The alerter that successfully raised the alert|
-|`principalAmount`|`uint256`|The amount of the staker's principal to slash|
+|`principalAmount`|`uint256`|The amount of the staker's staked LINK amount to slash|
 |`alerterRewardAmount`|`uint256`|The reward amount to be given to the alerter|
 
 
@@ -112,7 +112,8 @@ error InvalidSlasherConfig();
 ```
 
 ### InvalidRole
-This error is thrown when the admin tries to set the slasher role directly through
+This error is thrown when the contract manager tries to set the slasher role directly
+through
 `grantRole`
 
 
@@ -121,7 +122,8 @@ error InvalidRole();
 ```
 
 ### InvalidSlasher
-This error is thrown then the admin tries to set the slasher config for an address
+This error is thrown then the contract manager tries to set the slasher config for an
+address
 that doesn't have the slasher role
 
 

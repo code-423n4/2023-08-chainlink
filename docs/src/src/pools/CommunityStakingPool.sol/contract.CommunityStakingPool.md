@@ -1,13 +1,13 @@
 # CommunityStakingPool
-[Git Source](https://github.com/smartcontractkit/destiny-next/blob/93e1115f8d7fb0029b73a936d125afb837306065/src/pools/CommunityStakingPool.sol)
+[Git Source](https://github.com/code-423n4/2023-08-chainlink/blob/38d594fd52a417af576ce44eee67744196ba1094/src/pools/CommunityStakingPool.sol)
 
 **Inherits:**
-[StakingPoolBase](/src/pools/StakingPoolBase.sol/abstract.StakingPoolBase.md), [IMerkleAccessController](/src/interfaces/IMerkleAccessController.sol/interface.IMerkleAccessController.md), TypeAndVersionInterface
+[StakingPoolBase](/src/pools/StakingPoolBase.sol/abstract.StakingPoolBase.md), [IMerkleAccessController](/src/staking-v0.1/interfaces/IMerkleAccessController.sol/interface.IMerkleAccessController.md), TypeAndVersionInterface
 
 This contract manages the staking of LINK tokens for the community stakers.
 
 *This contract inherits the StakingPoolBase contract and interacts with the MigrationProxy,
-PriceFeedAlertsController, OperatorStakingPool, and RewardVault contracts.*
+OperatorStakingPool, and RewardVault contracts.*
 
 *invariant Operators cannot stake in the community staking pool.*
 
@@ -85,17 +85,11 @@ function hasAccess(address staker, bytes32[] calldata proof) external view overr
 |`staker`|`address`|The community staker's address|
 |`proof`|`bytes32[]`|Merkle proof for the community staker's allowlist|
 
-**Returns**
-
-|Name|Type|Description|
-|----|----|-----------|
-|`<none>`|`bool`|true If the staker has access to the private staking pool|
-
 
 ### _hasAccess
 
-Util function that validates if a community staker has access to the private staking
-pool
+Util function that validates if a community staker has access to an
+access limited community staking pool
 
 
 ```solidity
@@ -112,7 +106,7 @@ function _hasAccess(address staker, bytes32[] memory proof) private view returns
 
 |Name|Type|Description|
 |----|----|-----------|
-|`<none>`|`bool`|bool True if the community staker has access to the private staking pool|
+|`<none>`|`bool`|bool True if the community staker has access to the access limited community staking pool|
 
 
 ### setMerkleRoot
@@ -129,12 +123,10 @@ function setMerkleRoot(bytes32 newMerkleRoot) external override onlyRole(DEFAULT
 
 |Name|Type|Description|
 |----|----|-----------|
-|`newMerkleRoot`|`bytes32`|Merkle Tree root, used to prove access for community stakers will be required at opening but can be removed at any time by the owner when staking access will be granted to the public.|
+|`newMerkleRoot`|`bytes32`|Merkle Tree root, used to prove access for community stakers will be required at start but can be removed at any time by the owner when staking access will be granted to the public.|
 
 
 ### getMerkleRoot
-
-This function returns the current root of the Staking allowlist merkle tree
 
 
 ```solidity

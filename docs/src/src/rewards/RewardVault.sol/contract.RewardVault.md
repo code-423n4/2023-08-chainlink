@@ -1,24 +1,24 @@
 # RewardVault
-[Git Source](https://github.com/smartcontractkit/destiny-next/blob/93e1115f8d7fb0029b73a936d125afb837306065/src/rewards/RewardVault.sol)
+[Git Source](https://github.com/code-423n4/2023-08-chainlink/blob/38d594fd52a417af576ce44eee67744196ba1094/src/rewards/RewardVault.sol)
 
 **Inherits:**
 ERC677ReceiverInterface, [IRewardVault](/src/interfaces/IRewardVault.sol/interface.IRewardVault.md), [Migratable](/src/Migratable.sol/abstract.Migratable.md), [PausableWithAccessControl](/src/PausableWithAccessControl.sol/abstract.PausableWithAccessControl.md), TypeAndVersionInterface
 
 This contract is the reward vault for the staking pools. Admin can deposit rewards into
-the vault and set the emission rate for each pool to control the reward distribution.
+the vault and set the aggregate reward rate for each pool to control the reward distribution.
 
 *This contract interacts with the community and operator staking pools that it is connected
 to. A reward vault is connected to only one community and operator staking pool during its
 lifetime, which means when we upgrade either one of the pools or introduce a new type of pool,
 we will need to update this contract and deploy a new reward vault.*
 
-*invariant LINK balance of the contract is greater than or equal to the sum of unvested
+*invariant LINK balance of the contract is greater than or equal to the sum of unavailable
 rewards.*
 
-*invariant The sum of all stakers' rewards is less than or equal to the sum of vested
+*invariant The sum of all stakers' rewards is less than or equal to the sum of available
 rewards.*
 
-*invariant The reward bucket with zero emission rate has zero reward.*
+*invariant The reward bucket with zero aggregate reward rate has zero reward.*
 
 *invariant Stakers' multipliers are within 0 and the max value.*
 
@@ -40,7 +40,8 @@ bytes32 public constant REWARDER_ROLE = keccak256('REWARDER_ROLE');
 
 
 ### MAX_MULTIPLIER
-The maximum possible value of a multiplier.
+The maximum possible value of a multiplier. Current implementation requires that this
+value is 1e18 (i.e. 100%).
 
 
 ```solidity
@@ -142,14 +143,15 @@ constructor(ConstructorParams memory params)
 ### addReward
 
 Adds more rewards into the reward vault
-Calculates the reward duration from the amount and emission rate
+Calculates the reward duration from the amount and aggregate reward rate
 
 *To add rewards to all pools use address(0) as the pool address*
 
 *There is a possibility that a fraction of the added rewards can be locked in this
-contract as dust, specifically, when the amount is not divided by the emission rate evenly. We
+contract as dust, specifically, when the amount is not divided by the aggregate reward rate
+evenly. We
 will handle this case operationally and make sure that the amount is large relative to the
-emission rate so there will only be small dust (less than 10^18 juels).*
+aggregate reward rate so there will only be small dust (less than 10^18 juels).*
 
 *precondition The caller must have the default admin role.*
 
@@ -174,7 +176,7 @@ function addReward(
 |----|----|-----------|
 |`pool`|`address`|The staking pool address|
 |`amount`|`uint256`|The reward amount|
-|`emissionRate`|`uint256`|The target emission rate (token/second)|
+|`emissionRate`|`uint256`|The target aggregate reward rate (token/second)|
 
 
 ### getDelegationRateDenominator
@@ -283,9 +285,9 @@ function _validateMigrationTarget(address newMigrationTarget)
 
 ### migrate
 
-Migrates the contract
+This function allows stakers to migrate funds to a new staking pool.
 
-*This will migrate the unvested rewards and checkpoint the staking pools.*
+*This will migrate the unavailable rewards and checkpoint the staking pools.*
 
 *precondition The caller must have the default admin role.*
 
@@ -308,7 +310,7 @@ function migrate(bytes calldata data)
 
 |Name|Type|Description|
 |----|----|-----------|
-|`data`|`bytes`|Optional calldata to call on new contract|
+|`data`|`bytes`|Migration path details|
 
 
 ### supportsInterface
@@ -418,7 +420,7 @@ function updateReward(address staker, uint256 stakerPrincipal) external override
 |Name|Type|Description|
 |----|----|-----------|
 |`staker`|`address`|The staker's address. If this is set to zero address, staker's reward update will be skipped|
-|`stakerPrincipal`|`uint256`|The staker's current principal in juels|
+|`stakerPrincipal`|`uint256`|The staker's current staked LINK amount in juels|
 
 
 ### finalizeReward
@@ -431,7 +433,8 @@ their multiplier is reset.
 *This applies any final logic such as the multipliers to the staker's newly accrued and
 stored rewards and store the value.*
 
-*The caller staking pool must update the total principal of the pool AFTER calling this
+*The caller staking pool must update the total staked LINK amount of the pool AFTER
+calling this
 function.*
 
 *precondition The caller must be a staking pool.*
@@ -451,7 +454,7 @@ function finalizeReward(
 |Name|Type|Description|
 |----|----|-----------|
 |`staker`|`address`|The staker addres|
-|`oldPrincipal`|`uint256`|The staker's principal before finalizing|
+|`oldPrincipal`|`uint256`|The staker's staked LINK amount before finalizing|
 |`stakedAt`|`uint256`|The last time the staker staked at|
 |`unstakedAmount`|`uint256`|The amount that the staker has unstaked in juels|
 |`shouldClaim`|`bool`|True if rewards should be transferred to the staker|
@@ -467,7 +470,7 @@ function finalizeReward(
 
 Closes the reward vault, disabling adding rewards and staking
 
-*Withdraws any unvested LINK rewards to the owner's address.*
+*Withdraws any unavailable LINK rewards to the owner's address.*
 
 *precondition The caller must have the default admin role.*
 
@@ -527,13 +530,34 @@ function hasRewardDurationEnded(address stakingPool) external view override retu
 
 |Name|Type|Description|
 |----|----|-----------|
-|`stakingPool`|`address`|The address of the staking pool rewards are being distributed to|
+|`stakingPool`|`address`|The address of the staking pool rewards are being shared to|
 
 **Returns**
 
 |Name|Type|Description|
 |----|----|-----------|
 |`<none>`|`bool`|bool True if the reward duration has ended|
+
+
+### getStoredReward
+
+Returns the stored reward info of the staker
+
+
+```solidity
+function getStoredReward(address staker) external view override returns (StakerReward memory);
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`staker`|`address`|The staker address|
+
+**Returns**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`<none>`|`StakerReward`|The staker's stored reward info|
 
 
 ### getRewardBuckets
@@ -605,27 +629,6 @@ function getMultiplier(address staker) external view returns (uint256);
 |`<none>`|`uint256`|uint256 The staker's multiplier|
 
 
-### getStoredReward
-
-Returns the stored reward info of the staker
-
-
-```solidity
-function getStoredReward(address staker) external view returns (StakerReward memory);
-```
-**Parameters**
-
-|Name|Type|Description|
-|----|----|-----------|
-|`staker`|`address`|The staker address|
-
-**Returns**
-
-|Name|Type|Description|
-|----|----|-----------|
-|`<none>`|`StakerReward`|The staker's stored reward info|
-
-
 ### calculateLatestStakerReward
 
 Calculates and returns the latest reward info of the staker
@@ -668,7 +671,7 @@ function getVestingCheckpointData() external view returns (VestingCheckpointData
 
 ### getUnvestedRewards
 
-Returns the unvested rewards
+Returns the unavailable rewards
 
 
 ```solidity
@@ -678,9 +681,9 @@ function getUnvestedRewards() external view returns (uint256, uint256, uint256);
 
 |Name|Type|Description|
 |----|----|-----------|
-|`<none>`|`uint256`|unvestedCommunityBaseRewards The unvested community base rewards|
-|`<none>`|`uint256`|unvestedOperatorBaseRewards The unvested operator base rewards|
-|`<none>`|`uint256`|unvestedOperatorDelegatedRewards The unvested operator delegated rewards|
+|`<none>`|`uint256`|unvestedCommunityBaseRewards The unavailable community base rewards|
+|`<none>`|`uint256`|unvestedOperatorBaseRewards The unavailable operator base rewards|
+|`<none>`|`uint256`|unvestedOperatorDelegatedRewards The unavailable operator delegated rewards|
 
 
 ### isPaused
@@ -720,7 +723,7 @@ function _forfeitStakerBaseReward(
 |`stakerReward`|`StakerReward`|The staker's reward struct|
 |`fullForfeitedRewardAmount`|`uint256`|The amount of rewards the staker has forfeited because of their multiplier in juels|
 |`unstakedAmount`|`uint256`| The amount the staker has unstaked in juels|
-|`oldPrincipal`|`uint256`|The staker's principal before unstaking in juels|
+|`oldPrincipal`|`uint256`|The staker's staked LINK amount before unstaking in juels|
 |`isOperator`|`bool`|True if the staker is an operator|
 
 
@@ -740,18 +743,18 @@ function _stopVestingRewardsToBuckets()
 
 |Name|Type|Description|
 |----|----|-----------|
-|`<none>`|`uint256`|uint256 The total emission rate from all three buckets|
-|`<none>`|`uint256`|uint256 The total amount of unvested rewards in juels|
-|`<none>`|`uint256`|uint256 The amount of unvested operator base rewards in juels|
-|`<none>`|`uint256`|uint256 The amount of unvested community base rewards in juels|
-|`<none>`|`uint256`|uint256 The amount of unvested operator delegated rewards in juels|
+|`<none>`|`uint256`|uint256 The total aggregate reward rate from all three buckets|
+|`<none>`|`uint256`|uint256 The total amount of available rewards in juels|
+|`<none>`|`uint256`|uint256 The amount of available operator base rewards in juels|
+|`<none>`|`uint256`|uint256 The amount of available community base rewards in juels|
+|`<none>`|`uint256`|uint256 The amount of available operator delegated rewards in juels|
 
 
 ### _getTotalPrincipal
 
-Returns the total principal staked in a staking pool.  This will
-return the staking pool's latest total principal if the vault has not been
-migrated from and the pool's total principal at the time the vault was
+Returns the total staked LINK amount staked in a staking pool.  This will
+return the staking pool's latest total staked LINK amount if the vault has not been
+migrated from and the pool's total staked LINK amount at the time the vault was
 migrated if the vault has already been migrated.
 
 
@@ -762,20 +765,20 @@ function _getTotalPrincipal(IStakingPool stakingPool) private view returns (uint
 
 |Name|Type|Description|
 |----|----|-----------|
-|`stakingPool`|`IStakingPool`|The staking pool to query the total principal for|
+|`stakingPool`|`IStakingPool`|The staking pool to query the total staked LINK amount for|
 
 **Returns**
 
 |Name|Type|Description|
 |----|----|-----------|
-|`<none>`|`uint256`|uint256 The total principal staked in the staking pool|
+|`<none>`|`uint256`|uint256 The total staked LINK amount staked in the staking pool|
 
 
 ### _getStakerPrincipal
 
-Returns the staker's principal in a staking pool.  This will
-return the staker's latest principal if the vault has not been
-migrated from and the staker's principal at the time the vault was
+Returns the staker's staked LINK amount in a staking pool.  This will
+return the staker's latest staked LINK amount if the vault has not been
+migrated from and the staker's staked LINK amount at the time the vault was
 migrated if the vault has already been migrated.
 
 
@@ -789,14 +792,14 @@ function _getStakerPrincipal(
 
 |Name|Type|Description|
 |----|----|-----------|
-|`staker`|`address`|The staker to query the total principal for|
-|`stakingPool`|`IStakingPool`|The staking pool to query the total principal for|
+|`staker`|`address`|The staker to query the total staked LINK amount for|
+|`stakingPool`|`IStakingPool`|The staking pool to query the total staked LINK amount for|
 
 **Returns**
 
 |Name|Type|Description|
 |----|----|-----------|
-|`<none>`|`uint256`|uint256 The staker's principal in the staking pool in juels|
+|`<none>`|`uint256`|uint256 The staker's staked LINK amount in the staking pool in juels|
 
 
 ### _getMultiplier
@@ -872,7 +875,7 @@ function _getMigratedAtCheckpointId(IStakingPool stakingPool) private view retur
 
 ### _getMigratedAtTotalPoolPrincipal
 
-Return the staking pool's total principal at the time the vault was
+Return the staking pool's total staked LINK amount at the time the vault was
 migrated
 
 
@@ -883,18 +886,18 @@ function _getMigratedAtTotalPoolPrincipal(IStakingPool stakingPool) private view
 
 |Name|Type|Description|
 |----|----|-----------|
-|`stakingPool`|`IStakingPool`|The staking pool to query the total principal for|
+|`stakingPool`|`IStakingPool`|The staking pool to query the total staked LINK amount for|
 
 **Returns**
 
 |Name|Type|Description|
 |----|----|-----------|
-|`<none>`|`uint256`|uint256 The pool's total principal at the time the vault was upgraded|
+|`<none>`|`uint256`|uint256 The pool's total staked LINK amount at the time the vault was upgraded|
 
 
 ### _checkpointStakingPools
 
-Records the current checkpoint IDs and the total principal in the
+Records the current checkpoint IDs and the total staked LINK amount in the
 operator and community staking pools
 
 *This is called in the migrate function when upgrading the vault*
@@ -922,7 +925,7 @@ function _stopVestingBucketRewards(RewardBucket storage bucket) private returns 
 
 |Name|Type|Description|
 |----|----|-----------|
-|`<none>`|`uint256`|uint256 The amount of unvested rewards in juels|
+|`<none>`|`uint256`|uint256 The amount of unavailable rewards in juels|
 
 
 ### _updateRewardBuckets
@@ -939,7 +942,7 @@ function _updateRewardBuckets(address pool, uint256 amount, uint256 emissionRate
 |----|----|-----------|
 |`pool`|`address`|The staking pool address|
 |`amount`|`uint256`|The reward amount|
-|`emissionRate`|`uint256`|The target emission rate (Juels/second)|
+|`emissionRate`|`uint256`|The target aggregate reward rate (Juels/second)|
 
 
 ### _updateRewardBucket
@@ -960,7 +963,7 @@ function _updateRewardBucket(
 |----|----|-----------|
 |`bucket`|`RewardBucket`|The reward bucket|
 |`amount`|`uint256`|The reward amount|
-|`emissionRate`|`uint256`|The target emission rate (token/second)|
+|`emissionRate`|`uint256`|The target aggregate reward rate (token/second)|
 
 
 ### _updateRewardDurationEndsAt
@@ -981,14 +984,14 @@ function _updateRewardDurationEndsAt(
 |----|----|-----------|
 |`bucket`|`RewardBucket`|The reward bucket|
 |`rewardAmount`|`uint256`|The reward amount|
-|`emissionRate`|`uint256`|The emission rate|
+|`emissionRate`|`uint256`|The aggregate reward rate|
 
 
 ### _getBucketRewardAndEmissionRateSplit
 
-Splits the reward and emission rates between the different reward buckets
+Splits the reward and aggregate reward rates between the different reward buckets
 
-*If the pool is not targeted, the returned reward and emission rate will be zero*
+*If the pool is not targeted, the returned reward and aggregate reward rate will be zero*
 
 
 ```solidity
@@ -1005,14 +1008,14 @@ function _getBucketRewardAndEmissionRateSplit(
 |----|----|-----------|
 |`pool`|`address`|The staking pool address (or zero address if the reward is split between all pools)|
 |`amount`|`uint256`|The reward amount|
-|`emissionRate`|`uint256`|The emission rate (juels/second)|
+|`emissionRate`|`uint256`|The aggregate reward rate (juels/second)|
 |`isDelegated`|`bool`|Whether the reward is delegated or not|
 
 **Returns**
 
 |Name|Type|Description|
 |----|----|-----------|
-|`<none>`|`BucketRewardEmissionSplit`|BucketRewardEmissionSplit The rewards and emission rates after distributing the reward amount to the buckets|
+|`<none>`|`BucketRewardEmissionSplit`|BucketRewardEmissionSplit The rewards and aggregate reward rates after distributing the reward amount to the buckets|
 
 
 ### _checkForRoundingToZeroRewardAmountSplit
@@ -1041,7 +1044,8 @@ function _checkForRoundingToZeroRewardAmountSplit(
 
 ### _checkForRoundingToZeroEmissionRateSplit
 
-Validates the emission rate after splitting to avoid a rounding error when dividing
+Validates the aggregate reward rate after splitting to avoid a rounding error when
+dividing
 
 
 ```solidity
@@ -1056,7 +1060,7 @@ function _checkForRoundingToZeroEmissionRateSplit(
 
 |Name|Type|Description|
 |----|----|-----------|
-|`emissionRate`|`uint256`|The emission rate|
+|`emissionRate`|`uint256`|The aggregate reward rate|
 |`communityPoolShare`|`uint256`|The size of the community staking pool to take into account|
 |`operatorPoolShare`|`uint256`|The size of the operator staking pool to take into account|
 |`totalPoolShare`|`uint256`|The total size of the pools to take into account|
@@ -1080,7 +1084,7 @@ function _checkForRoundingToZeroDelegationSplit(
 |Name|Type|Description|
 |----|----|-----------|
 |`communityReward`|`uint256`|The reward for the community staking pool|
-|`communityRate`|`uint256`|The emission rate for the community staking pool|
+|`communityRate`|`uint256`|The aggregate reward rate for the community staking pool|
 |`delegationDenominator`|`uint256`|The delegation denominator|
 
 
@@ -1112,7 +1116,7 @@ function _calculatePoolsRewardPerToken() private view returns (uint256, uint256,
 
 ### _calculateVestedRewardPerToken
 
-Calculate a bucket’s vested rewards earned per token
+Calculate a bucket’s available rewards earned per token
 
 
 ```solidity
@@ -1126,13 +1130,13 @@ function _calculateVestedRewardPerToken(
 |Name|Type|Description|
 |----|----|-----------|
 |`rewardBucket`|`RewardBucket`|The reward bucket to calculate the vestedRewardPerToken for|
-|`totalPrincipal`|`uint256`|The total principal staked in a pool associated with the reward bucket|
+|`totalPrincipal`|`uint256`|The total staked LINK amount staked in a pool associated with the reward bucket|
 
 **Returns**
 
 |Name|Type|Description|
 |----|----|-----------|
-|`<none>`|`uint256`|uint256 The vested rewards earned per token|
+|`<none>`|`uint256`|uint256 The available rewards earned per token|
 
 
 ### _calculateEarnedBaseReward
@@ -1152,7 +1156,7 @@ function _calculateEarnedBaseReward(
 |Name|Type|Description|
 |----|----|-----------|
 |`stakerReward`|`StakerReward`|The staker's reward info|
-|`stakerPrincipal`|`uint256`|The staker's principal|
+|`stakerPrincipal`|`uint256`|The staker's staked LINK amount|
 |`baseRewardPerToken`|`uint256`|The base reward per token of the staking pool|
 
 **Returns**
@@ -1179,7 +1183,7 @@ function _calculateEarnedDelegatedReward(
 |Name|Type|Description|
 |----|----|-----------|
 |`stakerReward`|`StakerReward`|The staker's reward info|
-|`stakerPrincipal`|`uint256`|The staker's principal|
+|`stakerPrincipal`|`uint256`|The staker's staked LINK amount|
 |`operatorDelegatedRewardPerToken`|`uint256`|The operator delegated reward per token|
 
 **Returns**
@@ -1235,9 +1239,9 @@ function _calculateAccruedReward(
 
 |Name|Type|Description|
 |----|----|-----------|
-|`principal`|`uint256`|The staker's principal|
+|`principal`|`uint256`|The staker's staked LINK amount|
 |`rewardPerToken`|`uint256`|The base or delegated reward per token of the staker|
-|`vestedRewardPerToken`|`uint256`|The vested reward per token of the staking pool|
+|`vestedRewardPerToken`|`uint256`|The available reward per token of the staking pool|
 
 **Returns**
 
@@ -1269,7 +1273,7 @@ function _calculateStakerReward(
 |----|----|-----------|
 |`staker`|`address`|The staker's address|
 |`isOperator`|`bool`|True if the staker is an operator, false otherwise|
-|`stakerPrincipal`|`uint256`||
+|`stakerPrincipal`|`uint256`|The staker's staked LINK amount|
 
 
 ### _distributeForfeitedReward
@@ -1289,20 +1293,20 @@ function _distributeForfeitedReward(
 |Name|Type|Description|
 |----|----|-----------|
 |`forfeitedReward`|`uint256`|The amount of forfeited rewards in juels|
-|`amountOfRecipientTokens`|`uint256`|The amount of tokens that the forfeited rewards should be distributed to|
-|`toOperatorPool`|`bool`|Whether the forfeited reward should be distributed to the operator pool|
+|`amountOfRecipientTokens`|`uint256`|The amount of tokens that the forfeited rewards should be shared to|
+|`toOperatorPool`|`bool`|Whether the forfeited reward should be shared to the operator pool|
 
 **Returns**
 
 |Name|Type|Description|
 |----|----|-----------|
-|`<none>`|`uint256`|uint256 The amount of forfeited reward that were redistributed|
+|`<none>`|`uint256`|uint256 The amount of forfeited reward that were shared|
 |`<none>`|`uint256`|uint256 The amount of forfeited reward that can be reclaimed due to empty pools|
 
 
 ### _calculateForfeitedRewardDistribution
 
-Helper function for calculating the vested reward per token and the reclaimable
+Helper function for calculating the available reward per token and the reclaimable
 reward
 
 *If the pool the staker is in is empty and we can't calculate the reward per token, we
@@ -1320,14 +1324,14 @@ function _calculateForfeitedRewardDistribution(
 |Name|Type|Description|
 |----|----|-----------|
 |`forfeitedReward`|`uint256`|The amount of forfeited reward|
-|`amountOfRecipientTokens`|`uint256`|The amount of tokens that the forfeited rewards should be distributed to|
+|`amountOfRecipientTokens`|`uint256`|The amount of tokens that the forfeited rewards should be shared to|
 
 **Returns**
 
 |Name|Type|Description|
 |----|----|-----------|
-|`<none>`|`uint256`|uint256 The amount of distributed forfeited reward|
-|`<none>`|`uint256`|uint256 The distributed forfeited reward per token|
+|`<none>`|`uint256`|uint256 The amount of shared forfeited reward|
+|`<none>`|`uint256`|uint256 The shared forfeited reward per token|
 |`<none>`|`uint256`|uint256 The amount of reclaimable reward|
 
 
@@ -1377,7 +1381,7 @@ function _getReward(address staker) private view returns (StakerReward memory, u
 
 ### _getUnvestedRewards
 
-Calculates the amount of unvested rewards in a reward bucket
+Calculates the amount of unavailable rewards in a reward bucket
 
 
 ```solidity
@@ -1387,18 +1391,18 @@ function _getUnvestedRewards(RewardBucket memory bucket) private view returns (u
 
 |Name|Type|Description|
 |----|----|-----------|
-|`bucket`|`RewardBucket`|The bucket to calculate unvested rewards for|
+|`bucket`|`RewardBucket`|The bucket to calculate unavailable rewards for|
 
 **Returns**
 
 |Name|Type|Description|
 |----|----|-----------|
-|`<none>`|`uint256`|uint256 The amount of unvested rewards in the bucket|
+|`<none>`|`uint256`|uint256 The amount of unavailable rewards in the bucket|
 
 
 ### _validateAddedRewards
 
-Validates that the amount of rewards added and the emission rate
+Validates that the amount of rewards added and the aggregate reward rate
 are valid and enough to cover the delegation rate
 
 
@@ -1410,13 +1414,13 @@ function _validateAddedRewards(uint256 addedRewardAmount, uint256 totalEmissionR
 |Name|Type|Description|
 |----|----|-----------|
 |`addedRewardAmount`|`uint256`|The amount of added rewards|
-|`totalEmissionRate`|`uint256`|The emission rate to the entire vault|
+|`totalEmissionRate`|`uint256`|The aggregate reward rate to the entire vault|
 
 
 ### _isOperator
 
 Returns whether or not an address is currently an operator or
-is a removed operator
+is a removed operator, if the vault is closed.
 
 
 ```solidity
@@ -1426,7 +1430,7 @@ function _isOperator(address staker) private view returns (bool);
 
 |Name|Type|Description|
 |----|----|-----------|
-|`<none>`|`bool`|bool True if the staker is an operator|
+|`<none>`|`bool`|bool True if the vault is open and the staker is an operator; if the vault is closed, returns True if the staker is either an operator or a removed operator.|
 
 
 ### onlyRewarder
@@ -1515,7 +1519,7 @@ event MultiplierDurationSet(uint256 oldMultiplierDuration, uint256 newMultiplier
 ```
 
 ### ForfeitedRewardDistributed
-This event is emitted when the forfeited rewards are distributed back into the reward
+This event is emitted when the forfeited rewards are shared back into the reward
 buckets.
 
 
@@ -1607,7 +1611,7 @@ error InvalidRewardAmount();
 ```
 
 ### InvalidEmissionRate
-This error is thrown when the emission rate is invalid when adding rewards
+This error is thrown when the aggregate reward rate is invalid when adding rewards
 
 
 ```solidity
@@ -1778,7 +1782,7 @@ struct VestingCheckpointData {
 
 ### BucketRewardEmissionSplit
 This struct is used for aggregating the return values of a function that calculates
-the reward emission rate splits.
+the reward aggregate reward rate splits.
 
 
 ```solidity
@@ -1789,21 +1793,6 @@ struct BucketRewardEmissionSplit {
   uint256 communityRate;
   uint256 operatorRate;
   uint256 delegatedRate;
-}
-```
-
-### StakerReward
-This struct is used to store the reward information for a staker.
-
-
-```solidity
-struct StakerReward {
-  uint112 finalizedBaseReward;
-  uint112 finalizedDelegatedReward;
-  uint112 baseRewardPerToken;
-  uint112 operatorDelegatedRewardPerToken;
-  uint112 claimedBaseRewardsInPeriod;
-  uint256 storedBaseReward;
 }
 ```
 

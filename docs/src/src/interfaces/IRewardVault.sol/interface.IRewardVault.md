@@ -1,5 +1,5 @@
 # IRewardVault
-[Git Source](https://github.com/smartcontractkit/destiny-next/blob/93e1115f8d7fb0029b73a936d125afb837306065/src/interfaces/IRewardVault.sol)
+[Git Source](https://github.com/code-423n4/2023-08-chainlink/blob/38d594fd52a417af576ce44eee67744196ba1094/src/interfaces/IRewardVault.sol)
 
 
 ## Functions
@@ -38,7 +38,7 @@ function updateReward(address staker, uint256 stakerPrincipal) external;
 |Name|Type|Description|
 |----|----|-----------|
 |`staker`|`address`|The staker's address. If this is set to zero address, staker's reward update will be skipped|
-|`stakerPrincipal`|`uint256`|The staker's current principal in juels|
+|`stakerPrincipal`|`uint256`|The staker's current staked LINK amount in juels|
 
 
 ### finalizeReward
@@ -63,7 +63,7 @@ have reached their maximum ramp up period multiplier.  Additionally an
 operator will also forfeit any unclaimable rewards if they are removed
 before they reach the maximum ramp up period multiplier.  The amount of
 rewards forfeited is proportional to the amount unstaked relative to
-the staker's total principal when unstaking.  A removed operator forfeits
+the staker's total staked LINK amount when unstaking.  A removed operator forfeits
 100% of their unclaimable rewards.*
 
 
@@ -81,7 +81,7 @@ function finalizeReward(
 |Name|Type|Description|
 |----|----|-----------|
 |`staker`|`address`|The staker addres|
-|`oldPrincipal`|`uint256`|The staker's principal before finalizing|
+|`oldPrincipal`|`uint256`|The staker's staked LINK amount before finalizing|
 |`stakedAt`|`uint256`|The last time the staker staked at|
 |`unstakedAmount`|`uint256`|The amount that the staker has unstaked in juels|
 |`shouldClaim`|`bool`|True if rewards should be transferred to the staker|
@@ -139,6 +139,27 @@ function getReward(address staker) external view returns (uint256);
 |`<none>`|`uint256`|The reward amount|
 
 
+### getStoredReward
+
+Returns the stored reward info of the staker
+
+
+```solidity
+function getStoredReward(address staker) external view returns (StakerReward memory);
+```
+**Parameters**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`staker`|`address`|The staker address|
+
+**Returns**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`<none>`|`StakerReward`|The staker's stored reward info|
+
+
 ### isPaused
 
 Returns whether or not the vault is paused
@@ -166,7 +187,7 @@ function hasRewardDurationEnded(address stakingPool) external view returns (bool
 
 |Name|Type|Description|
 |----|----|-----------|
-|`stakingPool`|`address`|The address of the staking pool rewards are being distributed to|
+|`stakingPool`|`address`|The address of the staking pool rewards are being shared to|
 
 **Returns**
 
@@ -174,4 +195,35 @@ function hasRewardDurationEnded(address stakingPool) external view returns (bool
 |----|----|-----------|
 |`<none>`|`bool`|bool True if the reward duration has ended|
 
+
+## Structs
+### StakerReward
+This struct is used to store the reward information for a staker.
+
+
+```solidity
+struct StakerReward {
+  uint112 finalizedBaseReward;
+  uint112 finalizedDelegatedReward;
+  uint112 baseRewardPerToken;
+  uint112 operatorDelegatedRewardPerToken;
+  uint112 claimedBaseRewardsInPeriod;
+  StakerType stakerType;
+  uint256 storedBaseReward;
+  uint256 earnedBaseRewardInPeriod;
+}
+```
+
+## Enums
+### StakerType
+This enum describes the different staker types
+
+
+```solidity
+enum StakerType {
+  NOT_STAKED,
+  COMMUNITY,
+  OPERATOR
+}
+```
 

@@ -1,5 +1,5 @@
 # IStakingOwner
-[Git Source](https://github.com/smartcontractkit/destiny-next/blob/93e1115f8d7fb0029b73a936d125afb837306065/src/interfaces/IStakingOwner.sol)
+[Git Source](https://github.com/code-423n4/2023-08-chainlink/blob/38d594fd52a417af576ce44eee67744196ba1094/src/interfaces/IStakingOwner.sol)
 
 
 ## Functions
@@ -113,7 +113,8 @@ error PoolNotClosed();
 ```
 
 ### PoolHasBeenOpened
-This error is thrown when the staking pool has been opened and admin tries to re-open.
+This error is thrown when the staking pool has been opened and contract manager tries
+to re-open.
 
 
 ```solidity
@@ -121,7 +122,8 @@ error PoolHasBeenOpened();
 ```
 
 ### PoolHasBeenClosed
-This error is thrown when the pool has been closed and admin tries to re-open
+This error is thrown when the pool has been closed and contract manager tries to
+re-open
 
 
 ```solidity

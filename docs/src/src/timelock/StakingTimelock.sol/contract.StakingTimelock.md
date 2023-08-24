@@ -1,10 +1,11 @@
 # StakingTimelock
-[Git Source](https://github.com/smartcontractkit/destiny-next/blob/93e1115f8d7fb0029b73a936d125afb837306065/src/timelock/StakingTimelock.sol)
+[Git Source](https://github.com/code-423n4/2023-08-chainlink/blob/38d594fd52a417af576ce44eee67744196ba1094/src/timelock/StakingTimelock.sol)
 
 **Inherits:**
 [Timelock](/src/timelock/Timelock.sol/contract.Timelock.md)
 
-This contract is the admin of all staking contracts. Any contract upgrades or parameter
+This contract is the contract manager of all staking contracts. Any contract upgrades or
+parameter
 updates will need to be scheduled here and go through the timelock.
 
 *The deployer will transfer the staking contracts ownership to this contract and proposer

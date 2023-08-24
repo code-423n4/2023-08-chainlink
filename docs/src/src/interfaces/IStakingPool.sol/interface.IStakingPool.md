@@ -1,11 +1,11 @@
 # IStakingPool
-[Git Source](https://github.com/smartcontractkit/destiny-next/blob/93e1115f8d7fb0029b73a936d125afb837306065/src/interfaces/IStakingPool.sol)
+[Git Source](https://github.com/code-423n4/2023-08-chainlink/blob/38d594fd52a417af576ce44eee67744196ba1094/src/interfaces/IStakingPool.sol)
 
 
 ## Functions
 ### unstake
 
-Unstakes amount LINK tokens from the staker’s principal
+Unstakes amount LINK tokens from the staker’s staked LINK amount
 Also claims all of the earned rewards if claimRewards is true
 
 
@@ -37,7 +37,7 @@ function getTotalPrincipal() external view returns (uint256);
 
 ### getStakerPrincipal
 
-Returns the staker's principal
+Returns the staker's staked LINK amount
 
 
 ```solidity
@@ -53,12 +53,12 @@ function getStakerPrincipal(address staker) external view returns (uint256);
 
 |Name|Type|Description|
 |----|----|-----------|
-|`<none>`|`uint256`|uint256 The staker's principal|
+|`<none>`|`uint256`|uint256 The staker's staked LINK amount|
 
 
 ### getStakerPrincipalAt
 
-Returns the staker's principal
+Returns the staker's staked LINK amount
 
 
 ```solidity
@@ -69,13 +69,13 @@ function getStakerPrincipalAt(address staker, uint256 checkpointId) external vie
 |Name|Type|Description|
 |----|----|-----------|
 |`staker`|`address`|The address of the staker to query for|
-|`checkpointId`|`uint256`|The checkpoint ID to fetch the staker's balance for.  Pass 0 to return the staker's latest principal|
+|`checkpointId`|`uint256`|The checkpoint ID to fetch the staker's balance for.  Pass 0 to return the staker's latest staked LINK amount|
 
 **Returns**
 
 |Name|Type|Description|
 |----|----|-----------|
-|`<none>`|`uint256`|uint256 The staker's principal|
+|`<none>`|`uint256`|uint256 The staker's staked LINK amount|
 
 
 ### getStakerStakedAtTime
@@ -366,7 +366,8 @@ error UnstakeZeroAmount();
 ```
 
 ### UnstakeExceedsPrincipal
-This error is thrown when the staker tries to unstake more than the principal
+This error is thrown when the staker tries to unstake more than the
+staked LINK amount
 
 
 ```solidity
@@ -375,7 +376,7 @@ error UnstakeExceedsPrincipal();
 
 ### UnstakePrincipalBelowMinAmount
 This error is thrown when the staker tries to unstake an amount that leaves their
-principal below the minimum amount
+staked LINK amount below the minimum amount
 
 
 ```solidity

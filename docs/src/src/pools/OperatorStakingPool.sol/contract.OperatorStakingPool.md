@@ -1,5 +1,5 @@
 # OperatorStakingPool
-[Git Source](https://github.com/smartcontractkit/destiny-next/blob/93e1115f8d7fb0029b73a936d125afb837306065/src/pools/OperatorStakingPool.sol)
+[Git Source](https://github.com/code-423n4/2023-08-chainlink/blob/38d594fd52a417af576ce44eee67744196ba1094/src/pools/OperatorStakingPool.sol)
 
 **Inherits:**
 [ISlashable](/src/interfaces/ISlashable.sol/interface.ISlashable.md), [StakingPoolBase](/src/pools/StakingPoolBase.sol/abstract.StakingPoolBase.md), TypeAndVersionInterface
@@ -9,7 +9,7 @@ This contract manages the staking of LINK tokens for the operator stakers.
 *This contract inherits the StakingPoolBase contract and interacts with the MigrationProxy,
 PriceFeedAlertsController, CommunityStakingPool, and RewardVault contracts.*
 
-*invariant Only addresses added as operators by the admin can stake in this pool.*
+*invariant Only addresses added as operators by the contract manager can stake in this pool.*
 
 *invariant contract's LINK token balance should be greater than or equal to the sum of
 totalPrincipal and s_alerterRewardFunds.*
@@ -126,6 +126,8 @@ Withdraws LINK from the alerter reward funds
 *precondition This contract must have at least `amount` LINK tokens as the alerter reward
 funds.*
 
+*precondition This contract must be closed (before opening or after closing).*
+
 
 ```solidity
 function withdrawAlerterReward(uint256 amount) external onlyRole(DEFAULT_ADMIN_ROLE);
@@ -154,7 +156,8 @@ function getAlerterRewardFunds() external view returns (uint256);
 
 ### grantRole
 
-Grants `role` to `account`. Reverts if the admin tries to grant the default admin or
+Grants `role` to `account`. Reverts if the contract manager tries to grant the default
+admin or
 slasher role.
 
 *The default admin role must be granted through `beginDefaultAdminTransfer` and
@@ -284,8 +287,12 @@ funds into the alerter reward funds.  The alerter is then
 rewarded by the funds in the alerter reward funds.
 
 *In the current implementation, on-feed operators can raise alerts to rescue a portion of
-their slashed principals. All operators can raise alerts in the priority period. Note
+their slashed staked LINK amount. All operators can raise alerts in the priority period. Note
 that this may change in the future as we add alerting for additional services.*
+
+*We will operationally make sure to remove an operator from the slashable (on-feed)
+operators list in alerts controllers if they are removed from the operators list in this
+contract, so there won't be a case where we slash a removed operator.*
 
 *precondition The caller must have the slasher role.*
 
@@ -308,7 +315,7 @@ function slashAndReward(
 |----|----|-----------|
 |`stakers`|`address[]`|The list of stakers to slash|
 |`alerter`|`address`|The alerter that successfully raised the alert|
-|`principalAmount`|`uint256`|The amount of the staker's principal to slash|
+|`principalAmount`|`uint256`|The amount of the staker's staked LINK amount to slash|
 |`alerterRewardAmount`|`uint256`|The reward amount to be given to the alerter|
 
 
@@ -331,7 +338,7 @@ function _slashOperators(
 |Name|Type|Description|
 |----|----|-----------|
 |`operators`|`address[]`|The list of operators to slash|
-|`principalAmount`|`uint256`|The amount to slash from each operator's principal|
+|`principalAmount`|`uint256`|The amount to slash from each operator's staked LINK amount|
 
 **Returns**
 
@@ -437,18 +444,13 @@ address(0xNext) > address(0xPrev)
 
 *Previously removed operators cannot be readded to the pool.*
 
-*Stakers who have already staked as community stakers should not be added as operators
-as their rewards may become unclaimable. Instead of having a check here, we will validate this
-operationally by checking the principals and rewards of the addresses before adding them as
-operators. This prevents a circular dependency between the community staking pool and the
-operator staking pool.*
-
 *precondition The caller must have the default admin role.*
 
 
 ```solidity
 function addOperators(address[] calldata operators)
   external
+  validateRewardVaultSet
   validatePoolSpace(
     s_pool.configs.maxPoolSize,
     s_pool.configs.maxPrincipalPerStaker,
@@ -468,7 +470,7 @@ function addOperators(address[] calldata operators)
 Removes one or more operators from a list of operators.
 
 *Should only be callable by the owner when the pool is open.
-When an operator is removed, we store their principal in a separate mapping to
+When an operator is removed, we store their staked LINK amount in a separate mapping to
 stop it from accruing reward.
 Removed operators are still slashable until they withdraw their removedPrincipal
 and exit the system. When they withdraw their removedPrincipal, they must
@@ -540,7 +542,7 @@ function isRemoved(address staker) external view returns (bool);
 
 ### getRemovedPrincipal
 
-Getter function for a removed operator's principal
+Getter function for a removed operator's total staked LINK amount
 
 
 ```solidity
@@ -556,7 +558,7 @@ function getRemovedPrincipal(address staker) external view returns (uint256);
 
 |Name|Type|Description|
 |----|----|-----------|
-|`<none>`|`uint256`|uint256 The principal of a removed operator that hasn't been withdrawn|
+|`<none>`|`uint256`|uint256 The removed operator's staked LINK amount that hasn't been withdrawn|
 
 
 ### unstakeRemovedPrincipal
@@ -565,7 +567,8 @@ Called by removed operators to withdraw their removed stake
 
 *precondition The caller must be in the claim period or the pool must be closed or paused.*
 
-*precondition The caller must be a removed operator with removed principal.*
+*precondition The caller must be a removed operator with some removed
+staked LINK amount.*
 
 
 ```solidity
@@ -626,7 +629,7 @@ Checks that the maximum pool size is greater than or equal to
 the reserved space for operators.
 
 *The reserved space is calculated by multiplying the number of
-operators and the maximum principal per operator*
+operators and the maximum staked LINK amount per operator*
 
 
 ```solidity
@@ -678,7 +681,7 @@ event AlerterRewardDeposited(uint256 amountFunded, uint256 totalBalance);
 ```
 
 ### AlerterRewardWithdrawn
-This event is emitted whenever the admin withdraws from the
+This event is emitted whenever the contract manager withdraws from the
 alerter reward funds
 
 
@@ -755,6 +758,14 @@ This error is raised when an operator to add has been removed previously.
 error OperatorHasBeenRemoved(address operator);
 ```
 
+### OperatorCannotBeCommunityStaker
+This error is raised when an operator to add is already a community staker.
+
+
+```solidity
+error OperatorCannotBeCommunityStaker(address operator);
+```
+
 ### InsufficientPoolSpace
 This error is thrown whenever the max pool size is less than the
 reserved space for operators
@@ -776,7 +787,7 @@ error InadequateInitialOperatorCount(uint256 numOperators, uint256 minInitialOpe
 ```
 
 ### InvalidAlerterRewardFundAmount
-This error is thrown when the admin tries to add a zero amount
+This error is thrown when the contract manager tries to add a zero amount
 to the alerter reward funds
 
 
@@ -785,7 +796,7 @@ error InvalidAlerterRewardFundAmount();
 ```
 
 ### InsufficientAlerterRewardFunds
-This error is thrown whenever the admin tries to withdraw
+This error is thrown whenever the contract manager tries to withdraw
 more than the remaining balance in the alerter reward funds
 
 

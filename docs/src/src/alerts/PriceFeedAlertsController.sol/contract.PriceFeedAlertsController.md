@@ -1,5 +1,5 @@
 # PriceFeedAlertsController
-[Git Source](https://github.com/smartcontractkit/destiny-next/blob/93e1115f8d7fb0029b73a936d125afb837306065/src/alerts/PriceFeedAlertsController.sol)
+[Git Source](https://github.com/code-423n4/2023-08-chainlink/blob/38d594fd52a417af576ce44eee67744196ba1094/src/alerts/PriceFeedAlertsController.sol)
 
 **Inherits:**
 [Migratable](/src/Migratable.sol/abstract.Migratable.md), [PausableWithAccessControl](/src/PausableWithAccessControl.sol/abstract.PausableWithAccessControl.md), TypeAndVersionInterface
@@ -280,7 +280,7 @@ function getSlashableOperators(address feed) external view returns (address[] me
 
 ### migrate
 
-Migrates the contract
+This function allows stakers to migrate funds to a new staking pool.
 
 *Renounces the slasher role of self from the staking contract.*
 
@@ -578,7 +578,7 @@ error InvalidOperatorList();
 
 ### InvalidSlashableAmount
 This error is thrown when the feed's slashable amount is 0 or
-greater than the max operator stake principal
+greater than the max operator stake staked LINK
 
 
 ```solidity
