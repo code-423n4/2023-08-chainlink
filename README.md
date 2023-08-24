@@ -293,7 +293,7 @@ pnpm gas
 ### Automated documentation
 
 ```
-forge doc
+forge doc --serve
 ```
 
 ### Slither
