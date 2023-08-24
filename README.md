@@ -9,7 +9,7 @@
   - Lookout awards: $8,000 USDC 
   - Scout awards: $500 USDC 
 - Join [C4 Discord](https://discord.gg/code4rena) to register
-- Submit findings [using the C4 form](https://code4rena.com/contests/2023-08-chainlink-staking/submit)
+- Submit findings [using the C4 form](https://code4rena.com/contests/2023-08-chainlink-staking-v02/submit)
 - [Read our guidelines for more details](https://docs.code4rena.com/roles/wardens)
 - Starts August 25, 2023 20:00 UTC
 - Ends September 12, 2023 20:00 UTC
@@ -287,6 +287,12 @@ You can find a `.gas-snapshot` file for several key flows. You may find it helpf
 
 ```
 pnpm gas
+```
+
+### Automated documentation
+
+```
+forge doc --serve
 ```
 
 ### Slither
