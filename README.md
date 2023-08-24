@@ -30,7 +30,7 @@ To learn more about Chainlink Staking and the technical design, please check out
 
 - [Technical Specification](https://github.com/code-423n4/2023-08-chainlink/blob/main/docs/specs.pdf): Learn about the internals of the Staking contracts.
 - [Staker Reward Calculations](https://github.com/code-423n4/2023-08-chainlink/blob/main/docs/rewards.pdf):  A more detailed explanation on how staker rewards are calculated
-- [Staker Actions](https://github.com/code-423n4/2023-08-chainlink/blob/main/docs/flows.pdf): An explanation on the primary staker flows.
+- [Staker Actions](https://github.com/code-423n4/2023-08-chainlink/blob/main/docs/actions.pdf): An explanation of primary staker actions.
 - [Developer Guide](#developer-guide): Learn how to compile the code and run tests.
 - [Glossary](#glossary)
 
