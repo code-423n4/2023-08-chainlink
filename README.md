@@ -290,6 +290,12 @@ You can find a `.gas-snapshot` file for several key flows. You may find it helpf
 pnpm gas
 ```
 
+### Automated documentation
+
+```
+forge doc --serve
+```
+
 ### Slither
 
 Run Slither with `slither src`
