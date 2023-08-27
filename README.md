@@ -132,7 +132,7 @@ The team's largest concerns with the Staking V0.2 protocol are around
 - The total amount staked by all stakers should equal the total stake of the pool.
 - The total staked amount SHOULD NOT be greater than the maximum pool size.
 - A Community Staker SHOULD NOT be allowed to stake in the operator staking pool.
-- An operator SHOULD NOT be allowed to stake in the Community Staking pool unless they have already been removed.
+- An operator SHOULD NOT be allowed to stake in the Community Staking pool even if they have already been removed.
 
 ### Rewards
 
