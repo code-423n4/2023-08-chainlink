@@ -60,6 +60,7 @@ Specific focus should be paid to the contracts listed below:
 | src/tests/\*.sol | Mock and helper contracts for testing purposes only.   |
 | test/\*.sol            | Foundry unit, fuzz and invariant tests.                      |
 | scripts/\*.sol            | Foundry deployment scripts                      |
+| src/staking-v0.1/ | v0.1 contracts only used in tests |
 | External libraries            |                       |
 
 # Additional Context
