@@ -1,0 +1,3159 @@
+==============================================================
+Guild: Code4rena
+Channel: ARCHIVE-Q3-2023 / chainlink-aug25
+==============================================================
+
+[08/16/2023 15:25] itsmetechjay (pinned)
+👋 Hello and welcome to the audit channel for the $250,000 USDC **Chainlink Staking v0.2 **audit!
+
+📆 Audit opens Friday, 25 August 2023 20:00 (20:00 UTC) and runs through Tuesday, 12 September 2023 20:00 (20:00 UTC) (18 days).
+
+Please give a warm welcome to the Chainlink team, particularly @Yos | Chainlink, @Hendrik | Chainlink, @Lia | Chainlink, and @Dimitri | Chainlink, who will be available for questions either here in the channel or via DM in the the CET and EST timezones.
+
+We'll be posting relevant links, documentation, etc. here, so if you intend to participate in this audit, consider enabling notifications for this channel. 🐺 ⏰
+
+Audit Page: https://code4rena.com/contests/2023-08-chainlink-staking-v02#top
+
+**IMPORTANT NOTE: **Prior to receiving payment from this audit you MUST become a Certified Contributor (successfully complete KYC). You do not have to become certified before submitting bugs. But you must successfully complete the certification process **within 30 days of the audit end date in order to receive awards. **This applies to all audit participants including wardens, teams, bot crews, judges, lookouts, and scouts.
+
+{Reactions}
+🫡 (7) 🙌 (7) 🔥 (6) ❤️‍🔥 (2) 🦅 (3) 
+
+[08/16/2023 15:25] itsmetechjay
+Pinned a message.
+
+
+[08/16/2023 19:21] audinarey
+Warm welcome team, I look forward to having meaningful interactions with you during and when the contest goes live.
+
+
+[08/22/2023 09:20] vnmrtz
+gl
+
+{Reactions}
+👀 
+
+[08/24/2023 09:11] ljmanini
+glhf
+
+{Reactions}
+😈 
+
+[08/25/2023 20:03] 0xtendency
+The repo points to the wrong contest page
+
+
+[08/25/2023 20:04] proxy1967
+Already duplicates
+
+{Reactions}
+😂 (5) 
+
+[08/25/2023 20:05] inallhonesty_
+Now let me delete my message and nothing happened 😄
+
+
+[08/25/2023 20:06] inallhonesty_
+Magic
+
+
+[08/25/2023 20:06] itsmetechjay
+You all are already finding bugs. Love it! Since been corrected 😉
+
+{Reactions}
+❤️ (5) 👀 
+
+[08/25/2023 20:07] castle_chain
+lets start ✅
+
+{Reactions}
+🎉 (4) 
+
+[08/25/2023 20:17] djroy777
+is bot registration is closed???
+
+
+[08/25/2023 20:18] djroy777
+i will found around 100+ bug
+
+
+[08/25/2023 20:21] djroy777
+but i cant register my bot
+
+
+[08/25/2023 20:23] djroy777
+please help me out
+
+
+[08/25/2023 20:25] itsmetechjay
+This one is only a bot race.  If you have a new bot you'll have to register in our next qualifier. Once it's scheduled, we'll post in #✋rsvp.
+
+
+[08/25/2023 20:30] djroy777
+Thanks for your kind information.
+
+
+[08/25/2023 20:31] djroy777
+can you please give me more information about how to register my bot
+
+
+[08/25/2023 20:32] itsmetechjay
+You will register it as part of the next qualifier: https://code4rena.com/register/bot
+
+Once the qualifier is live there will be more details in that bottom section.
+
+{Reactions}
+❤️ 
+
+[08/25/2023 22:35] kaden3328
+excellent docs 🙏
+
+{Reactions}
+💯 (4) 
+
+[08/25/2023 22:41] eme0242
+You can't expect less from Chainlink🙂
+
+{Reactions}
+👍 (3) 
+
+[08/25/2023 23:18] thank_you_
+Are there any plans for v0.2 to be deployed to chains outside of Eth mainnet?
+
+
+[08/26/2023 05:12] 14si2o_flint
+It really is next level, I've never seen 100+ pages of documentation for an audit. 🤯
+
+{Reactions}
+👍 🔥 (3) thisisfine 
+
+[08/26/2023 07:11] 0xnirlin
+I don't want to read that much ☠️
+
+
+[08/26/2023 07:12] 14si2o_flint
+Wait till you run "forge test" 😂
+
+
+[08/26/2023 07:25] _3agle
+Don't know why I'm getting this error on running forge test.
+
+{Attachments}
+Code4rena - ARCHIVE-Q3-2023 - chainlink-aug25 [1136357130635575306].txt_Files/image-0373A.png
+
+
+[08/26/2023 07:26] _3agle
+Any solutions??
+
+
+[08/26/2023 07:29] aslanbekaibimov
+foundryup and forge test have just solved it for me
+
+{Reactions}
+hi5 
+
+[08/26/2023 07:30] immeas
+haha, thx, why do i always forget the magic of foundryup
+
+{Reactions}
+👌 
+
+[08/26/2023 08:32] liffidmonky
+Thank you so much to the chainlink team for providing such a fcking high quality documentation 😄 even if I find nothing your code will give me incredible value and power up as a blockchain developer
+
+{Reactions}
+👍 (4) 
+
+[08/26/2023 08:58] aga7hokakological
+any solution? foundryup didn't work
+
+{Attachments}
+Code4rena - ARCHIVE-Q3-2023 - chainlink-aug25 [1136357130635575306].txt_Files/image-B61C3.png
+
+
+[08/26/2023 09:24] _3agle
+Try this `foundryup` -> `forge clean` -> `forge test`
+
+
+[08/26/2023 09:52] aga7hokakological
+not working
+
+
+[08/26/2023 09:54] _3agle
+I did this on a fresh repo and it worked for me  🤔
+
+
+[08/26/2023 11:08] Message Wolf#0225 (pinned)
+**Automated Findings / Publicly Known Issues**
+
+Automated findings output for the audit can be found [here](https://gist.github.com/code423n4/1269d9733378a4ecbd8d60649059f725).
+
+*Note for C4 wardens: Anything included in the automated findings output is considered a publicly known issue and is ineligible for awards.*
+
+
+[08/26/2023 11:33] thebrittfactor
+Pinned a message.
+
+
+[08/26/2023 12:10] plamkata
+Hi, what does it mean by "Killed" when I run forge test?
+
+
+[08/26/2023 13:54] noro9954
+i have the same issue, did you managed to solve it ?
+
+
+[08/26/2023 16:26] liffidmonky
+sometimes running foundryup before solves it
+
+
+[08/26/2023 16:26] liffidmonky
+in one of the runs my whole computer crashed and turned off, was pretty wtf
+
+
+[08/26/2023 16:27] liffidmonky
+@Yos | Chainlink @Hendrik | Chainlink @Lia | Chainlink @Dimitri | Chainlink , Contract Manager: The user with the role to modify certain staking parameters. => I cant seem to find who is this contract manager that has special roles across the codebase, who is it?
+
+
+[08/26/2023 16:29] yosriady
+You can assume that the contract manager will be an N-of-M Gnosis Safe multisig
+
+{Reactions}
+🫡 
+
+[08/26/2023 16:30] yosriady
+No plans currently
+
+{Reactions}
+👍 
+
+[08/26/2023 16:44] liffidmonky
+and who will be the different owners of the multisig?
+
+
+[08/26/2023 16:47] yosriady
+You can assume it's a secure set of distinct signers
+
+{Reactions}
+❤️ 
+
+[08/26/2023 17:09] plamkata
+@Yos | Chainlink or anybody really, why in the ``StakingPoolBase`` contract, whenever we access the value of ``stakerPrincipal`` from the history, sometimes it is casted to uint256 and sometimes to uint112?
+
+
+[08/26/2023 17:12] yosriady
+No reason in particular, sometimes calculations are simpler when it is cast in a particular way. For context, the entirety of LINK supply can fit in uint96.
+
+
+[08/26/2023 17:17] yosriady
+The reason why principal is using uint112 instead of uint256 is so it can fit in a single Checkpoint.Trace224 alongside averageStakedAtTime
+
+{Reactions}
+👌 
+
+[08/26/2023 17:17] cryptor9119
+Same issue here
+
+
+[08/26/2023 18:03] franfran5067
+Chad is in town
+
+{Reactions}
+🫡 
+
+[08/26/2023 20:12] pheonix244001
+Same here
+
+{Attachments}
+Code4rena - ARCHIVE-Q3-2023 - chainlink-aug25 [1136357130635575306].txt_Files/image-48B32.png
+
+
+[08/27/2023 06:38] _aforapple_
+Hey, I found a potential bug and submitted my report even but where the discussion happens on it ? like if have to provide more context on it to judge or verifier, how do I provide ? 
+
+one more thing is I have recently registered and applied for verification of warden, how to proceed ?
+
+
+[08/27/2023 06:39] aslanbekaibimov
+in StakingV1, what are the expected values for `s_pool.state.isOpen` and `s_reward._isDepleted()` during migration?
+
+{Attachments}
+Code4rena - ARCHIVE-Q3-2023 - chainlink-aug25 [1136357130635575306].txt_Files/image-BA1C6.png
+
+
+[08/27/2023 06:44] _aforapple_
+(not one of known ones)
+
+
+[08/27/2023 07:02] plamkata
+Since I am not extremely familiar with the Checkpoints, is the history shifted to the right since the first 32 bits of the Checkpoint struct are the key and the last 224 bits are the actual stored value?
+
+{Attachments}
+Code4rena - ARCHIVE-Q3-2023 - chainlink-aug25 [1136357130635575306].txt_Files/image-885F1.png
+
+
+[08/27/2023 07:02] plamkata
+And if so, why is it shifted exactly 112 bits
+
+
+[08/27/2023 07:06] bytes032
+this might help you:
+https://twitter.com/code4rena/status/1695183509143572959?s=20
+
+{Embed}
+Code4rena (@code4rena)
+https://twitter.com/code4rena/status/1695183509143572959?s=20
+Curious about bit shifting in the new Chainlink staking version? Don't fret, we've got all the explanations you need.
+
+Unravel the mysteries with us in this thread 🧵
+Code4rena - ARCHIVE-Q3-2023 - chainlink-aug25 [1136357130635575306].txt_Files/F4aAYYhaUAM3yiq-7D9AC.jpg
+Twitter
+
+{Reactions}
+👍 (9) ❤️ (2) 
+
+[08/27/2023 07:13] plamkata
+Got it
+
+
+[08/27/2023 07:13] plamkata
+Great resource!
+
+
+[08/27/2023 08:25] yosriady
+isOpen is expected to be false.
+
+{Reactions}
+👍 (2) 
+
+[08/27/2023 09:22] caventa
+From the documentation
+
+```In addition to this, the
+contract manager can also call withdrawUnvestedReward to withdraw any non-emitted LINK
+from the vault.```
+
+However, I cannot find withdrawUnvestedReward from the code
+
+Any idea on this? Thanks
+
+
+[08/27/2023 09:28] plamkata
+How much is a juel, an thus juel/second?
+
+
+[08/27/2023 09:38] 0xlemon
+A juel is the equivalent of wei. In the context of LINK tokens(1 LINK token = 10^18 jules)
+
+
+[08/27/2023 10:11] aga7hokakological
+nope. I told by 3gle I tried on fresh repo. git submodules etc got installed I thought it worked but then gave the same error. If anyone has solution plz tell
+
+
+[08/27/2023 14:05] liffidmonky
+@Yos | Chainlink @Hendrik | Chainlink  @Lia | Chainlink  @Dimitri | Chainlink I think there is an error in the docs regarding to the migration feature:
+
+On actions.pdf in the docs folder says:
+
+- Staking v0.1 calls onTokenTransfer in the `RewardVault` contract.
+- The MigrationProxy contract determines if the sender is a Node Operator Staker or
+Community Staker and routes the migrated LINK to either the NOPStakingPool or
+CommunityStakingPool. Any unmigrated LINK tokens are transferred back to the
+staker.
+
+But on specs.pdf in the migration section they dont mention any interaction Stakingv0.1 - RewardVault.
+They mention direct interaction Stakingv0.1 - MigrationProxy. Code seems to be actually doing what is said
+in specs.pdf.
+
+Is this correct and the line:
+`- Staking v0.1 calls onTokenTransfer in the `RewardVault` contract.`
+should be changed to:
+`- Staking v0.1 calls onTokenTransfer in the `MigrationProxy` contract.` ???
+
+
+[08/27/2023 14:11] yosriady
+Good catch, the withdrawUnvestedReward() function has been removed and the logic has been moved into the RewardVault.close() function
+
+{Reactions}
+👍 
+
+[08/27/2023 14:13] yosriady
+It should indeed refer to the Migration proxy contract. The diagram preceding it is correct
+
+{Reactions}
+🙌 (4) 👍 (2) 
+
+[08/27/2023 16:29] limbooo9
+I'm curious why operators are not allowed to stake in the community pool if they have been removed, even though they would be allowed in newer versions, I think.
+
+
+[08/27/2023 17:09] liffidmonky
+@Yos | Chainlink @Hendrik | Chainlink  @Lia | Chainlink  @Dimitri | Chainlink Question about the note:
+
+`NOTE: This documentation and code contains parameter config values. These config values
+are for illustration purposes only in order to explain how the code executes through examples.
+Such configs will be set at different values upon launch.`
+
+In the note, it's mentioned that the code has illustrative config values. For contracts like MigratorProxy, 
+which depend on other contracts being deployed already, does this mean the addresses of these already deployed contracts (like the staking pools for example)
+will be hardcoded into the source code? Or will they be provided as constructor arguments during deployment?
+
+
+[08/27/2023 17:11] yosriady
+Contract addresses are provided as constructor arguments instead of being hardcoded for better extensibility and modularity.
+
+
+[08/27/2023 17:12] yosriady
+We'll come back to you on this. For context, removing a misbehaving operator from the network is a rare scenario.
+
+{Reactions}
+👍 
+
+[08/27/2023 17:41] sockdrawermoney
+at @Yos | Chainlink's request, have just updated the audit readme to say:
+
+> An operator SHOULD NOT be allowed to stake in the Community Staking pool ~~unless~~ **__even if__** they have already been removed.
+
+{Reactions}
+👍 (3) 🥲 
+
+[08/27/2023 17:41] sockdrawermoney
+https://github.com/code-423n4/2023-08-chainlink/commit/08239d0761ed40765884bbc740fd38fcd5e95f62
+
+
+[08/27/2023 18:03] kosedogus
+Goodbye my first finding 👋🏼
+
+{Reactions}
+😢 (5) 
+
+[08/27/2023 18:07] limbooo9
+I’m sorry, I didn’t notice this in the doc!
+
+
+[08/27/2023 19:27] osmanozdemir1
+According to page 55 of this doc: https://github.com/code-423n4/2023-08-chainlink/blob/main/docs/specs.pdf
+
+Removed operator can stake as a community staker
+
+{Embed}
+https://github.com/code-423n4/2023-08-chainlink/blob/main/docs/specs.pdf
+2023-08-chainlink/docs/specs.pdf at main · code-423n4/2023-08-chain...
+Contribute to code-423n4/2023-08-chainlink development by creating an account on GitHub.
+Code4rena - ARCHIVE-Q3-2023 - chainlink-aug25 [1136357130635575306].txt_Files/7e2fe7ca-98f4-4cb9-ae88-26857d12693f-765C7
+
+
+[08/27/2023 19:27] osmanozdemir1
+
+
+{Attachments}
+Code4rena - ARCHIVE-Q3-2023 - chainlink-aug25 [1136357130635575306].txt_Files/Image_27-08-2023_at_20.24-8B9AB.jpg
+
+
+[08/27/2023 21:35] yosriady
+Thanks for raising this. The doc is stale on this specific point. In the current code, removed operators are not allowed to stake.
+
+
+[08/27/2023 22:07] osmanozdemir1
+Thanks for the clarification 🙏🏻
+
+
+[08/28/2023 02:05] cryptor9119
+@Yos | Chainlink are admins trusted?
+
+
+[08/28/2023 03:41] yosriady
+You can assume so, but findings around abusing trusted roles are welcome (if reasonable).
+
+{Reactions}
+👍 
+
+[08/28/2023 09:43] aga7hokakological
+anyone plz help
+
+{Attachments}
+Code4rena - ARCHIVE-Q3-2023 - chainlink-aug25 [1136357130635575306].txt_Files/image-C0F5B.png
+
+
+[08/28/2023 09:49] plamkata
+Nobody has solved this one yet
+
+
+[08/28/2023 10:17] pheonix244001
+I was able to compile it in my Ubuntu vm, not sure why is this not working in wsl
+
+
+[08/28/2023 10:19] aga7hokakological
+I see.
+
+
+[08/28/2023 10:26] pheonix244001
+Please check your dm
+
+
+[08/28/2023 14:02] c7e7eff
+One VM I can build, another it gives the solc error. not sure why.
+
+
+[08/28/2023 15:02] aslanbekaibimov
+im using wsl2, forge clean always works for me (getting `Killed` otherwise)
+
+
+[08/28/2023 15:40] c7e7eff
+Was able to solve it now by increasing memory for the VM from 8GB to 10GB.
+
+
+[08/28/2023 15:41] noro9954
+how much is your real machine memory ?
+
+
+[08/28/2023 15:42] 0xhelium
+May i send you a dm ?
+
+{Reactions}
+🆗 
+
+[08/28/2023 16:49] 0xg03.14
+Is staking.sol in scope
+
+
+[08/28/2023 16:49] 0xg03.14
+im confused
+
+
+[08/28/2023 16:49] 0xg03.14
+@Yos | Chainlink
+
+
+[08/28/2023 16:49] 0xg03.14
+or anyone
+
+
+[08/28/2023 16:51] yosriady
+Staking.sol is the v0.1 contract. It and other contracts in `src/staking-v0.1/` is not in scope
+
+{Reactions}
+👍 
+
+[08/28/2023 17:01] 33audits
+Is there a public audit report for staking v 0.1? @Yos | Chainlink
+
+
+[08/28/2023 18:29] devabdee
+@Yos | Chainlink Qs about v01 unstake functionality. When the migration is open, v01.unstake(), will be instantaneous or it will lock the stake for a certain period, and then users will be able to claim it?
+
+
+[08/28/2023 18:31] yosriady
+In v0.1, unstake() is instantaneous (once the migration phase is open.) 
+In v0.2, unstake() is not instantaneous; it goes through an unbonding period.
+
+{Reactions}
+👍 
+
+[08/28/2023 22:52] 0xhelium
+Is there a way to cancel a submission i did ? I litteraly did not read the last line of comment before a function and submitted just that issue lol
+
+
+[08/28/2023 23:57] liveactionllamac4
+If you navigate to the page on our website for this specific audit, while logged in, you should see a `Your Findings` tab. Click that and you should see a list of your findings, and you can click into them to edit or withdraw (while the audit is still live). 🙂
+
+
+[08/29/2023 00:01] 0xhelium
+Thanks just did
+
+{Reactions}
+hi5 
+
+[08/29/2023 07:00] t0x1c.c0de
+Hi @Yos | Chainlink please accept request; sent a DM
+
+
+[08/29/2023 07:06] t0x1c.c0de
+Hey @Dimitri | Chainlink  @Lia | Chainlink , can you please check your DM?
+
+{Reactions}
+👍 
+
+[08/29/2023 14:41] nonseodion
+Is anyone experiencing this? The tests run but foundry crashes with this error after a certain point.
+
+{Attachments}
+Code4rena - ARCHIVE-Q3-2023 - chainlink-aug25 [1136357130635575306].txt_Files/Screenshot_2023-08-29_at_15.40.57-C532A.png
+
+
+[08/29/2023 15:25] plamkata
+Will the operators and merkle root be set, before v0.1 gets closed? @Yos | Chainlink
+
+
+[08/29/2023 15:40] yosriady
+Yes it will
+
+
+[08/29/2023 15:42] yosriady
+There isn't. The design and architecture of v0.2 is significantly different from v0.1 so I think they can be audited in isolation just as effectively.
+
+
+[08/29/2023 16:48] 33audits
+has anyone been able to run the tests yet?
+
+{Reactions}
+➕ (2) 
+
+[08/29/2023 16:57] hex.byte
+Not even that much for most of us I guess. Unable to run tests atm.
+
+
+[08/29/2023 17:00] 33audits
+@hexbyte does this work for you?
+
+{Reactions}
+🙅‍♂️ 
+
+[08/29/2023 17:01] mrpotatomagic
+works fine for me
+
+{Reactions}
+➕ (3) 
+
+[08/29/2023 17:02] plamkata
+I cant run them
+
+
+[08/29/2023 17:08] hex.byte
+Okay well, so I restarted the vm > `foundryup` > `forge build`. Hope this helps.
+
+
+[08/29/2023 20:05] 0xjuda
+@Yos | Chainlink Can I connect with you through DMs?
+
+
+[08/29/2023 20:06] yosriady
+It's the end of my day for me. Please connect with Hendrik. Thanks. 🙏
+
+
+[08/29/2023 20:07] 0xjuda
+Okay, thank you. Enjoy your rest. 🙂
+
+
+[08/29/2023 21:21] tamayonft
+The way to stake in the stakingpool is send link token directly right? OnTransfer function take care stake the link?
+
+
+[08/29/2023 22:22] cll_dev_economics#0018
+To stake, you would call the `transferAndCall` call function on the LINK token and specify the recipient as the address of the staking pool.
+
+{Reactions}
+🫡 
+
+[08/30/2023 02:28] tamayonft
+Thanks
+
+
+[08/30/2023 08:05] yasooox
+How long does it take to run the test? it take more than 20 min so I close it.
+
+
+[08/30/2023 08:26] mrpotatomagic
+took around 3-4 mins
+
+{Reactions}
+👍 
+
+[08/30/2023 08:50] yasooox
+Nice thanks
+
+
+[08/30/2023 09:30] yasooox
+I use windows 10. yeah I used wsl2 previously. Is that interupt this one ?
+
+
+[08/30/2023 09:31] liffidmonky
+@Yos | Chainlink @Hendrik | Chainlink  in the timelock contract event CallExecuted, what does this mean?:    * @dev The target is not indexed in order to keep the original event signature
+As far as I know event signatures dont depend on indexed argument but the name of the event and the type of the arguments.
+
+
+[08/30/2023 10:05] ch_301
+@Yos | Chainlink DM sent
+
+
+[08/30/2023 10:07] yosriady
+Good catch. The general intent here to minimize the amount of changes from the OZ Timelock contract. I think changing it will still change the topics and data section of the event, even if the signature remains the same.
+
+{Reactions}
+✅ 
+
+[08/30/2023 10:27] liffidmonky
+So you wanna stick to the names of the OZ contract, thats why `updateDelay(uint256 newDelay)` is called like that and not something like `updateMinDelay()`. Idk I find  the second name more appropiate for the function. What you think?
+
+
+[08/30/2023 10:28] yosriady
+I think it's better to retain the signatures of existing functions.
+
+{Reactions}
+🤟 
+
+[08/30/2023 12:33] liffidmonky
+are executors, proposers and cancellers trusted too?
+
+
+[08/30/2023 12:40] yosriady
+You can assume so
+
+
+[08/30/2023 15:19] rustyrabbit
+@Yos | Chainlink friendrequest sent
+
+{Reactions}
+🆗 
+
+[08/30/2023 16:35] mylifechangefast.eth
+How can I start to audit chanlink
+
+
+[08/30/2023 16:35] mylifechangefast.eth
+any step
+
+
+[08/30/2023 17:00] liffidmonky
+I recommend you the classic read the docs🔍
+
+
+[08/30/2023 17:05] orbitalautodev
+Anybody having github issues? Cloning this repository and I'm getting 1989 internet speeds, errors after hours long delay.
+
+
+[08/30/2023 17:06] orbitalautodev
+Zip file is missing dependencies so no go there either.
+
+
+[08/30/2023 17:06] orbitalautodev
+remote: Enumerating objects: 264763, done.        
+remote: Counting objects: 100% (264754/264754), done.        
+remote: Compressing objects: 100% (67925/67925), done.        
+error: RPC failed; curl 16 Error in the HTTP2 framing layerKiB/s
+error: 3423 bytes of body are still expected
+fetch-pack: unexpected disconnect while reading sideband packet
+fatal: early EOF
+fatal: fetch-pack: invalid index-pack output
+
+
+[08/30/2023 17:06] orbitalautodev
+cmd line output.
+
+
+[08/30/2023 17:07] orbitalautodev
+That running "forge test"
+
+
+[08/30/2023 17:08] mylifechangefast.eth
+I new here that why
+
+
+[08/30/2023 17:22] 0xbtk
+@Yos | Chainlink Dmed
+
+
+[08/30/2023 17:51] Deleted User
+@Hendrik | Chainlink sent dm
+
+
+[08/30/2023 18:14] orbitalautodev
+After several hours, github just started responding normally.
+
+
+[08/30/2023 18:43] saaitaamaa
+is there a LINK token contract in scope ?
+
+{Attachments}
+Code4rena - ARCHIVE-Q3-2023 - chainlink-aug25 [1136357130635575306].txt_Files/image-F320E.png
+
+
+[08/30/2023 18:43] aamirusmani1552
+Hey everyone. I am Aamir. I am Trying an audit first time on code4rena. I am not sure about some rules. Can someone tell me if we are not sure the category of the vulnerability would it be counted if we submit it with wrong category. I mean would it be changed during the judging period.
+
+
+[08/30/2023 18:44] aamirusmani1552
+or it would be invalid?
+
+
+[08/30/2023 18:45] cll_dev_economics#0018
+The LINK token contract is not in scope.
+
+
+[08/30/2023 18:51] aamirusmani1552
+hey hendrik can i send you dm?
+
+
+[08/30/2023 19:03] orbitalautodev
+I didn't recognize the program "pnpm". Google not much help. Can anyone clue me in?
+
+
+[08/30/2023 19:03] orbitalautodev
+pnpm coverage
+
+
+[08/30/2023 19:03] orbitalautodev
+pnpm gas
+
+
+[08/30/2023 19:30] stealthyzzzz
+FR sent 🙂
+
+
+[08/30/2023 19:33] cll_dev_economics#0018
+yes
+
+
+[08/30/2023 19:33] aamirusmani1552
+sent you. plz check
+
+
+[08/30/2023 19:42] mylifechangefast.eth
+sent dm
+
+
+[08/30/2023 21:25] trachev
+@Hendrik | Chainlink sent a dm
+
+
+[08/30/2023 22:05] tamayonft
+Hey guys sorry question all the staker operator will be added in the priceFeedAlerter contract like slashable operators?
+
+
+[08/31/2023 07:45] aamirusmani1552
+anybody know how to stop this installing different compiler version everytime we try to run a test
+```bash
+[⠢] Compiling...
+[⠘] Installing solc version 0.4.26
+[⠘] Successfully installed solc 0.4.26
+[⠰] Compiling 45 files with 0.8.19
+[⠒] Solc 0.8.19 finished in 212.05s
+```
+
+{Reactions}
+☝️ (3) 
+
+[08/31/2023 07:45] aamirusmani1552
+it's taking a lot of time just to check one test
+
+
+[08/31/2023 09:16] kawaicho
+where is the function that you stake tokens in the pool? Is it in the staking-v0.1?
+
+
+[08/31/2023 09:26] eme0242
+You transfer Link tokens directly to Staking pool via transferAndCall, then onTokenReceived function gets called to update stake balance
+
+
+[08/31/2023 09:39] kawaicho
+where is onTokenReceived function
+
+
+[08/31/2023 09:39] kawaicho
+off chain?
+
+
+[08/31/2023 09:40] eme0242
+StakingPool contract
+transferAndCall is in LINK token contract
+
+
+[08/31/2023 10:17] kawaicho
+I dont have any functions with the name onTokenReceived?
+
+
+[08/31/2023 10:19] 0xjuda
+It is called onTokenTransfer https://github.com/code-423n4/2023-08-chainlink/blob/e0cfce3073a3c9443eac55a377ff74f22e23c163/src/pools/StakingPoolBase.sol#L332C3-L332C28
+
+
+[08/31/2023 10:26] yosriady
+Each feed and each slashing condition may have a different set of slashable operators. They may not include all operator stakers.
+
+
+[08/31/2023 10:43] eme0242
+Sorry..
+onTokenTransfer😅
+
+
+[08/31/2023 11:00] 0x73696d616f
+erc677 transferAndCall is really cool, more protocols should adopt it
+
+{Reactions}
+🔥 
+
+[08/31/2023 12:37] mrpotatomagic
+@Yos | Chainlink can you share the staking v0.1 contract?
+
+
+[08/31/2023 12:38] yosriady
+It's available in `src/staking-v0.1/`
+
+
+[08/31/2023 12:39] mrpotatomagic
+Thank you
+
+
+[08/31/2023 12:40] yosriady
+It's also available here https://github.com/smartcontractkit/staking-v0.1 Note that the v0.1 contracts are not in scope
+
+{Embed}
+https://github.com/smartcontractkit/staking-v0.1
+GitHub - smartcontractkit/staking-v0.1: Earn rewards for helping se...
+Earn rewards for helping secure the Chainlink Network. Chainlink Staking is a security mechanism in which stakers commit LINK in smart contracts to back certain performance guarantees around oracle...
+Code4rena - ARCHIVE-Q3-2023 - chainlink-aug25 [1136357130635575306].txt_Files/staking-v0-FE4F7.1
+
+{Reactions}
+👍 (2) 
+
+[08/31/2023 14:47] liffidmonky
+@Yos | Chainlink will the deployment look something like this?:
+
+1- deployer deploys the contracts in right order
+2- Now deployer initiates process of giving StakingTimelock the `DEFAULT_ADMIN_ROLE` on the contracts
+3- Timelock, after delay time, accepts the role
+
+
+[08/31/2023 14:49] yosriady
+That is correct
+
+{Reactions}
+🤟 
+
+[08/31/2023 14:54] kawaicho
+@Hendrik | Chainlink sent you a dm
+
+
+[08/31/2023 15:31] rechenkn1cht#8148
+Is the previous sentence:
+
+
+[08/31/2023 15:32] rechenkn1cht#8148
+*Set the migration target in the Staking V0.1 contract to the ~~RewardVault~~ MigrationProxy*
+
+
+[08/31/2023 15:32] rechenkn1cht#8148
+incorrect as well?
+
+
+[08/31/2023 15:39] yosriady
+Yes it should read "*Set the migration target in the Staking V0.1 contract to the MigrationProxy"
+
+{Reactions}
+👍 
+
+[08/31/2023 15:45] liffidmonky
+@Yos | Chainlink when migrating from v0.2 to v0.3, migrate() in v0.2 will be called and onTokenTransfer() will be called in v0.3? Im talking about RewardVault specially
+
+
+[08/31/2023 15:51] yosriady
+Yes. You can have a look at the `RewardVault.t.sol` and `Upgrade*.t.sol` to unit tests to better understand the upgrade / migration flow.
+
+{Reactions}
+👍 (2) 
+
+[08/31/2023 15:54] cll_dev_economics#0018
+I would also like to point out that going from v0.2 to v0.3 doesn't necessarily require the RewardVault to migrate.
+
+The new features for v0.3 have not been determined yet.
+
+{Reactions}
+👍 (2) 
+
+[08/31/2023 16:48] liffidmonky
+@Hendrik | Chainlink @Yos | Chainlink  when it says emission rate is token/second, is not the same as juels/second right?
+
+
+[08/31/2023 16:49] aamirusmani1552
+does anybody know that. It's very annoying just to wait 3 to 4 minutes everytime to run even a simple test
+
+
+[08/31/2023 17:28] cll_dev_economics#0018
+All rates are in juels/second.
+
+
+[08/31/2023 18:22] yosriady
+Hi folks, just want to point out that this part of the doc is stale. The actual logic is to slash up to the slashers remaining capacity, not revert.
+
+{Attachments}
+Code4rena - ARCHIVE-Q3-2023 - chainlink-aug25 [1136357130635575306].txt_Files/image-4-8E190.png
+
+{Reactions}
+👍 (8) 
+
+[09/01/2023 03:32] devabdee
+brother many guys tests are not even running so I think you should be thankful that atleast your tests run. I know its annoying but probably we cannot do anything about it 🙂
+
+{Reactions}
+😅 (5) 
+
+[09/01/2023 03:38] nailkhalimov
+Guys, hope it will be helpful in setup & running scripts as I see many of people can't run it. Basically before running scripts you must setup Foundry(https://book.getfoundry.sh/getting-started/installation), after installation reboot your terminal and run `foundry` command in the directory of chainlink. Later you will be available to run any scripts. Example `forge build`(forge part of foundry tool installation).
+
+By the way, it's my first auditing😅
+Good luck to everyone🙌
+
+{Reactions}
+👍 (3) 
+
+[09/01/2023 04:07] devabdee
+just wanna confirm if these min & max values given in constants.t.sol expected to be same on-chain values, especially MAX_UNBONDING_PERIOD value
+```js
+  uint32 internal constant UNBONDING_PERIOD = 30 days;
+  uint32 internal constant MIN_UNBONDING_PERIOD = 1;
+  uint32 internal constant MAX_UNBONDING_PERIOD = 60 days;
+  uint32 internal constant MIN_CLAIM_PERIOD = 1 days;
+  uint32 internal constant MAX_CLAIM_PERIOD = 30 days;
+```
+
+
+[09/01/2023 05:28] aamirusmani1552
+😅 yes you are right. It's just my pc is very slow and it feels like it takes more time after every run. It's also my bad habbit i guess to complain about things.
+
+{Reactions}
+hi5 (2) 
+
+[09/01/2023 05:33] kawaicho
+What does it mean the reward vault to be migrated?
+
+
+[09/01/2023 13:52] cll_dev_economics#0018
+These are the values we have used for testing, but they are only placeholders. The exact values have not been determined yet.
+
+{Reactions}
+👍 
+
+[09/01/2023 16:20] Deleted User
+@Yos | Chainlink @Hendrik | Chainlink how do you close the reward vault?
+
+
+[09/01/2023 16:33] cll_dev_economics#0018
+There's an admin function `close()` in the reward vault contract
+
+
+[09/01/2023 20:51] kaden3328
+do you guys happen to have the spreadsheets from the staker rewards calculations doc?
+
+{Reactions}
+👍 (2) ☝️ 
+
+[09/02/2023 12:25] berlin.101
+Is someone available from the Chainlink team over the weekend?
+
+
+[09/02/2023 12:37] 0xepley
+does chainlink have their own reward mechanism or they are using synthetics or any other?
+
+
+[09/02/2023 13:10] liffidmonky
+@Hendrik | Chainlink @Lia | Chainlink @Dimitri | Chainlink anyone available for a DM?
+
+
+[09/02/2023 13:11] cl_dim_21#1974
+Hi yes I am
+
+{Reactions}
+🔥 
+
+[09/02/2023 13:11] cl_dim_21#1974
+So we only have the tables in the diagrams but not spreadsheets
+
+
+[09/02/2023 13:12] cl_dim_21#1974
+We’ve designed our own
+
+
+[09/02/2023 14:51] caventa
+Could someone please explain this code?
+
+```
+function _isOperator(address staker) private view returns (bool) {
+    bool isCurrentOperator = i_operatorStakingPool.isOperator(staker);
+    return s_vaultConfig.isOpen
+      ? isCurrentOperator
+      : isCurrentOperator || i_operatorStakingPool.isRemoved(staker);
+  }
+```
+
+See https://github.com/code-423n4/2023-08-chainlink/blob/main/src/rewards/RewardVault.sol#L1697-L1706
+
+Why would when the vault is closed, then isRemoved operator is considered an operator?
+
+{Embed}
+https://github.com/code-423n4/2023-08-chainlink/blob/main/src/rewards/RewardVault.sol
+2023-08-chainlink/src/rewards/RewardVault.sol at main · code-423n4/...
+Contribute to code-423n4/2023-08-chainlink development by creating an account on GitHub.
+Code4rena - ARCHIVE-Q3-2023 - chainlink-aug25 [1136357130635575306].txt_Files/7e2fe7ca-98f4-4cb9-ae88-26857d12693f-765C7
+
+
+[09/02/2023 15:15] ch_301
+@Dimitri | Chainlink DM sent
+
+
+[09/02/2023 15:33] _3agle
+I think it allows removed operators to claim their rewards
+
+{Reactions}
+👍 
+
+[09/02/2023 16:01] mylifechangefast.eth
+I submitted my gas report
+
+
+[09/02/2023 16:01] mylifechangefast.eth
+then I thought it was one one
+
+
+[09/02/2023 16:01] mylifechangefast.eth
+😩
+
+
+[09/02/2023 18:34] 0xstalin
+You can edit it and add the rest of gas findings 👌
+
+
+[09/02/2023 20:23] .testerbot
+Hey, I'm troubleshooting the `Solc ERROR` that shows whenever I try to run the tests.  Does anyone know if the `/.svm` folder should be inside the `home` folder or inside the `/.cargo` folder (default installation folder)?
+
+
+[09/02/2023 20:52] .testerbot
+Nevermind, got the tests running
+
+{Reactions}
+10_10 
+
+[09/02/2023 21:19] .testerbot
+If anyone is having the `Killed` or the generic `Solc Error`  while trying to run the tests you can try the following:
+
+*Disclaimer: This is what worked for me and what I found after a couple hours of research. This doesn't mean it will work for you nor that this is the correct way of fixing the aforementioned errors*
+
+- Make sure you have the latest rustup version installed by running `rustup -v` 
+- If you don't have rustup you can get it here:  https://www.rust-lang.org/tools/install .
+*Rustup is the rust toolchain installer, it is needed to install and manage the Solidity Version Manager (svm)*
+- Remove the current `~/.svm` folder  with `rm -rf ~/.svm` ( Only if you have one, in my case I didn't have any svm folder in the system, you can run it anyways to make sure lol)
+- Clean install of SVM with `cargo install svm-rs`  SVM is used by foundry to manage compiler versions *(Official Foundry documentation: https://github.com/foundry-rs/foundry/blob/master/README.md#features)*
+- Restart the terminal
+- Run `foundryup` to install/update foundry
+
+*Some people on GitHub and Foundry telegram say this should be enough, however I did a couple things before running `forge build` again*
+
+- Clone a clean copy of the repo
+- Run `forge clean`
+- Run `forge build`
+
+If it compiled succesfully you should be able to run `forge test` without issues 🙂
+
+{Reactions}
+hi5 👍 (2) 
+
+[09/02/2023 21:26] idarrha_adam
+thanks
+
+
+[09/02/2023 23:14] saaitaamaa
+can someone explain the MOCK_STAKING_V01 in testing ? and how can i mock a v01 Staker with 100eth staked for example ?
+
+
+[09/03/2023 04:40] _3agle
+@Hendrik | Chainlink sent a DM, pls reply when possible
+
+
+[09/03/2023 11:15] trachev
+@Dimitri | Chainlink sent a DM
+
+
+[09/03/2023 11:38] noro9954
+@Dimitri | Chainlink DM sent .
+
+
+[09/03/2023 14:39] 0xbtk
+Hey @Hendrik | Chainlink , can you elaborate with some examples ?
+
+> What can the contract manager NOT do after the pool is closed?
+>       ● Cannot change any mutable variables
+
+
+[09/03/2023 15:45] 0xepley
+an alerter can be anyone?
+
+
+[09/03/2023 15:45] 0xepley
+or specifically node operator
+
+
+[09/03/2023 15:48] 0xepley
+also whats the difference btw regular alert and priority alert
+
+
+[09/03/2023 15:54] Deleted User
+@Dimitri | Chainlink sent a dm
+
+
+[09/03/2023 16:07] 0xbtk
+https://github.com/code-423n4/2023-08-chainlink/blob/main/docs/specs.pdf
+
+{Embed}
+https://github.com/code-423n4/2023-08-chainlink/blob/main/docs/specs.pdf
+2023-08-chainlink/docs/specs.pdf at main · code-423n4/2023-08-chain...
+Contribute to code-423n4/2023-08-chainlink development by creating an account on GitHub.
+Code4rena - ARCHIVE-Q3-2023 - chainlink-aug25 [1136357130635575306].txt_Files/7e2fe7ca-98f4-4cb9-ae88-26857d12693f-765C7
+
+
+[09/03/2023 16:07] 0xbtk
+Check page 35 and 36
+
+
+[09/03/2023 16:16] 0xepley
+thanks
+
+{Reactions}
+🙏 
+
+[09/03/2023 18:02] aamirusmani1552
+Hey @Hendrik | Chainlink please check your dm
+
+
+[09/03/2023 19:05] mylifechangefast.eth
+Wait guys
+
+
+[09/03/2023 19:06] mylifechangefast.eth
+Should we follow the docs for the chainlink?
+
+
+[09/03/2023 19:07] mylifechangefast.eth
+I mean the whole mechaninmechanism going on in the docs should it be done also in the contract?
+
+
+[09/03/2023 19:07] mylifechangefast.eth
+that is what it was mean't to do? right?
+
+
+[09/03/2023 19:10] mrpotatomagic
+yepp you're right
+
+
+[09/03/2023 19:10] mylifechangefast.eth
+Oh so it the contract that is not following the docs mechanism right?
+
+
+[09/03/2023 19:11] mylifechangefast.eth
+I'm new here don't mind me
+
+
+[09/03/2023 19:12] mrpotatomagic
+the documentation is provided to gain more context on the mechanism of the contracts
+
+
+[09/03/2023 19:12] mylifechangefast.eth
+Oh I see
+
+
+[09/03/2023 19:14] mylifechangefast.eth
+so even the docs itself is wrong it just giving context about the contract which is also wrong in some ways
+
+
+[09/03/2023 19:18] mrpotatomagic
+The docs represent the dev assumptions so anything contradictory in the contracts can be reported as an issue based on the impact. There might be a few typos in the docs  (which have been mentioned above in this group channel) so be sure to check them.
+
+
+[09/04/2023 00:25] dontonka
+Can someone explain me why `{` are `}` used when passing parameters while the contract has normal parameter?
+```i_LINK.transferAndCall({to: pool, value: amount, data: data});```
+```function transferAndCall(address _to, uint _value, bytes _data)```
+
+
+[09/04/2023 02:01] cl_dim_21#1974
+Hi yes we’ve decided to use {} when calling functions with 3 or more params to improve readability.
+
+{Reactions}
+👌 (6) 
+
+[09/04/2023 04:03] victorygod
+can someone tell me where Staking V0.1 contract is?
+
+
+[09/04/2023 04:45] _3agle
+https://discord.com/channels/810916927919620096/1136357130635575306/1146786578686017658
+
+
+[09/04/2023 04:46] victorygod
+thanks 🙂
+
+
+[09/04/2023 05:04] aamirusmani1552
+@Dimitri | Chainlink sent you dm
+
+
+[09/04/2023 10:01] rustyrabbit
+What does the operational process of becoming an operator look like ? Is that a gated process ?
+
+
+[09/04/2023 12:14] noro9954
+who among the chainlink team is available on CET timezone ?
+
+
+[09/04/2023 12:55] dontonka
+strong code base, it's not easy to find something, love it 👍.
+
+
+[09/04/2023 12:56] auditsea
+love it? you should love the codebase you can find many things. lol
+
+
+[09/04/2023 12:58] dontonka
+hahaha. i might make no money during this contest, but my link stack staked in v0.1 from last year, i feel its good investement 😆.
+
+{Reactions}
+🔥 (6) 
+
+[09/04/2023 12:59] auditsea
+Awesome, so you take part in the contest to secure your money lol, you should get compliment from Chainlink team.
+
+{Reactions}
+🤣 (5) 
+
+[09/04/2023 13:02] dontonka
+but if i found something, i will feel even more proud as the bar is high here, at least for me.
+
+
+[09/04/2023 13:06] auditsea
+Sure yes, good luck for you!
+
+
+[09/04/2023 13:37] liffidmonky
+@Yos | Chainlink @Dimitri | Chainlink @Lia | Chainlink @Hendrik | Chainlink In the staking pools base, the `function migrate(bytes calldata data)` function. As I understand it for the v0.1 if data was empty it meant full migration, otherwise a partial one with proportions indicated in `data` parameter. Now in v0.2 the migrate() function plans to function the same way or is it undetermined due to lack of solid knowledge on how v0.3 might look?
+
+
+[09/04/2023 13:43] golanger
+Sent you a fr to dm if you can accepts😊
+
+
+[09/04/2023 15:13] caventa
+Could anyone explain the following code
+
+```
+return principal.mulWadDown(vestedRewardPerToken - rewardPerToken);
+```
+
+A lot of formulas are actually built on top of this basic formula
+
+Many thanks 🙏
+
+
+[09/04/2023 15:20] liffidmonky
+its on the FixedPointMathLib file
+
+
+[09/04/2023 15:21] caventa
+I mean what does vestedRewardPerToken - rewardPerToken mean
+
+Sorry if this seems to be a stupid question. 🤣
+
+
+[09/04/2023 15:24] liffidmonky
+long story dont have time now xd read the docs, spec.pdf and rewards.pdf, I would start with rewards.pdf s simpler might help
+
+
+[09/04/2023 15:26] caventa
+Maybe I could find the answer in rewards.pdf, I keep reading spec.pdf. Okay I got it
+
+
+[09/04/2023 15:50] adriro
+gm! any dev I can dm?
+
+{Reactions}
+👀 
+
+[09/04/2023 15:59] c7e7eff
+@Lia | Chainlink @Hendrik | Chainlink  Friendrequest sent, so I can DM. Can you accept?
+
+
+[09/04/2023 23:39] cl_dim_21#1974
+We're currently unsure how it will look like in v0.3.
+
+{Reactions}
+🔥 
+
+[09/04/2023 23:39] cl_dim_21#1974
+`vestedRewardPerToken - rewardPerToken` is calculating the amount of rewards each staked LINK should receive.  We then calculate the Staker’s earned reward by multiplying that by the amount of LINK that staker has staked.  
+
+`vestedRewardPerToken` - The amount of rewards earned per staked LINK since the beginning of the staking program
+
+`rewardPerToken` - The amount of rewards per staked LINK a staker has already earned OR the amount of rewards per staked LINK a staker has missed.  A staker should miss any staking rewards earned prior to them staking.  For example a staker that stakes at T=10 should miss rewards earned from T=0 to T=10.
+
+{Reactions}
+🙏 (2) 👍 
+
+[09/05/2023 01:12] bitcoinfever244
+@Yos | Chainlink  , @Hendrik | Chainlink @Lia | Chainlink @Dimitri | Chainlink  any dev I can dm
+
+
+[09/05/2023 01:49] cl_dim_21#1974
+Im available
+
+
+[09/05/2023 01:51] bitcoinfever244
+I sent a friend request @Dimitri | Chainlink
+
+
+[09/05/2023 02:23] tamayonft
+I sent a friend request @Dimitri | Chainlink
+
+
+[09/05/2023 03:39] _3agle
+@Dimitri | Chainlink Sent a DM
+
+
+[09/05/2023 04:41] caventa
+I have two more questions:
+
+1.
+
+What is the reason we multiply fullForfeitedRewardAmount with unstakedAmount
+
+```
+uint256  = fullForfeitedRewardAmount * unstakedAmount;
+```
+
+See https://github.com/code-423n4/2023-08-chainlink/blob/main/src/rewards/RewardVault.sol#L929
+
+2. 
+
+Why would -1 added to checkpoint id ?
+
+```
+   if (operatorPoolCheckpointId != 0) {
+      s_finalVestingCheckpointData.operatorPoolCheckpointId = operatorPoolCheckpointId - 1;
+    }
+
+    if (communityPoolCheckpointId != 0) {
+      s_finalVestingCheckpointData.communityPoolCheckpointId = communityPoolCheckpointId - 1;
+    }
+```
+
+See https://github.com/code-423n4/2023-08-chainlink/blob/main/src/rewards/RewardVault.sol#L1091-L1098
+
+{Embed}
+https://github.com/code-423n4/2023-08-chainlink/blob/main/src/rewards/RewardVault.sol
+2023-08-chainlink/src/rewards/RewardVault.sol at main · code-423n4/...
+Contribute to code-423n4/2023-08-chainlink development by creating an account on GitHub.
+Code4rena - ARCHIVE-Q3-2023 - chainlink-aug25 [1136357130635575306].txt_Files/7e2fe7ca-98f4-4cb9-ae88-26857d12693f-765C7
+
+
+[09/05/2023 04:54] _3agle
+Re. Question 2
+Comments before the lines
+```
+    // We store the last checkpointId  used to record a staker's staked LINK amount as the
+    // current checkpointId will be used to record the next staker action in
+    // the staking pool after the reward vault is migrated.
+```
+
+{Reactions}
+👍 
+
+[09/05/2023 06:03] coffiasd
+🙏🏻
+
+
+[09/05/2023 06:41] cl_dim_21#1974
+1. It's to calculate the proportion of rewards to forfeit.  https://github.com/code-423n4/2023-08-chainlink/blob/main/src/rewards/RewardVault.sol#L938.  For example a staker unstaking 50% of their principal should result in them forfeiting 50% of their unclaimed rewards.
+
+2. The `operatorPoolCheckpointId` and `communityPoolCheckpointId`s represent the next `checkpointId` to use when a staker stakes. This means that the last `checkpointId` that was used to record a staker's history is at `checkpointId - 1`.
+
+{Embed}
+https://github.com/code-423n4/2023-08-chainlink/blob/main/src/rewards/RewardVault.sol
+2023-08-chainlink/src/rewards/RewardVault.sol at main · code-423n4/...
+Contribute to code-423n4/2023-08-chainlink development by creating an account on GitHub.
+Code4rena - ARCHIVE-Q3-2023 - chainlink-aug25 [1136357130635575306].txt_Files/7e2fe7ca-98f4-4cb9-ae88-26857d12693f-765C7
+
+{Reactions}
+👍 
+
+[09/05/2023 07:02] devabdee
+Hey Mate. Can I DM you? Just wanna talk a little bit about chainlink staking. Thanks!
+
+
+[09/05/2023 14:11] zaevlad
+@Hendrik | Chainlink dm you, thanks
+
+{Reactions}
+☝️ 👍 
+
+[09/05/2023 14:48] liffidmonky
+@Hendrik | Chainlink @Yos | Chainlink @Lia | Chainlink @Dimitri | Chainlink  how clients get the merkle proof for the whitelisted period?
+
+
+[09/05/2023 17:19] liffidmonky
+@Hendrik | Chainlink are migrations to the community pool expected after opening the pool for everyone or are they just expected in the only-migrations period?
+
+
+[09/05/2023 17:27] aamirusmani1552
+Hey so far there are 2 parts of the docs that are stale right?
+1. The removed operator cannot stake in community pool.
+2. And that was related to slash capacity.
+
+
+[09/05/2023 17:28] aamirusmani1552
+Is there anything that is also stale?
+
+
+[09/05/2023 17:29] cll_dev_economics#0018
+I don't have specific details yet, but the proofs will be made public. When interacting with the contracts through our front-end, this will be a seemless experience.
+
+{Reactions}
+👍 
+
+[09/05/2023 17:30] cll_dev_economics#0018
+Stakers in v0.1 will be able to migrate beyond the migrations only period as long as there is space in the pool.
+
+{Reactions}
+👍 (2) 
+
+[09/05/2023 17:30] kaden3328
+there's a part of the docs which states that removed operators can restake as community operators which i've confirmed with @Dimitri | Chainlink  that it's stale
+
+{Reactions}
+👍 (4) 
+
+[09/05/2023 17:32] aamirusmani1552
+yes and second is this
+
+{Reactions}
+👍 
+
+[09/05/2023 17:32] aamirusmani1552
+Not anything else than that right?
+
+
+[09/05/2023 17:42] devabdee
+Thanks for pointing it out. That revert thing was really un-digestive for me.
+
+{Reactions}
+hi5 
+
+[09/06/2023 01:56] dontonka
+sent you a FR @Hendrik | Chainlink
+
+
+[09/06/2023 02:33] thank_you_
+@Hendrik | Chainlink sent a FR regarding a question about the codebase.
+
+
+[09/06/2023 03:25] caventa
+I sent a friend request @Dimitri | Chainlink
+
+
+[09/06/2023 06:25] eme0242
+Please, how do I fix this error?:
+
+Context:
+- Error #0: error trying to connect: Operation timed out (os error 60)
+
+
+[09/06/2023 13:15] liffidmonky
+@Hendrik | Chainlink for now is only price feeds but does the team plan to integrate alerting with other chainlink services?
+
+
+[09/06/2023 13:16] cll_dev_economics#0018
+This is part of the roadmap, but v0.2 is focused solely on price feeds
+
+{Reactions}
+❤️ 
+
+[09/06/2023 13:33] liffidmonky
+@Hendrik | Chainlink are operators expected to always have a priority period when alerting in any feed?
+
+{Reactions}
+🛡️ 
+
+[09/06/2023 13:35] cll_dev_economics#0018
+In v0.2 yes they have a priority alert period
+
+
+[09/06/2023 14:22] c7e7eff
+What's the process like for adding an operator? When is that done ? Is this (semi) automated, or manual by the contract owner (Chainlink team)?
+
+{Reactions}
+👍 
+
+[09/06/2023 15:18] liffidmonky
+@Hendrik | Chainlink  when all rewards have been distributed, should someone be able to slash operators?
+
+
+[09/06/2023 16:01] magu1225
+@Hendrik | Chainlink 
+I sent a freind request.please allow me.
+
+
+[09/06/2023 16:58] cll_dev_economics#0018
+This is handled by the team (done manually)
+
+
+[09/06/2023 17:00] cll_dev_economics#0018
+No, for a slash event to happen the pool must be open and rewards must not have ended
+
+
+[09/06/2023 17:27] aamirusmani1552
+Hey what is this `predecessor` id in this function:
+```Javascript
+  function hashOperationBatch(
+    Call[] calldata calls,
+    bytes32 predecessor,
+    bytes32 salt
+  ) public pure virtual returns (bytes32) {
+    return keccak256(abi.encode(calls, predecessor, salt));
+  }
+```
+
+
+[09/06/2023 17:28] aamirusmani1552
+The contracts says `   * @param predecessor ID of the preceding operation.`
+
+
+[09/06/2023 17:29] aamirusmani1552
+Why it is important
+
+
+[09/06/2023 20:48] osmanozdemir1
+Every operation batch is tied to the previous batch. Like a blockchain but an opChain maybe 😄
+
+Batch ids are actually some kind of hash that also includes previous batch’s id. 
+
+When an executor tries to execute a batch, previous batch had to be executed already. Otherwise it will revert during “_beforeCall” check.
+
+
+[09/06/2023 23:25] mylifechangefast.eth
+what type of issue is when someone can set something to one on C4?
+
+
+[09/06/2023 23:52] peritoflores
+Hi @Hendrik | Chainlink , could I DM you?
+
+
+[09/07/2023 03:52] mussucal
+refill rate
+
+
+[09/07/2023 05:06] aamirusmani1552
+oh ok thanks
+
+{Reactions}
+👍🏻 
+
+[09/07/2023 09:52] 14si2o_flint
+@Hendrik | Chainlink @Dimitri | Chainlink 
+
+In RewardVault.sol there is following NatSpec: 
+`the reclaimable reward is the forfeited reward that can be claimed by the last staker due to empty pools`
+
+Could you elaborate on what exactly is meant by "empty pools"?
+
+
+[09/07/2023 09:52] cl_dim_21#1974
+A pool with no staked LINK
+
+
+[09/07/2023 09:53] 14si2o_flint
+Ok so a pool before it is opened or a closed pool where all the link has been unstaked, correct?
+
+
+[09/07/2023 09:54] cl_dim_21#1974
+Yes though in theory a pool can also be empty before it’s closed as stakers can unstake at any time.
+
+
+[09/07/2023 09:54] 14si2o_flint
+Ok got it, thanks for the information!
+
+
+[09/07/2023 13:47] dontonka
+`PriceFeedAlertsController::sendMigrationData`
+Is there a use case for you guys where you need to migrate `only partially` feeds (and not all of them) to the new contract 🤔 ?
+@Dimitri | Chainlink
+
+{Reactions}
+10_10 
+
+[09/07/2023 16:43] angry_mustache_man
+Hi @Hendrik | Chainlink . Sent you FR
+
+
+[09/07/2023 17:42] yellowbirby
+@Hendrik | Chainlink @Dimitri | Chainlink send a FR re; question about inconsitencies in the docs
+
+
+[09/07/2023 18:12] mylifechangefast.eth
+are their any resources I can check for gas on assembly?
+
+
+[09/07/2023 23:54] cl_dim_21#1974
+Yes we may want to gradually upgrade alertable feeds
+
+{Reactions}
+🫡 (2) 
+
+[09/08/2023 00:54] dontonka
+How do you track the feeds externally, since you need to know exactly which feedConfig are active (not considering those removed)?
+
+
+[09/08/2023 03:12] coffiasd
+Hi @Hendrik | Chainlink  sent you dm
+
+
+[09/08/2023 07:27] 0xadrii
+Hey @Hendrik | Chainlink ! Just DM'ed you🤝
+
+
+[09/08/2023 16:12] mylifechangefast.eth
+@Dimitri | Chainlink how do people stake?
+
+
+[09/08/2023 16:12] mylifechangefast.eth
+I'm just seeing unstake or is there no stake function?
+
+
+[09/08/2023 16:19] adeolu
+By sending link to the pool and calling the "onTokenTransfer()". 
+
+This is done via the link token's transferAndCall()
+
+
+[09/08/2023 16:26] mylifechangefast.eth
+Oh okay thanks
+
+
+[09/08/2023 16:27] mylifechangefast.eth
+In the communitypool though?
+
+
+[09/08/2023 16:28] adeolu
+In any of the pools. Community pool or Operator pool. Check stakingPoolBase and the link token contract for these functions.
+
+{Reactions}
+👍 
+
+[09/08/2023 17:00] mylifechangefast.eth
+@adeolu sorry boss what are the types of finding on QA and analysis?
+
+
+[09/08/2023 17:02] mylifechangefast.eth
+I'm even trying to send you a friend request but the verification of if I'm a bot is not responding
+
+
+[09/08/2023 17:07] adeolu
+QA is for low and non critical. Analysis is sort of like a document you write on the architecture, design of the protocol and codebase
+
+
+[09/08/2023 17:11] mylifechangefast.eth
+Oh okay
+
+
+[09/08/2023 17:58] mylifechangefast.eth
+`import {MerkleProof} from '@openzeppelin/contracts/utils/cryptography/MerkleProof.sol';` is this file valid? @adeolu
+
+
+[09/08/2023 18:01] adeolu
+it is not in scope. the files that are in scope are here-->https://code4rena.com/contests/2023-08-chainlink-staking-v02 and here -> https://github.com/code-423n4/2023-08-chainlink/blob/main/scope.txt
+
+{Embed}
+https://code4rena.com/contests/2023-08-chainlink-staking-v02
+Code4rena
+Code4rena is a competitive audit platform that finds more high-severity vulnerabilities, more quickly than any other auditing method.
+Code4rena - ARCHIVE-Q3-2023 - chainlink-aug25 [1136357130635575306].txt_Files/c4-og-banner-D9756.png
+
+{Embed}
+https://github.com/code-423n4/2023-08-chainlink/blob/main/scope.txt
+2023-08-chainlink/scope.txt at main · code-423n4/2023-08-chainlink
+Contribute to code-423n4/2023-08-chainlink development by creating an account on GitHub.
+Code4rena - ARCHIVE-Q3-2023 - chainlink-aug25 [1136357130635575306].txt_Files/7e2fe7ca-98f4-4cb9-ae88-26857d12693f-765C7
+
+
+[09/08/2023 18:02] mylifechangefast.eth
+if they are not in scope how do I check for that particular file?
+
+
+[09/08/2023 18:03] mylifechangefast.eth
+no need for that? ba?
+
+
+[09/08/2023 18:05] adeolu
+it is in the repo. check the openzeppelin folder in lib folder
+
+{Reactions}
+👍 
+
+[09/08/2023 18:05] mylifechangefast.eth
+Okay
+
+
+[09/08/2023 18:49] liffidmonky
+If I make slight changes in the code and then I try forge compile, my computer crashes and restarts, is anyone facing this problem?
+
+
+[09/08/2023 18:54] liffidmonky
+Sometimes executing forge cleand and then forge compile works, but sometimes it doesnt
+
+
+[09/08/2023 19:06] aamirusmani1552
+Try asking in official telegram channel of foundry.
+
+
+[09/08/2023 20:53] dirk_y
+@Dimitri | Chainlink Can we assume that the admin will always perform any configuration changes/migration steps in a sensible order?
+
+
+[09/08/2023 21:57] chaduke3730
+@adeoluwhere can I find the staking v0.1 contract for OperatorStakingPool.sol?
+
+
+[09/08/2023 22:13] adeolu
+Hi bro. I don't know. I haven't read the v0.1 contracts well yet but I just checked and I think the pool in v0.1 isn't separated. 
+
+It's just if else statements deciding what to do when staker is operator or not. Check staking.sol  file in staking-v0.1 folder
+
+
+[09/08/2023 22:19] chaduke3730
+where can I find the staking v0.1 contract for OperatorStakingPool.sol?
+
+
+[09/08/2023 22:20] chaduke3730
+@Dimitri | Chainlink
+
+
+[09/08/2023 22:20] chaduke3730
+thank you @adeolu
+
+{Reactions}
+🫡 
+
+[09/08/2023 22:28] adriro
+its the one in the staking v01 directory
+
+{Reactions}
+👍 
+
+[09/08/2023 22:28] chaduke3730
+got it. thanks
+
+
+[09/08/2023 22:28] chaduke3730
+@adriro
+
+{Reactions}
+🤘 
+
+[09/08/2023 22:29] adriro
+running a single test takes ages, not sure if it's the BaseTest setup or what. Any tips on how to speed the process?
+
+
+[09/08/2023 22:30] chaduke3730
+@adrirosame problem here. I tried to delete some test files first
+
+
+[09/08/2023 23:21] 0xlgtm
+try to specify --match-contract and --match-test it'll speed it up. Sometimes it helps to just do forge clean and compile all over again.
+
+{Reactions}
+👍 (2) 
+
+[09/08/2023 23:31] chaduke3730
+@0xlgtmthanks
+
+
+[09/08/2023 23:58] adriro
+I tested a dummy test file with no setup and a single assert(true), it took ~50 secs
+
+
+[09/08/2023 23:59] adriro
+I guess the amount of files is adding some kind of overhead to the run, will try recreating the repo with just the files in scope
+
+
+[09/09/2023 03:39] bowtiedvirus
+It's a bit late, but adding some extra RAM helped out the build and testing times **immensely**. I was using a VM for the project and didn't have enough RAM to hold the massive amount of running code.
+
+{Reactions}
+hi5 
+
+[09/09/2023 07:18] 0xmojito
+Hi, is there any sponsor available for DM? Thank you
+
+
+[09/09/2023 08:52] coffiasd
+the share of delegate is from operator or community  i feel a little bit confused about it ?
+
+
+[09/09/2023 08:53] coffiasd
+it seem like the name is `operatorDelegated` but the share if from community
+
+
+[09/09/2023 09:08] 0xsorrynotsorry
+From the community
+
+{Reactions}
+❤️ 
+
+[09/09/2023 09:57] 0xumarkhatab
+so initially `vestedRewardPerToken ` will be zero as `rewards earned per staked LINK since the beginning of the staking program` will be zero initially
+
+
+[09/09/2023 09:59] carrotsmuggler
+@Dimitri | Chainlink are deployemnts only for mainnet?
+
+
+[09/09/2023 11:19] devabdee
+Yes
+
+
+[09/09/2023 11:19] devabdee
+It was confrimed earlier by the protocol team
+
+
+[09/09/2023 14:38] 0xumarkhatab
+Hi everyone , what is fortfeiting ?
+
+
+[09/09/2023 14:46] 0xsorrynotsorry
+Forfeited Rewards
+If a staker unstakes before their ramp-up multiplier reaches 1, the staker will forfeit some of their
+earned rewards depending on their current multiplier and the amount they unstake relative to
+their current staked LINK.
+
+
+[09/09/2023 14:54] 0xumarkhatab
+perfect !
+Thanks
+
+{Reactions}
+hi5 
+
+[09/09/2023 14:57] 0xumarkhatab
+Also according to these lines , what is meant by `will become available for others to claim` 
+
+are they free to claim or they can claim based on their staking ?
+
+```
+If a staker completes a withdrawal of any amount of their staked LINK, their ramp-up period will reset to 0% and any Locked Rewards earned will be forfeited back to the rewards pool and become available for all stakers in the same category (i.e., a Community Staker’s Forfeited Rewards can then be earned by all Community Stakers). After a withdrawal of staked LINK, a staker will need to go through the full ramp-up period again in order for Attributed Rewards to fully turn into Claimable Rewards. 
+
+Note that Claimable Rewards can be withdrawn at any point in time by a staker without resetting their ramp-up period progress.
+
+```
+
+
+[09/09/2023 15:16] devabdee
+Means that forfieted rewards will be added back to the rewards pool and will be available for all the stakers just like other rewards (claim based on staking)
+
+
+[09/09/2023 15:21] 0xumarkhatab
+perfect!
+Thank you man
+
+{Reactions}
+👍 
+
+[09/09/2023 15:47] liffidmonky
+Whats this maintenance process? I cant find it on the docs, the code is inside the `Timelock` contract:   /**
+   * @dev Contract might receive/hold ETH as part of the maintenance process.
+   */
+  receive() external payable {}
+
+
+[09/09/2023 19:31] mylifechangefast.eth
+Did OpartorStakingPool inherit the IStakingPool interface?
+
+
+[09/09/2023 19:46] aamirusmani1552
+Yes. `OperatorStakingPool` inherit `StakingPoolBase` which inherits `IStakingPool`
+
+{Reactions}
+🫡 
+
+[09/09/2023 20:16] mylifechangefast.eth
+oh it was nested
+
+
+[09/09/2023 21:25] 0xbtk
+Request sent @Dimitri | Chainlink
+
+
+[09/09/2023 21:50] mylifechangefast.eth
+Are we suppose to demonstrate how an attacker exploit a vulnerable fuctiion? is that allowed?
+
+
+[09/09/2023 21:51] mylifechangefast.eth
+Request sent @Dimitri | Chainlink
+
+
+[09/09/2023 21:58] mylifechangefast.eth
+Request sent @adeolu
+
+
+[09/09/2023 22:22] shealtielanz
+With time you’ll buy a better pc 🫶
+
+{Reactions}
+❤️ (2) hi5 (2) 
+
+[09/09/2023 22:42] mylifechangefast.eth
+Aren't you Brainac5😏
+
+{Reactions}
+👀 🫡 
+
+[09/10/2023 06:15] 0xumarkhatab
+Hi there , is Link token an ERC677 ?
+
+
+[09/10/2023 06:50] 0xumarkhatab
+how do i stake tokens ?
+
+using this ?
+```
+      s_LINK.transferAndCall(address(s_rewardVault), 1 ether,"");
+```
+
+
+[09/10/2023 06:51] 0xumarkhatab
+i've encountered this error :
+
+[FAIL. Reason: AccessForbidden()]
+
+
+[09/10/2023 06:51] 0xumarkhatab
+I've pranked as Community Staker and Operator staker , but i'm unable to stake
+
+
+[09/10/2023 07:26] 0xbtk
+You can't stake in the reward vault, try one of the staking pools!
+
+
+[09/10/2023 07:31] 0xbtk
+Any one from the team is available, @Hendrik | Chainlink , @Lia | Chainlink, @Dimitri | Chainlink
+
+
+[09/10/2023 07:56] 0xumarkhatab
+Oh okey
+
+
+[09/10/2023 07:56] 0xumarkhatab
+Thanks
+
+
+[09/10/2023 08:01] 0xumarkhatab
+can you suggest a code example todo so ? @btk
+
+
+[09/10/2023 08:04] _3agle
+@0xumarkhatab Look at the following tests (in order) to get an idea:
+https://github.com/code-423n4/2023-08-chainlink/blob/main/test/base-scenarios/RewardVaultScenarios.t.sol#L107
+https://github.com/code-423n4/2023-08-chainlink/blob/main/test/units/rewards/RewardVault.ClaimReward.t.sol#L45
+
+
+[09/10/2023 10:27] 0xumarkhatab
+Hey thanks ... Appreciated
+
+
+[09/10/2023 10:30] 0xumarkhatab
+unable to run it's tests
+
+
+[09/10/2023 11:23] 0xumarkhatab
+who will be the admin of CommunityStakingPool ? the timelock contract ?
+
+
+[09/10/2023 11:33] 0xumarkhatab
+Also OperatorStakingPool
+
+
+[09/10/2023 13:30] visualbits
+Yes, Timelock
+
+
+[09/10/2023 13:51] devabdee
+In a nutshell, ERC20 Compatible + Allows token transfers to contain a data payload
+
+
+[09/10/2023 14:30] 0xumarkhatab
+perfect !
+
+{Reactions}
+👍 
+
+[09/11/2023 08:24] yosriady
+This is from the OZ TimelockController contract. It's just to allow the contract to hold ETH if it ever needs to interact with contracts that need it
+
+{Reactions}
+🫡 
+
+[09/11/2023 08:36] visualbits
+@Yos | Chainlink Dmed
+
+{Reactions}
+🆗 
+
+[09/11/2023 10:49] 0xumarkhatab
+Hi can someone explain this line ?
+```
+      FixedPointMathLib.divWadDown(x - y, multiplierDuration)
+
+```
+
+
+[09/11/2023 10:50] 0xumarkhatab
+where 
+
+ function divWadDown(uint256 x, uint256 y) internal pure returns (uint256) {
+        return mulDivDown(x, WAD, y); // Equivalent to (x * WAD) / y rounded down.
+    }
+
+
+[09/11/2023 10:51] 0xumarkhatab
+function mulDivDown(
+        uint256 x,
+        uint256 y,
+        uint256 denominator
+    ) internal pure returns (uint256 z) {
+        /// @solidity memory-safe-assembly
+        assembly {
+            // Equivalent to require(denominator != 0 && (y == 0 || x <= type(uint256).max / y))
+            if iszero(mul(denominator, iszero(mul(y, gt(x, div(MAX_UINT256, y)))))) {
+                revert(0, 0)
+            }
+
+            // Divide x * y by the denominator.
+            z := div(mul(x, y), denominator)
+        }
+    }
+
+
+[09/11/2023 10:51] _3agle
+insert this code into ChatGPT, and see the magic
+
+
+[09/11/2023 10:53] 0xumarkhatab
+okey 😂
+
+{Reactions}
+🤝 
+
+[09/11/2023 10:58] 0xumarkhatab
+chat gpt did not work for me
+
+
+[09/11/2023 10:59] 0xumarkhatab
+i think it checks (x-y)/multiplierDuration
+
+
+[09/11/2023 10:59] 0xumarkhatab
+in a safe way
+
+
+[09/11/2023 10:59] 0xumarkhatab
+nothing else right ?
+
+
+[09/11/2023 11:06] 0xumarkhatab
+@Lia | Chainlink there ?
+
+
+[09/11/2023 11:13] nadin4559
+Its mean x = (x-y) , y = multiplierDuration .  Function divWadDown returns ( x * Wad) / y.
+
+{Reactions}
+✌️ 
+
+[09/11/2023 11:29] yosriady
+Hi folks, just calling out that the Staking v0.2 `Timelock`  `ADMIN_ROLE` will be assigned to `address(this)`  the Timelock itself, as is stated in the constructor comments https://github.com/code-423n4/2023-08-chainlink/blob/main/src/timelock/Timelock.sol#L22.
+
+{Reactions}
+👍 
+
+[09/11/2023 11:41] 0xumarkhatab
+gotcha thanks
+
+
+[09/11/2023 11:42] yosriady
+I also want to call out the 2 stale points in the doc about **removed operators**, for visibility. The bullet points below are stale:
+```
+What can a removed operator do?:
+- The Operator’s staked LINK can still be slashed.
+- Stake as a Community Staker but with their multiplier reset
+```
+As is implemented in the code:
+- Removed operators can't be slashed https://github.com/code-423n4/2023-08-chainlink/blob/e0cfce3073a3c9443eac55a377ff74f22e23c163/src/pools/OperatorStakingPool.sol#L271-L273
+- Removed operators cannot stake in the CS pool
+
+Thank you for understanding.
+
+{Reactions}
+👍 (4) 👋🏼 (2) 
+
+[09/11/2023 13:55] cl_dim_21#1974
+Hi everyone, we've received several questions around how different components can be upgraded.  These integration tests should help demonstrate how upgrades can be done.  https://github.com/code-423n4/2023-08-chainlink/tree/e0cfce3073a3c9443eac55a377ff74f22e23c163/test/integrations
+
+{Embed}
+https://github.com/code-423n4/2023-08-chainlink/tree/e0cfce3073a3c9443eac55a377ff74f22e23c163/test/integrations
+2023-08-chainlink/test/integrations at e0cfce3073a3c9443eac55a377ff...
+Contribute to code-423n4/2023-08-chainlink development by creating an account on GitHub.
+Code4rena - ARCHIVE-Q3-2023 - chainlink-aug25 [1136357130635575306].txt_Files/7e2fe7ca-98f4-4cb9-ae88-26857d12693f-765C7
+
+
+[09/11/2023 13:56] shealtielanz
+so many mediums gone 🙂
+
+{Reactions}
+🥲 (3) 
+
+[09/11/2023 13:57] shealtielanz
+No matter how rough the road gets we keep on moving, for who so ever seekth, he shall find.
+
+{Reactions}
+bolt_discord_emoji (2) 💪 (3) 
+
+[09/11/2023 16:39] audinarey
+...and then rounds down
+
+{Reactions}
+gummy_wink (2) 
+
+[09/11/2023 19:34] neumoxx
+Hey @Hendrik | Chainlink , please check DMs 🙏
+
+
+[09/11/2023 20:32] 0x73696d616f
+anyone getting solc error when running the tests? it does not always happen, seems like a timeout
+
+
+[09/11/2023 22:13] 0x73696d616f
+@Yos | Chainlink dmed
+
+
+[09/11/2023 22:24] 0x73696d616f
+My findings are giving this error
+Oops! Something went wrong.
+Internal server error.
+
+
+[09/12/2023 02:51] aslanbekaibimov
+it happens from time to time. Waiting a few minutes usually works
+
+
+[09/12/2023 04:30] _3agle
+Thank god it didn’t happen to me. 😅
+Cause I haven’t found any 😂
+
+{Reactions}
+😅 
+
+[09/12/2023 04:42] 0xumarkhatab
+you a liar : )))
+
+{Reactions}
+🙄 😅 
+
+[09/12/2023 04:44] 0xumarkhatab
+anyhow , anoyone has any idea about the reference to any documentation related to buckets
+
+
+[09/12/2023 05:15] _3agle
+not kidding, haven't found any medium, this codebase was tough to crack  😉
+
+
+[09/12/2023 05:18] 0xumarkhatab
+damn !
+I've found some meds and highs but not sure what will happen !
+Imposter syndrom : /
+
+{Reactions}
+🔥 (8) 
+
+[09/12/2023 07:48] chainshield
+is there any limit on the num of operators?
+
+
+[09/12/2023 08:16] 0x11singh99
+@Yos | Chainlink ` roundId` in Aggregator  increases one by one for each next round for feeds or it increases in some other way ??
+
+
+[09/12/2023 08:18] yosriady
+Round ids increases strictly monotonically
+
+
+[09/12/2023 08:19] 0x11singh99
+ok thanks
+
+
+[09/12/2023 08:22] shealtielanz
+hehehe  🙂
+The submission number is above the average already  actually lots of wardens are participating
+
+
+[09/12/2023 08:41] moneyversed.eth
+just submitted my analysis 🫡
+
+
+[09/12/2023 09:21] mrpotatomagic
+@Yos | Chainlink dmed you
+
+
+[09/12/2023 09:37] _3agle
+Guess I’ll also be submitting a few vulns now, but my statement still remains “Haven’t found any MED”
+
+{Reactions}
+😂 (3) 
+
+[09/12/2023 09:44] 0xumarkhatab
+you probably will submit highs :-;
+
+{Reactions}
+💯 
+
+[09/12/2023 09:46] adeolu
+for what reasons may an operator be removed? @Yos | Chainlink  @Dimitri | Chainlink
+
+
+[09/12/2023 09:48] yosriady
+If they misbehave as a node operator. This is a an unlikely scenario
+
+{Reactions}
+🫡 
+
+[09/12/2023 09:53] yanchuan1
+@Dimitri | Chainlink  does forfeited reward get distributed to the stakers in the staking pool, including the penalized staker or not?
+
+
+[09/12/2023 10:06] t1moh
+It isn't distributed to penalized user
+
+
+[09/12/2023 10:08] t1moh
+Really interesting to see highs in this contest
+
+{Reactions}
+☝️ (4) 
+
+[09/12/2023 10:09] no_noo
+I failed to submit another QA report because one has been submitted successfully before, could someone tell me how to submit another one?
+
+
+[09/12/2023 10:10] 0xumarkhatab
+edit it
+
+
+[09/12/2023 10:10] 0xumarkhatab
+;-;
+
+
+[09/12/2023 10:10] shealtielanz
+Compile all the QA  Report (Low Risk & Non Critical Findings) Into one and submit
+
+
+[09/12/2023 10:11] shealtielanz
+Submitting differently might go against C4 submission guidelines
+
+
+[09/12/2023 10:12] shealtielanz
+Same for Gas Reports✅
+
+
+[09/12/2023 10:12] no_noo
+Thanks!!!
+
+{Reactions}
+👍 
+
+[09/12/2023 10:14] shealtielanz
+Try making it organized and understandable in order get into the Grade b category and above sir
+
+
+[09/12/2023 10:19] bryan_conquer
+very real 👍
+
+{Reactions}
+✌️ 
+
+[09/12/2023 10:34] yanchuan1
+@T1MOH thanks
+
+
+[09/12/2023 16:51] 0x11singh99
+@Yos | Chainlink  does link token reverts on 0 token transfer ??
+
+
+[09/12/2023 16:52] t1moh
+Look at source code on etherscan, why ping others
+
+{Reactions}
+☝️ (7) 
+
+[09/12/2023 18:08] aamirusmani1552
+Hey everyone, I have a question, Who is going to get a pauser role. I know not much time is left for the conclusion of the contest. Just trying to look at it final time.
+
+
+[09/12/2023 18:10] visualbits
+It's trusted role
+
+
+[09/12/2023 18:10] aamirusmani1552
+ok but who will receive it?
+
+
+[09/12/2023 18:10] aamirusmani1552
+StakingTimelock?
+
+
+[09/12/2023 18:13] visualbits
+It's not specified exactly, but it can be
+
+{Reactions}
+👍 (2) 
+
+[09/12/2023 19:12] neumoxx
+Probably not the Timelock, as usually the pause of a protocol is an emergency and should not be delayed.
+
+
+[09/12/2023 19:17] yosriady
+As folks have pointed out, the pauser role will not be held by the Timelock to allow for a rapid response to emergencies. It won't be held by an EOA either, most likely a Gnosis Safe.
+
+{Reactions}
+👍 (2) 
+
+[09/12/2023 20:02] C4
+**🚨 AUDIT ALERT**
+
+@🐺wardens The **Chainlink Staking v0.2** audit is now closed! Huge thanks to everyone who participated 🔍, whether you submitted a finding or not.
+
+What's next: The sponsor team and judge will review the findings over the next couple of weeks. Keep an eye on #📢announcements for regular updates on how the audit is progressing through awarding 🤑🏆, judging 🧑‍⚖️ and reporting 📜. Feel free to ping a Contest-Admin if you have questions along the way!
+
+❗️**If you're not already certified:**  you have 30 days to complete certification or you will not be eligible for awards. Instructions here: https://docs.code4rena.com/roles/certified-contributors
+
+{Embed}
+https://docs.code4rena.com/roles/certified-contributors
+Certified contributors
+In order to create opportunities for contributions which rely on establishment of trust, Code4rena allows community members to opt into certifying their identity and entering into a simple agreement.
+
+{Reactions}
+C4Keycap (20) 🫡 (13) 🎉 (7) code4rena (8) cheers_badger (5) 
+
+[09/12/2023 20:04] chaduke3730
+good luck to all!
+
+
+[09/12/2023 20:05] mrpotatomagic
+Thanks @Yos | Chainlink @Hendrik | Chainlink @Dimitri | Chainlink for your coordination and swift responses :thankyou:
+
+
+[09/12/2023 20:07] cryptor9119
+Many thanks to the sponsors at Chainlink  @Yos | Chainlink  @Dimitri | Chainlink @Hendrik | Chainlink  for answering all of our questions and hosting a great contest. Definitely learned a lot these past few weeks
+
+
+[09/12/2023 20:08] alexxander
+gg everyone, was a pleasure auditing let’s hope to see some good results soon 🙌:chefskiss: :letsgo:
+
+
+[09/12/2023 20:08] liffidmonky
+guys be honest how much you submited? xd
+
+
+[09/12/2023 20:08] ustas.eth
+Thanks for the great contracts! I didn't find any mediums or highs this time, but hopefully my lows are gonna be valid
+
+
+[09/12/2023 20:08] liffidmonky
+gg and thanks to the devs, they were asnwering a lot 😄
+
+
+[09/12/2023 20:08] yosriady
+Thank you to all participating wardens for helping to secure the Chainlink protocol! Hope to see you in future contests. :hi5:
+
+{Reactions}
+⚡ (18) chefskiss (13) hi5 
+
+[09/12/2023 20:09] 0xdetermination
+Pleasure auditing with you all, enjoyed this contest!
+
+{Reactions}
+👍 
+
+[09/12/2023 20:13] shealtielanz
+It’ was really an honor Auditing with determination 
+ 🙂
+
+
+[09/12/2023 20:14] 0xdetermination
+@shealtielanz same here ser 🫡
+
+{Reactions}
+🔥 
+
+[09/12/2023 20:14] shealtielanz
+😂🔥 Good luck to everyone
+
+
+[09/12/2023 20:14] t1moh
+Good luck all!!🔥 🔥
+
+{Reactions}
+🔥 (3) 
+
+[09/12/2023 20:14] eduardonicoleit
+GG guys, my first audit and I did found some things, hope my points are valid 😅
+
+{Reactions}
+🔥 (6) hi5 (3) 
+
+[09/12/2023 20:20] t1moh
+You guys are awesome
+
+{Reactions}
+❤️ (2) 
+
+[09/12/2023 20:21] _paperparachute
+Best of luck everyone!
+
+
+[09/12/2023 20:28] topmark1
+gonna need more than luck😖
+
+
+[09/12/2023 20:30] 0xhelium
+How many submissions are there ?
+
+
+[09/12/2023 20:30] t1moh
+960
+
+{Reactions}
+👍 (11) 🫡 (2) 
+
+[09/12/2023 21:01] berlin.101
+Was a pleasure auditing this project 🙌  Thanks a lot to the Chainlink team @Yos | Chainlink, @Dimitri | Chainlink, @Hendrik | Chainlink for the great feedback on my questions.
+
+
+[09/12/2023 21:37] ladboy233
+how is everyone doing？
+
+{Reactions}
+👋 
+
+[09/12/2023 21:37] ladboy233
+😄
+
+
+[09/13/2023 00:05] coffiasd
+Gooood luck to all of you guys
+
+
+[09/13/2023 00:16] _3agle
+Thanks to the Chainlink Team!
+Best of Luck to all 👍
+
+
+[09/13/2023 05:46] aamirusmani1552
+All the best everyone 👍. 
+And thanks Chainlink team
+
+{Reactions}
+👍 (3) 
+
+[09/13/2023 08:19] chainshield
+All the best everyone
+
+
+[09/13/2023 11:56] saaitaamaa
+This was my first ever contest Best of luck to everyone
+
+{Reactions}
+🫡 (2) 
+
+[09/13/2023 15:05] joshuajee
+Best of luck to us, this was also my first
+
+{Reactions}
+🙏 
+
+[09/13/2023 18:51] rustyrabbit
+Will the findings be public ? Not like last time I believe.
+
+
+[09/13/2023 18:51] rustyrabbit
+Really interested to see what others have found
+
+{Reactions}
+👍 
+
+[09/14/2023 12:17] liffidmonky
+Hey! Regarding Chainlink Staking contest, I got a finding I would like to discuss with the community, can I make it public? I guess as the competition was public and the code too I can safely just share it on linkedin or the discord chat. Am i right or I cant publish it till findings are reviewed? My intention is to get feedback on the validity of a mathematical development I made in the last moments before closing the contest
+
+
+[09/14/2023 12:30] olanre_waju
+Don't do that!!!! Till findings are made public. Also, this is yet to be validated.
+
+
+[09/14/2023 12:31] liffidmonky
+Okay! Yeah exactly, Im curious if that finding will get validated xd I will just wait patiently then :d
+
+
+[09/14/2023 13:23] 0x11singh99
+It is chainlink so findings probably will not be public . So don't do it from your side until they publish them. It is against the code of conduct of C4.
+
+{Reactions}
+👆🏽 (4) 
+
+[09/17/2023 13:31] shealtielanz
+I think you can discuss some matters in the backstage👀
+
+{Reactions}
+🤟 
+
+[09/17/2023 13:33] liffidmonky
+Havent participated in 3 code4arena contest yet. Need 1 more to get backstage access xd
+
+
+[09/17/2023 18:13] liffidmonky
+@Hendrik | Chainlink @Yos | Chainlink @Lia | Chainlink @Dimitri | Chainlink  Hey I would like to talk to you guys about a finding I sent very close to the deadline. As I wrote it fast a little part is not correct but the rest of the finding is correct, can I DM you for clarifications? Or maybe any judge which might be judging the findings too
+
+
+[09/18/2023 08:07] yosriady
+Sorry, this should be discussed in the judging phase.
+
+{Reactions}
+🫡 🤟 
+
+[10/03/2023 15:59] thebrittfactor
+❗️ Wardens - If you're not already certified:  you have until **Oct 12th** to complete certification or you will not be eligible for awards. Instructions here: https://docs.code4rena.com/roles/certified-contributors
+
+
+[10/04/2023 16:32] 0xvj
+@thebrittfactor | C4  all of the team members have to be certified if particpated as team?
+
+
+[10/04/2023 16:56] thebrittfactor
+Correct! All members need to be certified in order to receive awards.
+
+{Reactions}
+👍 (2) 
+
+[10/08/2023 18:42] ayo#6131
+What about people who have zero document
+
+
+[10/09/2023 01:23] thebrittfactor
+If you are unable to complete certification, unfortunately, you will not be eligible for awards; however,  you will remain on the leaderboard.
+
+
+[10/09/2023 04:55] spyboy__
+what if someones cerfification delayed and awards are anounced after certification that warden will recive awards right ??
+
+
+[10/09/2023 10:24] ayo#6131
+This only for chainlink right
+
+
+[10/10/2023 13:58] thebrittfactor
+Correct. You only need to be certified if the audit requires it. You can find this requirement on the main audit card [here](https://code4rena.com/contests/2023-08-chainlink-staking-v02#top) in the details tab.
+
+
+[10/10/2023 13:59] thebrittfactor
+Unfortuantely, the requirement is to successfully complete the certification process within 30 days of the audit end date in order to receive awards.
+
+{Reactions}
+👍 (2) 
+
+[10/12/2023 14:11] 0xhelium
+wen ?
+
+
+[10/12/2023 16:30] borongod
+🫡 Its the first one I participate in
+
+
+[10/12/2023 16:31] borongod
+really want to learn something from findings on such a sturdy code library
+
+
+[10/12/2023 16:51] visualbits
+Duo to #📢announcements  , it is still in the sponsor review stage, it's very weird🤔
+
+
+[10/12/2023 17:13] aamirusmani1552
+how can we see this?
+
+
+[10/12/2023 17:14] visualbits
+https://discord.com/channels/810916927919620096/810929015509483554/1161488856022003752
+
+{Reactions}
+👍 
+
+[10/19/2023 06:03] borongod
+How long does the judgment usually last?
+
+
+[10/19/2023 06:27] ihtishamsudo
+this one's gonna talk long i guess
+
+
+[10/19/2023 06:34] visualbits
+How many submissions submitted?
+
+
+[10/19/2023 06:37] ihtishamsudo
+https://discord.com/channels/810916927919620096/1136357130635575306/1151253602950721646
+
+{Reactions}
+thankyou (3) 
+
+[10/30/2023 12:15] beamsuuun
+Hey hey guys 
+Any estimate when the results will become public?
+
+
+[10/30/2023 12:36] t1moh
+Not soon, come back next month
+
+{Reactions}
+😂 (5) 
+
+[10/30/2023 15:00] ihtishamsudo
+Specific time periods for wardens to compete in specific contests. But not specific time periods for judges to wrap up judging. 🤔
+
+
+[10/30/2023 18:08] nethoxa
+well, thinking like that, 100 kangaroos fighting against a wheelchair man with a shotgun is fair
+
+{Reactions}
+😂 (3) 
+
+[10/30/2023 18:09] nethoxa
+(joke)
+
+
+[11/07/2023 11:09] coffiasd
+:code4rena:
+
+{Reactions}
+👀 (9) 
+
+[11/13/2023 19:38] plamkata
+:chefskiss:
+
+
+[11/15/2023 10:04] 0x11singh99
+Chances  of results coming this week ?😇
+
+
+[11/15/2023 10:11] visualbits
+Maybe today...
+
+{Reactions}
+💥 (3) 
+
+[11/15/2023 13:42] 0x11singh99
+how much time @PaperParachute | C4 😇
+
+
+[11/15/2023 13:47] _paperparachute
+Some time today 🙂 🎉
+
+{Reactions}
+hi5 (7) 🫡 (5) 4739_Skeletor (3) 
+
+[11/15/2023 18:55] unique0x0
+https://tenor.com/view/is-it-time-yet-gif-25211267
+
+{Embed}
+https://tenor.com/view/is-it-time-yet-gif-25211267
+Code4rena - ARCHIVE-Q3-2023 - chainlink-aug25 [1136357130635575306].txt_Files/is-it-time-yet-02C4D.png
+
+{Reactions}
+👀 (4) 
+
+[11/15/2023 22:33] _paperparachute
+Sorry for being a tease guys, this is going to happen tomorrow now!
+
+{Reactions}
+👀 (5) 😢 (4) 🫡 (5) 
+
+[11/16/2023 16:17] thebrittfactor
+🤑 🎉  Awards for **Chainlink Staking**:
+
+‼️ **Please note this audit required all awarded parties to be [Certified Contributors](https://docs.code4rena.com/roles/certified-contributors).**
+**If you did not successfully *complete* the certification process within 30 days of the audit end** (**Reminders of Oct 12th deadline provided [here](https://discord.com/channels/810916927919620096/1136357130635575306/1151246360159469578) and [here](https://discord.com/channels/810916927919620096/1136357130635575306/1158795401428738058)), your awards will be sent back to the org. This applies to all audit participants including wardens, teams, bot crews, judges, lookouts, and scouts.**
+
+$48,797.93 USDC » @MiloTruck 
+$16,263.42 USDC » @immeas 
+$16,199.42 USDC » BitMinds (@Cryptor and @berlin.101)
+$16,005.26 USDC » @sashik_eth 
+$10,193.13 USDC » @HE1M 
+$8,561.58 USDC » @Kow 
+$7,169.74 USDC » pep7siup 
+$6,820.78 USDC » 0x73696d616f 
+$5,525.64 USDC » @mert_eren. 
+$5,525.31 USDC » @carrotsmuggler 
+$5,264.40 USDC » @0xRobocop 
+$5,205.43 USDC » @dirk_y 
+$4,892.66 USDC » Voyvoda 
+$4,330.80 USDC » @rvierdiiev 
+$3,741.70 USDC » @juancito 
+$3,697.31 USDC » zzzitron
+$3,696.67 USDC » GalloDaSballo
+$2,992.96 USDC » @nobody2018 
+$2,736.66 USDC » @Ch301
+$2,395.20 USDC » @adriro
+$2,264.84 USDC » @Yanchuan
+$2,219.54 USDC » @ak1
+$2,024.58 USDC » @MrPotatoMagic 
+$1,843.47 USDC » plainshift (@surya, @thank_you and @windhustler)
+$1,749.29 USDC » @Sathish9098 
+$1,688.35 USDC » mojito_auditor 
+$1,596.58 USDC » GREY-HAWK-REACH (@aslanbek, @dimulski, @Kose and @Habib0x)
+$1,485.15 USDC » @Priyam
+$1,426.68 USDC » @14si2o_Flint 
+$1,421.62 USDC » chaduke
+
+
+[11/16/2023 16:22] thebrittfactor
+$1,202.41 USDC » @codegpt 
+$1,133.92 USDC » @c3phas 
+$913.70 USDC » @0xhacksmithh 
+$903.16 USDC » @bin2chen 
+$718.68 USDC » @0xbepresent 
+$645.16 USDC » @Jorgect 
+$562.10 USDC » Emmanuel 
+$513.27 USDC » kaden 
+$510.38 USDC » @audinarey 
+$475.68 USDC » BPZ (@Bitcoinfever244, @Yas000X and @zinc42)
+$471.82 USDC » seerether 
+$471.82 USDC » @trachev 
+$471.82 USDC » CRIMSON-RAT-REACH (@cergyk, @paspe, @VictoryGod, 0xtotem, @imkapadia, @devblixt, @vani, @VanGrim, @0xChuck, @Angry_Mustache_Man)
+$427.48 USDC » @Aamir 
+$389.83 USDC » @sorryNotsorry 
+$371.20 USDC » shealtielanz 
+$371.20 USDC » @0xDetermination 
+$367.34 USDC » @carlos__alegre 
+$243.00 USDC » @adeolu 
+$169.65 USDC » @osmanozdemir1 
+$169.32 USDC » peanuts 
+$165.79 USDC » @neumo 
+$165.79 USDC » @Bauchibred 
+$124.35 USDC » @moneyversed 
+$124.35 USDC » @kodyvim 
+$124.35 USDC » Testerbot 
+$124.35 USDC » 33BYTEZZZ (@zuhaibmohd, @33audits and @hexbyte)
+$124.35 USDC » @catellatech 
+$124.35 USDC » 0xepley 
+$90.28 USDC » los_chicos (@vnmrtz.eth, @0xadrii and @ljmanini)
+$86.42 USDC » 0xCiphky 
+$79.61 USDC » @ICP 
+$79.61 USDC » @LéoS 
+$79.61 USDC » @john80 
+$79.61 USDC » DavidGiladi 
+$79.61 USDC » @K42 Ψ 
+$79.61 USDC » @ayo_dev 
+$79.61 USDC » @Rolezn 
+$79.61 USDC » @none 
+$79.61 USDC » duodit (@ordinary and @clash)
+$79.61 USDC » @0x11singh99 
+$48.83 USDC » @c7e7eff/RustyRabbit 
+$48.83 USDC » @beam_suuun
+
+
+[11/16/2023 16:22] thebrittfactor
+$45.31 USDC » @AkshaySrivastav 
+$45.31 USDC » @peritoflores 
+$44.97 USDC » UniversalCrypto 
+$44.97 USDC » @said 
+$44.97 USDC » @DevABDee 
+$44.97 USDC » @Nyx 
+$44.97 USDC » @ltyu 
+$44.97 USDC » Go-Langer 
+$41.45 USDC » @0xTheC0der 
+$41.45 USDC » @stealthyz 
+$41.45 USDC » @!0xcaventa 
+$41.45 USDC » @T1MOH 
+$41.45 USDC » @Bitspinner 
+$41.45 USDC » @auditsea 
+$41.45 USDC » @0xladboy | Sparkware 
+$41.45 USDC » P12473 
+$41.45 USDC » dontonka 
+$41.45 USDC » @josephdara 
+$41.45 USDC » gzeon 
+$41.45 USDC » @radev_sw 
+$3.86 USDC » cccz 
+$3.86 USDC » @Vagner 
+$3.86 USDC » @ayden 
+$3.86 USDC » Martians (@Nikki and @Vijay)
+$3.86 USDC » @SPY8OY 
+$3.86 USDC » @nemveer 
+$3.86 USDC » @Viktor_Cortess 
+$3.86 USDC » @visualbits
+$3.86 USDC » AlexCzm
+$3.86 USDC » @Limbooo 
+$3.86 USDC » jah
+
+🏁 Findings summary
+-------------------------------------
+High risk findings: 0 unique (0 total)
+Med risk findings: 20 unique (142 total)
+Gas reports: 19 (Best: c3phas)
+QA reports: 54 (Best: MiloTruck)
+Advanced analysis reports: 26 (Best: MrPotatoMagic)
+
+Awards to Certified participants will be distributed on Polygon within the next week. Congratulations all!  💸 💸 💸
+
+❗  @🐺wardens - Friendly reminder that as this was a private audit, all details regarding results and findings are confidential.
+We'll post the aggregate data to the leaderboard, but please no discussions regarding the content of findings whatsoever.
+
+{Reactions}
+🚀 (7) 🎉 (2) 
+
+[11/16/2023 16:23] fulum
+@MiloTruck  The killer 😎
+
+{Reactions}
+🔥 (2) 
+
+[11/16/2023 16:24] adeolu
+@MiloTruck legend.
+
+
+[11/16/2023 16:24] milotruck
+Congrats everyone!
+
+{Reactions}
+🙇 (31) hi5 (12) 👏 (13) 🙌 (10) 10_10 (3) 
+
+[11/16/2023 16:24] plamkata
+bruh
+
+
+[11/16/2023 16:24] milotruck
+@sashik_eth nice find
+
+{Reactions}
+🤝 (3) 
+
+[11/16/2023 16:24] 0xpujimak
+Congrats
+
+
+[11/16/2023 16:25] 0x11singh99
+🫡You absolutely killed it. Congrats 👏
+
+
+[11/16/2023 16:25] t1moh
+You made 4 top 1 in a row wow
+
+{Reactions}
+🔥 
+
+[11/16/2023 16:25] _theblackpanther
+Congrats 🥳
+
+
+[11/16/2023 16:25] unclejeff4407
+that @ wardens notification tho
+
+{Reactions}
+4739_Skeletor (11) 😭 (16) 
+
+[11/16/2023 16:25] zzebra83
+Holy Milo Truck
+
+
+[11/16/2023 16:26] 0x4non
+Milotrain!
+
+{Reactions}
+🚅 (2) 
+
+[11/16/2023 16:26] 0xsimeon
+@MiloTruck omo
+
+
+[11/16/2023 16:28] catscanaudit
+@MiloTruck jeez man
+
+
+[11/16/2023 16:28] 0xsimeon
+OMG
+
+
+[11/16/2023 16:28] catscanaudit
+@MiloTruck On the PoP interview you did I remember you saying ".. obviously it's not sustainable to expect to make 40K every contest"
+
+{Reactions}
+🤣 (4) 
+
+[11/16/2023 16:28] catscanaudit
+yeah right.. lol
+
+
+[11/16/2023 16:29] catscanaudit
+youre a beast
+
+
+[11/16/2023 16:29] funkornaut
+https://tenor.com/view/brinks-truck-cash-money-pay-day-gif-13731216
+
+{Embed}
+https://tenor.com/view/brinks-truck-cash-money-pay-day-gif-13731216
+Code4rena - ARCHIVE-Q3-2023 - chainlink-aug25 [1136357130635575306].txt_Files/brinks-truck-cash-92A2B.png
+
+
+[11/16/2023 16:29] funkornaut
+Milo more like Brinks truck
+
+{Reactions}
+😂 chefskiss 
+
+[11/16/2023 16:30] funkornaut
+Congratulations to everyone in the money on this competition!
+
+
+[11/16/2023 16:31] deadrosesxyz
+now that the results are out
+
+
+[11/16/2023 16:31] deadrosesxyz
+@MiloTruck nice unique finding mate
+
+
+[11/16/2023 16:32] saksham0290
+@Cryptor @berlin.101 LFG!!
+
+{Reactions}
+🫡 (2) 
+
+[11/16/2023 16:33] deadrosesxyz
+seeing that finding actually inspired me to look at the code differently and got me a bounty lol
+
+{Reactions}
+🔥 (5) 
+
+[11/16/2023 16:36] milotruck
+I'm assuming you're referring to another protocol
+
+{Reactions}
+👍 
+
+[11/16/2023 16:36] taylorwebb
+@MiloTruck  the 🐐
+
+
+[11/16/2023 16:36] uttxm
+wow congrats everyone
+
+
+[11/16/2023 16:36] deadrosesxyz
+yeah
+
+
+[11/16/2023 16:37] kosedogus
+It's best to not mention anything about issues
+
+
+[11/16/2023 16:38] cloudellie
+Please note the confidentiality clause in the award announcement
+
+{Reactions}
+👍 
+
+[11/16/2023 16:38] 0xjuancito
+gg everyone! 🏆
+
+
+[11/16/2023 16:38] marchev
+Milo the 🐐
+
+
+[11/16/2023 16:39] milotruck
+I wish my own finding could give me bug bounty inspiration 😢
+
+{Reactions}
+❤️ (15) 
+
+[11/16/2023 16:39] 14si2o_flint
+Note to self: filter on Milo participating, he takes everything every time 😂 . Awesome work!
+
+
+[11/16/2023 16:40] osmanozdemir1
+Congrats everyone!
+
+
+[11/16/2023 16:40] osmanozdemir1
+Hi @CloudEllie can I dm?
+
+
+[11/16/2023 16:46] ding0077
+Simply the 🐐 @MiloTruck . Congratulations!
+
+
+[11/16/2023 16:46] munakhan12#8137
+Congratulations everyone
+
+
+[11/16/2023 16:49] saint6704
+@MiloTruck Congrats ser
+Really huge results
+
+
+[11/16/2023 16:59] namx05
+Dude!!! I thought that my report got selected and I was looking for my username ¯\_(ツ)_/¯
+
+
+[11/16/2023 17:03] sathish9098kumar
+Congrats @MiloTruck
+
+
+[11/16/2023 17:10] luke_john
+Congrats to all especially to @MiloTruck
+
+
+[11/16/2023 17:19] aslanbekaibimov
+@CloudEllie are we allowed to tweet about our own prize?
+
+
+[11/16/2023 17:24] cloudellie
+You can definitely share your award info -- that's public via the leaderboard anyway. 🙂  
+
+It's anything to do with the *content of the findings* that's confidential.
+
+{Reactions}
+👍 (5) thankyou (3) 
+
+[11/16/2023 18:57] 0xrobocop
+@MiloTruck Congrats!!!
+
+{Reactions}
+❤️ 
+
+[11/16/2023 19:12] aamirusmani1552
+Congrats everyone
+
+
+[11/16/2023 19:15] inallhonesty_
+M8 come on, you are a beast! 💪
+
+
+[11/16/2023 19:31] immeas
+don't worry, i'll take inspiration from them, haha, congrats!
+
+{Reactions}
+4739_Skeletor 
+
+[12/03/2023 00:37] unclejeff4407
+same
+
+
+[01/11/2024 13:48] baice8614
+Is there any report of this chainlink staking V0.2 contest ?
+
+
+[01/11/2024 14:24] 0x11singh99
+it will not be public
+
+
+==============================================================
+Exported 583 message(s)
+==============================================================
